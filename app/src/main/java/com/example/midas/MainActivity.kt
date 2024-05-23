@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         var botonEnviar = findViewById<Button>(R.id.btnIniciar)
         botonEnviar.setOnClickListener(){
             try {
-                val addEstudiante:PreparedStatement = connecySQL.dbConn()?.prepareStatement("Insert into Estudiante(nombre, apellido) values (?,?)")!!
+                val addEstudiante:PreparedStatement = connecySQL.dbConn()?.prepareStatement("INSERT INTO Estudiante(nombre, codigo) values (?,?)")!!
                 addEstudiante.setString(1,nombre.text.toString())
                 addEstudiante.setString(2,codigo.text.toString())
                 addEstudiante.executeUpdate()
