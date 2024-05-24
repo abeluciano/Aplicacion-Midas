@@ -4,7 +4,6 @@ import kotlin.random.Random
 
 class Cuenta(val tipoMoneda: String ) {
 
-    var identificador: Int = Random.nextInt(1000000000,2000000000)
     var saldo: Double = 0.0
         private set
     fun retirar(cantidad:Double) {

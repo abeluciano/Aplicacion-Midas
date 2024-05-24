@@ -23,11 +23,11 @@ class AccesoDatos {
             connString = "jdbc:jtds:sqlserver://$ip;databaseName=$db;user=$username;password=$password"
             conn = DriverManager.getConnection(connString)
         }catch (ex: SQLException){
-            Log.e("Error: ", ex.message!!)
+            ex.printStackTrace()
         }catch (ex1: ClassNotFoundException){
-            Log.e("Error: ", ex1.message!!)
+            ex1.printStackTrace()
         }catch (ex2:Exception){
-            Log.e("Error: ", ex2.message!!)
+            ex2.printStackTrace()
         }
         return conn
     }

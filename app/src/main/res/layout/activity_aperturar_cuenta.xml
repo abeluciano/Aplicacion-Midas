@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+    <TextView
+        android:id="@+id/txtAperturarCuenta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFA756"
+        android:gravity="center"
+
+        android:text="Aperturar Cuenta"
+        android:textSize="30dp" />
+
+    <Spinner
+        android:id="@+id/tipoMonedaSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/contraseñaEditText"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Contraseña"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/abrirCuentaButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#FFA756"
+        android:text="Aperturar" />
+    </LinearLayout>
+
