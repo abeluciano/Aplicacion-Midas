@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="Principal_naranja">#FFA756</color>
+    <color name="Color_botones">#6A1B1B</color>
 </resources>
