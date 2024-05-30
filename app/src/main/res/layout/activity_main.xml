@@ -20,7 +20,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:ems="10"
-        android:hint="Ingresar Usuario"
+        android:hint="Ingrese su Identificador"
         android:inputType="text" />
 
     <EditText
@@ -41,6 +41,17 @@
         android:layout_marginTop="40dp"
         android:backgroundTint="#591616"
         android:text="Ingresar"
+        android:textColorLink="#BF1E1E"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btnSignUp"
+        android:layout_width="154dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#591616"
+        android:text="Registrarse"
         android:textColorLink="#BF1E1E"
         android:textSize="20dp" />
 

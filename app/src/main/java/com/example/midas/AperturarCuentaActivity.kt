@@ -1,6 +1,5 @@
 package com.example.midas
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -8,25 +7,26 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import java.sql.SQLException
-
 
 class AperturarCuentaActivity : AppCompatActivity() {
     private lateinit var usuario: Usuario
+    private lateinit var tipoMonedaSpinner: Spinner
+    private lateinit var contraseñaEditText: EditText
+    private lateinit var abrirCuentaButton: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_aperturar_cuenta)
 
-        var tipoMonedaSpinner = findViewById<Spinner>(R.id.tipoMonedaSpinner)
-        var contraseñaEditText = findViewById<EditText>(R.id.contraseñaEditText)
-        var abrirCuentaButton = findViewById<Button>(R.id.abrirCuentaButton)
-        var connecySQL = AccesoDatos()
+        tipoMonedaSpinner = findViewById(R.id.tipoMonedaSpinner)
+        contraseñaEditText = findViewById(R.id.contraseñaEditText)
+        abrirCuentaButton = findViewById(R.id.abrirCuentaButton)
 
         val sharedPreferences = getSharedPreferences("MyAppPreferences", MODE_PRIVATE)
         val idUsuario = sharedPreferences.getInt("Id_Usuario", -1)
 
         if (idUsuario != -1) {
-            usuario = Usuario(idUsuario)
+            usuario = Usuario(idUsuario, this)
         }
 
         val monedas = arrayOf("Soles", "Dolares")
@@ -37,21 +37,14 @@ class AperturarCuentaActivity : AppCompatActivity() {
         abrirCuentaButton.setOnClickListener {
             try {
                 val tipoMoneda = tipoMonedaSpinner.selectedItem.toString()
-                val contraseñaU = contraseñaEditText.text.toString()
+                val contraseña = contraseñaEditText.text.toString()
 
                 if (::usuario.isInitialized) {
-                    usuario.abrirCuenta(tipoMoneda, contraseñaU,connecySQL)
+                    usuario.abrirCuenta(tipoMoneda, contraseña)
                 }
 
-                Toast.makeText(this, "Se abrio la cuenta", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, Menu::class.java)
-                startActivity(intent)
-            }catch (e: Exception){
-                e.printStackTrace()
-                Toast.makeText(this, "No se pudo Aperturar Cuenta", Toast.LENGTH_SHORT).show()
-            }catch (e: SQLException){
-                e.printStackTrace()
-                Toast.makeText(this, "No se pudo Aperturar Cuenta", Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                Toast.makeText(this, "No se pudo aperturar cuenta", Toast.LENGTH_SHORT).show()
             }
         }
     }

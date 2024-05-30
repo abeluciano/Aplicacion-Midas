@@ -1,0 +1,69 @@
+package com.example.midas
+
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+
+class RecargarSaldoActivity : AppCompatActivity() {
+
+    private lateinit var dbHelper: DatabaseHelper
+    private lateinit var idCuentaTextView: TextView
+    private lateinit var simboloMonedaTextView: TextView
+    private lateinit var montoEditText: EditText
+    private lateinit var continuarButton: Button
+
+    private var idCuenta: String = ""
+    private var tipoMoneda: String = ""
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_recargar_saldo )
+
+        dbHelper = DatabaseHelper(this)
+
+        idCuentaTextView = findViewById(R.id.idCuentaTextView)
+        simboloMonedaTextView = findViewById(R.id.simboloMonedaTextView)
+        montoEditText = findViewById(R.id.montoEditText)
+        continuarButton = findViewById(R.id.continuarButton)
+
+        idCuenta = intent.getStringExtra("ID_CUENTA") ?: ""
+        tipoMoneda = intent.getStringExtra("TIPO_MONEDA") ?: ""
+
+        idCuentaTextView.text = "ID Cuenta: $idCuenta"
+        simboloMonedaTextView.text = if (tipoMoneda == "Soles") "S/" else "$"
+
+        continuarButton.setOnClickListener {
+            val montoString = montoEditText.text.toString()
+
+            if (montoString.isNotEmpty()) {
+                try {
+                    val monto = montoString.toDouble()
+
+                    if (monto > 0) {
+                        recargarCuenta(idCuenta, monto)
+                        Toast.makeText(this, "Cuenta recargada con éxito", Toast.LENGTH_SHORT).show()
+                        finish()
+                    } else {
+                        Toast.makeText(this, "Ingrese un monto válido", Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: NumberFormatException) {
+                    Toast.makeText(this, "Ingrese un monto válido", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "Ingrese un monto", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun recargarCuenta(idCuenta: String, monto: Double) {
+        val db = dbHelper.writableDatabase
+        val query = "UPDATE Cuenta SET Saldo = Saldo + ? WHERE Id_Cuenta = ?"
+        val statement = db.compileStatement(query)
+        statement.bindDouble(1, monto)
+        statement.bindString(2, idCuenta)
+        statement.executeUpdateDelete()
+    }
+}
