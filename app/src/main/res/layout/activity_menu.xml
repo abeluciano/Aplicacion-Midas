@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="false"
     android:orientation="vertical">
 
     <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,93 +20,127 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hapticFeedbackEnabled="false"
-                android:orientation="vertical">
-
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/mavegacion" />
-            </LinearLayout>
-
-            />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+                app:srcCompat="@drawable/mavegacion" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="432dp">
+                android:layout_height="250dp">
 
                 <TextView
-                    android:id="@+id/idCuentaTextView"
+                    android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="150dp"
-                    android:layout_marginBottom="408dp"
-                    android:text="ID Cuenta: "
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/saldoTextView"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/saldoTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="408dp"
-                    android:text="Saldo: "
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/idCuentaTextView"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-                <Button
-                    android:id="@+id/btnAperturarCuenta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#6A1B1B"
-                    android:text="Aperturar Cuenta"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.455" />
+                    android:text="Tranferencia"
+                    app:layout_constraintTop_toBottomOf="@+id/btnTranferencia"
+                    tools:layout_editor_absoluteX="42dp" />
 
                 <ImageButton
-                    android:id="@+id/btnTransferencia"
+                    android:id="@+id/btnReporte"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Transferencia"
-                    app:srcCompat="@drawable/transferencia"
-                    tools:layout_editor_absoluteX="76dp"
-                    tools:layout_editor_absoluteY="55dp" />
+                    android:background="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/textView6"
+                    app:layout_constraintStart_toStartOf="@+id/textView6"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.1"
+                    app:srcCompat="@drawable/Reporte2" />
 
-                <Button
-                    android:id="@+id/btnReportes"
+                <ImageButton
+                    android:id="@+id/btnHistorial"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#6A1B1B"
-                    android:text="Reportes"
-                    tools:layout_editor_absoluteX="267dp"
-                    tools:layout_editor_absoluteY="105dp" />
+                    android:background="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/textView5"
+                    app:layout_constraintHorizontal_bias="0.54"
+                    app:layout_constraintStart_toStartOf="@+id/textView5"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.1"
+                    app:srcCompat="@drawable/Historial3" />
 
-                <Button
-                    android:id="@+id/btnCambioMoneda"
+                <ImageButton
+                    android:id="@+id/btnTranferencia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#6A1B1B"
-                    android:text="Recargar"
-                    tools:layout_editor_absoluteX="28dp"
-                    tools:layout_editor_absoluteY="294dp" />
+                    android:background="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/textView4"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/textView4"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.1"
+                    app:srcCompat="@drawable/transferencia" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Historial"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnHistorial" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reporte"
+                    app:layout_constraintTop_toBottomOf="@+id/btnReporte"
+                    tools:layout_editor_absoluteX="306dp" />
+
+                <ImageButton
+                    android:id="@+id/btnRecarga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    app:layout_constraintEnd_toEndOf="@+id/textView9"
+                    app:layout_constraintStart_toStartOf="@+id/textView9"
+                    app:srcCompat="@drawable/Recarga2"
+                    tools:layout_editor_absoluteY="125dp" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recarga"
+                    app:layout_constraintTop_toBottomOf="@+id/btnRecarga"
+                    tools:layout_editor_absoluteX="179dp" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtID"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:background="@color/Gris_mostrar"
+                    android:gravity="center"
+                    android:text="IDCuenta"
+                    android:textColor="@color/black"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/txtMostrarSaldo"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/Gris_mostrar"
+                    android:gravity="center"
+                    android:text="Saldo"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    tools:layout_gravity="center" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
