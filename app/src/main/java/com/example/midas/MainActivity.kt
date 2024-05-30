@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
                     editor.putString("nombre", userName)
                     editor.apply()
 
-                    val intent = Intent(this, Menu::class.java)
+                    val intent = Intent(this, MenuActivity::class.java)
                     startActivity(intent)
                 } else {
                     Toast.makeText(this, "Usuario no encontrado", Toast.LENGTH_SHORT).show()

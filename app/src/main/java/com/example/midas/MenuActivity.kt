@@ -3,10 +3,11 @@ package com.example.midas
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-class Menu : AppCompatActivity() {
+class MenuActivity : AppCompatActivity() {
 
     private lateinit var dbHelper: DatabaseHelper
     private var idCuenta: String = ""
@@ -22,7 +23,7 @@ class Menu : AppCompatActivity() {
        val  saldoTextView = findViewById<TextView>(R.id.saldoTextView)
         val AbrirCuenta = findViewById<Button>(R.id.btnAperturarCuenta)
         val CambiodeMoneda = findViewById<Button>(R.id.btnCambioMoneda)
-        val Transferencia = findViewById<Button>(R.id.btnTransferencia)
+        val Transferencia = findViewById<ImageButton>(R.id.btnTransferencia)
 
         val sharedPreferences = getSharedPreferences("MyAppPreferences", MODE_PRIVATE)
         val idUsuario = sharedPreferences.getInt("Id_Usuario", -1)
@@ -43,18 +44,21 @@ class Menu : AppCompatActivity() {
         AbrirCuenta.setOnClickListener(){
             val intent = Intent(this, AperturarCuentaActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
 
         Transferencia.setOnClickListener(){
             val intent = Intent(this, TransferenciaActivity::class.java)
             startActivity(intent)
+            finish()
         }
         CambiodeMoneda.setOnClickListener {
             val intent = Intent(this, RecargarSaldoActivity::class.java)
             intent.putExtra("ID_CUENTA", idCuenta)
             intent.putExtra("TIPO_MONEDA", tipoMoneda)
             startActivity(intent)
+            finish()
         }
     }
 }

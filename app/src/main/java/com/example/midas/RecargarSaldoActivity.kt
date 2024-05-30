@@ -1,5 +1,6 @@
 package com.example.midas
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -45,6 +46,8 @@ class RecargarSaldoActivity : AppCompatActivity() {
                     if (monto > 0) {
                         recargarCuenta(idCuenta, monto)
                         Toast.makeText(this, "Cuenta recargada con éxito", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, MenuActivity::class.java)
+                        startActivity(intent)
                         finish()
                     } else {
                         Toast.makeText(this, "Ingrese un monto válido", Toast.LENGTH_SHORT).show()

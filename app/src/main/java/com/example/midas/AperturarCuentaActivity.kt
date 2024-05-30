@@ -1,9 +1,11 @@
 package com.example.midas
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +23,7 @@ class AperturarCuentaActivity : AppCompatActivity() {
         tipoMonedaSpinner = findViewById(R.id.tipoMonedaSpinner)
         contraseñaEditText = findViewById(R.id.contraseñaEditText)
         abrirCuentaButton = findViewById(R.id.abrirCuentaButton)
+        var atras = findViewById<ImageButton>(R.id.imgbtnAtras)
 
         val sharedPreferences = getSharedPreferences("MyAppPreferences", MODE_PRIVATE)
         val idUsuario = sharedPreferences.getInt("Id_Usuario", -1)
@@ -46,6 +49,11 @@ class AperturarCuentaActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 Toast.makeText(this, "No se pudo aperturar cuenta", Toast.LENGTH_SHORT).show()
             }
+        }
+        atras.setOnClickListener(){
+            val intent = Intent(this, MenuActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }
