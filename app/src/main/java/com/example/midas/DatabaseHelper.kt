@@ -133,5 +133,18 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         cursor.close()
         return exists
     }
+    fun getNumeroCuentasUsuario(idUsuario: String): Int {
+        val db = this.readableDatabase
+        val query = "SELECT COUNT(*) FROM Cuenta WHERE Id_Usuario = ?"
+        val cursor = db.rawQuery(query, arrayOf(idUsuario))
+        var numCuentas = 0
+
+        if (cursor.moveToFirst()) {
+            numCuentas = cursor.getInt(0)
+        }
+        cursor.close()
+        db.close()
+        return numCuentas
+    }
 
 }

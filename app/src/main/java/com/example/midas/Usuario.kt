@@ -22,15 +22,21 @@ class Usuario(private val idUsuario: Int, private val context: Context) {
 
     fun abrirCuenta(tipoMoneda: String, contraseña: String) {
         if (verificarContraseña(contraseña)) {
-            if (tipoMoneda == "Soles" || tipoMoneda == "Dolares") {
-                val nuevaCuentaId = generarIdCuentaAleatorio()
-                dbHelper.addCuenta(nuevaCuentaId, tipoMoneda, idUsuario.toString())
-                Toast.makeText(context, "\"Se abrió una cuenta con el ID: $nuevaCuentaId", Toast.LENGTH_SHORT).show()
+            val numCuentas = dbHelper.getNumeroCuentasUsuario(idUsuario.toString())
+
+            if (numCuentas < 20) {
+                if (tipoMoneda == "Soles" || tipoMoneda == "Dolares") {
+                    val nuevaCuentaId = generarIdCuentaAleatorio()
+                    dbHelper.addCuenta(nuevaCuentaId, tipoMoneda, idUsuario.toString())
+                    Toast.makeText(context, "Se abrió una cuenta con el ID: $nuevaCuentaId", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Tipo de moneda inválido", Toast.LENGTH_SHORT).show()
+                }
             } else {
-                println("Tipo de moneda inválido")
+                Toast.makeText(context, "No se pueden crear más de 20 cuentas", Toast.LENGTH_SHORT).show()
             }
         } else {
-            println("La contraseña es incorrecta, datos inválidos")
+            Toast.makeText(context, "La contraseña es incorrecta, datos inválidos", Toast.LENGTH_SHORT).show()
         }
     }
 

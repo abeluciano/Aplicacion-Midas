@@ -15,6 +15,7 @@ class AperturarCuentaActivity : AppCompatActivity() {
     private lateinit var tipoMonedaSpinner: Spinner
     private lateinit var contraseñaEditText: EditText
     private lateinit var abrirCuentaButton: Button
+    private lateinit var atras: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +24,7 @@ class AperturarCuentaActivity : AppCompatActivity() {
         tipoMonedaSpinner = findViewById(R.id.tipoMonedaSpinner)
         contraseñaEditText = findViewById(R.id.contraseñaEditText)
         abrirCuentaButton = findViewById(R.id.abrirCuentaButton)
-        var atras = findViewById<ImageButton>(R.id.imgbtnAtras)
+        atras = findViewById(R.id.imgbtnAtras)
 
         val sharedPreferences = getSharedPreferences("MyAppPreferences", MODE_PRIVATE)
         val idUsuario = sharedPreferences.getInt("Id_Usuario", -1)
