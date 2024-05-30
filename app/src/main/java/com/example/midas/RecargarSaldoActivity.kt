@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +30,7 @@ class RecargarSaldoActivity : AppCompatActivity() {
         simboloMonedaTextView = findViewById(R.id.simboloMonedaTextView)
         montoEditText = findViewById(R.id.montoEditText)
         continuarButton = findViewById(R.id.continuarButton)
+        var recargar = findViewById<ImageButton>(R.id.imgbtnAtrasRe)
 
         idCuenta = intent.getStringExtra("ID_CUENTA") ?: ""
         tipoMoneda = intent.getStringExtra("TIPO_MONEDA") ?: ""
@@ -59,6 +61,11 @@ class RecargarSaldoActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Ingrese un monto", Toast.LENGTH_SHORT).show()
             }
+        }
+        recargar.setOnClickListener(){
+            val intent = Intent(this, MenuActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 

@@ -23,14 +23,27 @@ android:orientation="vertical">
             android:layout_height="67dp"
             app:srcCompat="@drawable/mavegacion" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/Principal_naranja"
-            android:gravity="center"
-            android:text="Cuenta"
-            android:textColor="@color/black"
-            android:textSize="30dp" />
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imgbtnAtrasRe"
+                android:layout_width="42dp"
+                android:layout_height="match_parent"
+                android:background="#FFA756"
+                app:srcCompat="@drawable/baseline_arrow_back_ios_24" />
+
+            <TextView
+                android:id="@+id/txtRecargarCuenta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFA756"
+                android:gravity="center"
+                android:text="Recargar Cuenta"
+                android:textSize="30dp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/idCuentaTextView"
