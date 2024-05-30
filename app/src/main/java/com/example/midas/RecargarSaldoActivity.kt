@@ -42,8 +42,9 @@ class RecargarSaldoActivity : AppCompatActivity() {
             if (montoString.isNotEmpty()) {
                 try {
                     val monto = montoString.toDouble()
+                    val montoMinimo = if (tipoMoneda == "Soles") 5.0 else 2.0
 
-                    if (monto > 0) {
+                    if (monto > montoMinimo) {
                         recargarCuenta(idCuenta, monto)
                         Toast.makeText(this, "Cuenta recargada con éxito", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, MenuActivity::class.java)
