@@ -20,6 +20,7 @@
 
             <ImageView
                 android:id="@+id/imageView"
+                tools:ignore="DuplicateIds,MissingConstraints"
                 android:layout_width="match_parent"
                 android:layout_height="67dp"
                 app:srcCompat="@drawable/mavegacion" />
@@ -34,7 +35,7 @@
                     android:layout_height="50dp"
                     android:background="@color/Principal_naranja"
                     android:gravity="center"
-                    android:text="Transferencia"
+                    android:text="Reportes"
                     android:textColor="@color/black"
                     android:textSize="25dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -56,15 +57,22 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/textView11"
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="80dp"
+                android:background="@null"
+                app:srcCompat="@drawable/realizar_reporte_usuario" />
+
+            <ImageButton
+                android:id="@+id/imageButton5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:gravity="center"
-                android:text="Ya no se va a usar"
-                android:textSize="25dp" />
-
+                android:layout_marginTop="80dp"
+                android:background="@null"
+                app:srcCompat="@drawable/ver_reporte_usuario" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
