@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">MIDAS</string>
     <string name="cuenta_destino">Cuenta Destino</string>
+    <string name="name_des">Name Des</string>
+    <string name="monto">Monto</string>
+    <string name="fecha">Fecha</string>
 </resources>

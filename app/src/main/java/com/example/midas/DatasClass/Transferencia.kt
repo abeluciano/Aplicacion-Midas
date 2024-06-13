@@ -1,3 +1,5 @@
 package com.example.midas.DatasClass
 
-data class Transferencia(var idCuenta: String, val saldo: Double, val tipoMoneda: String)
+import java.util.Date
+
+data class Transferencia(var nombreDestino: String, val monto: Double, val cuentaOrigen: String, val fecha: String)

@@ -35,7 +35,7 @@
                     android:layout_height="50dp"
                     android:background="@color/Principal_naranja"
                     android:gravity="center"
-                    android:text="Historial de Transefrencias"
+                    android:text="Historial de Transferencias"
                     android:textColor="@color/black"
                     android:textSize="25dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -58,6 +58,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewHistory"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="20dp" />

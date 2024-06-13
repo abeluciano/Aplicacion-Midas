@@ -47,12 +47,11 @@ class RecargarSaldoActivity : AppCompatActivity() {
             val montoString = montoEditText.text.toString().trim()
 
             if (montoString.isNotEmpty()) {
-                val monto = montoString.toDoubleOrNull() ?: 0.0 // Convertir a Double, o 0.0 si no es válido
+                val monto = montoString.toDoubleOrNull() ?: 0.0
                 val montoMinimo = if (tipoMoneda == "Soles") 5.0 else 2.0
                 val montomaximo = if (tipoMoneda == "Soles") 4000.0 else 1500.0
 
                 if (monto in montoMinimo..montomaximo) {
-                    // Formatear el monto a dos decimales y actualizar el texto en montoEditText
                     val montoFormatted = String.format("%.2f", monto)
                     if (monto != montoFormatted.toDouble()) {
                         montoEditText.setText(montoFormatted)

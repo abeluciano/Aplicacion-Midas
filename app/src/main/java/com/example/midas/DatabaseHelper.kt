@@ -110,6 +110,16 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return -1
     }
 
+    fun verifyAccount(idCuenta: String): Boolean {
+        val db = this.readableDatabase
+        val query = "SELECT $COLUMN_ID_CUENTA FROM $TABLE_CUENTA WHERE $COLUMN_ID_CUENTA = ?"
+        val cursor = db.rawQuery(query, arrayOf(idCuenta))
+        val exists = cursor.count > 0
+        cursor.close()
+        return exists
+    }
+
+
     fun getFirstUserAccount(idUsuario: String): Cuenta? {
         val db = readableDatabase
         val query = "SELECT Id_Cuenta, Saldo, Tipo_Cuenta FROM Cuenta WHERE Id_Usuario = ? LIMIT 1"

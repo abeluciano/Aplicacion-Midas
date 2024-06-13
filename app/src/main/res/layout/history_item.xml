@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/accountDesNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/name_des"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/transBalanceTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/monto"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/accountDesIdTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cuenta Destino"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/accountDateTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fecha" />
+
+</LinearLayout>

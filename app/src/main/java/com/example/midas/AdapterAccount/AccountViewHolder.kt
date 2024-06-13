@@ -11,6 +11,7 @@ class AccountViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     val accountIdTextView = itemView.findViewById<TextView>(R.id.accountIdTextView)
     val accountTypeTextView = itemView.findViewById<TextView>(R.id.accountTypeTextView)
     val accountBalanceTextView = itemView.findViewById<TextView>(R.id.accountBalanceTextView)
+
     fun render(item: Cuenta, l: View.OnClickListener, onClickListener: (Cuenta) -> Unit) {
         accountIdTextView.text = item.idCuenta
         accountTypeTextView.text = item.tipoMoneda

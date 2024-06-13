@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.midas.AdapterAccount.AccountAdapter
 import com.example.midas.DatasClass.Cuenta
+import com.example.midas.Transferencia.TransferenciaActivity
 import kotlin.properties.Delegates
 
 class MenuActivity : AppCompatActivity() {
@@ -29,8 +30,8 @@ class MenuActivity : AppCompatActivity() {
 
         dbHelper = DatabaseHelper(this)
 
-        idCuentaTextView = findViewById<TextView>(R.id.txtID)
-        saldoTextView = findViewById<TextView>(R.id.txtMostrarSaldo)
+        idCuentaTextView = findViewById(R.id.txtID)
+        saldoTextView = findViewById(R.id.txtMostrarSaldo)
         val AbrirCuenta = findViewById<ImageButton>(R.id.btnAperturarCuenta)
         val Recarga = findViewById<ImageButton>(R.id.btnRecarga)
         val Transferencia = findViewById<ImageButton>(R.id.btnTranferencia)
@@ -46,7 +47,9 @@ class MenuActivity : AppCompatActivity() {
                 tipoMoneda = cuenta!!.tipoMoneda
 
                 idCuentaTextView.text = "ID Cuenta: $idCuenta"
+                val saldoFormatted = String.format("%.2f", saldo)
                 saldoTextView.text = "Saldo: ${if (tipoMoneda == "Soles") "S/" else "$"} $saldo"
+                saldoTextView.setText(saldoFormatted)
             } else {
                 idCuentaTextView.text = "No se encontró ninguna cuenta"
                 saldoTextView.text = "Saldo: N/A"
@@ -60,6 +63,8 @@ class MenuActivity : AppCompatActivity() {
 
         Transferencia.setOnClickListener(){
             val intent = Intent(this, TransferenciaActivity::class.java)
+            intent.putExtra("ID_CUENTA", idCuenta)
+            intent.putExtra("TIPO_MONEDA", tipoMoneda)
             startActivity(intent)
         }
         Recarga.setOnClickListener {
@@ -89,7 +94,10 @@ class MenuActivity : AppCompatActivity() {
     private fun onItemSelected(cuenta: Cuenta){
         this.idCuenta = cuenta.idCuenta
         this.saldo = cuenta.saldo
+        this.tipoMoneda = cuenta.tipoMoneda
         idCuentaTextView.text = "ID Cuenta: $idCuenta"
+        val saldoFormatted = String.format("%.2f", saldo)
         saldoTextView.text = "Saldo: ${if (tipoMoneda == "Soles") "S/" else "$"} $saldo"
+        saldoTextView.setText(saldoFormatted)
     }
 }
