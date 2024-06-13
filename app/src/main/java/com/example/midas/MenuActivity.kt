@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -61,10 +62,14 @@ class MenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
         Recarga.setOnClickListener {
-            val intent = Intent(this, RecargarSaldoActivity::class.java)
-            intent.putExtra("ID_CUENTA", idCuenta)
-            intent.putExtra("TIPO_MONEDA", tipoMoneda)
-            startActivity(intent)
+            if (dbHelper.getNumeroCuentasUsuario(idUsuario.toString()) > 0) {
+                val intent = Intent(this, RecargarSaldoActivity::class.java)
+                intent.putExtra("ID_CUENTA", idCuenta)
+                intent.putExtra("TIPO_MONEDA", tipoMoneda)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Debe crear al menos una cuenta para recargar saldo", Toast.LENGTH_SHORT).show()
+            }
         }
     }
     fun initRecyclerView() {

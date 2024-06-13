@@ -89,6 +89,13 @@
                 android:text="Mínimo S/5.00 o $2.00"
                 android:layout_gravity="center"
                 />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FF0000"
+                android:text="Maximo S/4000.00 o $1500.00"
+                android:layout_gravity="center"
+                />
             <Button
                 android:id="@+id/continuarButton"
                 android:layout_width="250dp"
