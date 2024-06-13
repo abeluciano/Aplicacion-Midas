@@ -33,25 +33,33 @@ class SignUpActivity : AppCompatActivity() {
             val reconfirmar = confirmarContraseña.text.toString()
 
             if (idUsuario.length == 8 && idUsuario.isNotEmpty() && nombre.isNotEmpty() && correo.isNotEmpty() && contraseña.isNotEmpty()) {
-                if (esContraseñaValida(contraseña)) {
-                    if ( contraseña == reconfirmar){
-                        if (!dbHelper.isUserExists(idUsuario)) {
-                            dbHelper.addUser(idUsuario, nombre, contraseña, correo)
-                            Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this, MainActivity::class.java)
-                            startActivity(intent)
-                            finish()
+                if (esCorreoValido(correo)) {
+                    if (esContraseñaValida(contraseña)) {
+                        if ( contraseña == reconfirmar){
+                            if (contraseña.length >= 8){
+                                if (!dbHelper.isUserExists(idUsuario)) {
+                                    dbHelper.addUser(idUsuario, nombre, contraseña, correo)
+                                    Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
+                                    val intent = Intent(this, MainActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                } else {
+                                    Toast.makeText(this, "El ID de usuario ya existe", Toast.LENGTH_SHORT).show()
+                                }
+                            } else {
+                                Toast.makeText(this, "La contraseña es muy corta", Toast.LENGTH_SHORT).show()
+                            }
                         } else {
-                            Toast.makeText(this, "El ID de usuario ya existe", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "La contraseña no coincide", Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(this, "La contraseña no coincide", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "La contraseña no es segura", Toast.LENGTH_LONG).show()
                     }
                 } else {
-                    Toast.makeText(this, "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial (#)", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "El correo no tiene un dominio valido", Toast.LENGTH_LONG).show()
                 }
             } else {
-                    Toast.makeText(this, "Por favor complete todos los campos correctamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Complete todos los campos correctamente", Toast.LENGTH_SHORT).show()
             }
         }
         imgbtnAtras.setOnClickListener() {
@@ -61,7 +69,13 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
     private fun esContraseñaValida(contraseña: String): Boolean {
-        val regex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[#])[A-Za-z\\d#]{8,}$"
+        val regex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@\$!%*?&#])[A-Za-z\\d@\$!%*?&#]{8,}$"
         return contraseña.matches(regex.toRegex())
     }
+
+    private fun esCorreoValido(correo: String): Boolean {
+        val regex = "^[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$"
+        return correo.matches(regex.toRegex())
+    }
+
 }

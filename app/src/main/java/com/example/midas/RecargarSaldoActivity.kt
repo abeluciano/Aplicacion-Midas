@@ -30,7 +30,7 @@ class RecargarSaldoActivity : AppCompatActivity() {
         simboloMonedaTextView = findViewById(R.id.simboloMonedaTextView)
         montoEditText = findViewById(R.id.montoEditText)
         continuarButton = findViewById(R.id.continuarButton)
-        var recargar = findViewById<ImageButton>(R.id.imgbtnAtrasRe)
+        var regresar = findViewById<ImageButton>(R.id.imgbtnAtrasRe)
 
         idCuenta = intent.getStringExtra("ID_CUENTA") ?: ""
         tipoMoneda = intent.getStringExtra("TIPO_MONEDA") ?: ""
@@ -62,7 +62,7 @@ class RecargarSaldoActivity : AppCompatActivity() {
                 Toast.makeText(this, "Ingrese un monto", Toast.LENGTH_SHORT).show()
             }
         }
-        recargar.setOnClickListener(){
+        regresar.setOnClickListener(){
             val intent = Intent(this, MenuActivity::class.java)
             startActivity(intent)
             finish()

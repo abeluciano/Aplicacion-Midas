@@ -4,6 +4,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import java.io.File
+import java.io.FileReader
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -146,5 +148,23 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.close()
         return numCuentas
     }
+    fun getCuentasByUsuario(idUsuario: String): List<Cuenta> {
+        val cuentasList = mutableListOf<Cuenta>()
+        val db = this.readableDatabase
+        val query = "SELECT Id_Cuenta, Saldo, Tipo_Cuenta FROM $TABLE_CUENTA WHERE $COLUMN_ID_USUARIO_FK = ?"
+        val cursor = db.rawQuery(query, arrayOf(idUsuario))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val idCuenta = cursor.getString(cursor.getColumnIndexOrThrow("Id_Cuenta"))
+                val saldo = cursor.getDouble(cursor.getColumnIndexOrThrow("Saldo"))
+                val tipoMoneda = cursor.getString(cursor.getColumnIndexOrThrow("Tipo_Cuenta"))
+                cuentasList.add(Cuenta(idCuenta, saldo, tipoMoneda))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return cuentasList
+    }
+
 
 }
