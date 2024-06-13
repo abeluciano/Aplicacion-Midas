@@ -1,4 +1,4 @@
-package com.example.midas.Adapter
+package com.example.midas.AdapterAccount
 
 import android.view.View
 import android.widget.TextView
