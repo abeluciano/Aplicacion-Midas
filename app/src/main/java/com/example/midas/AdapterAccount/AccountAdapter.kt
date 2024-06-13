@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.midas.Cuenta
+import com.example.midas.DatasClass.Cuenta
 import com.example.midas.R
 
 class AccountAdapter(

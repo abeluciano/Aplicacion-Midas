@@ -3,7 +3,7 @@ package com.example.midas.AdapterAccount
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.midas.Cuenta
+import com.example.midas.DatasClass.Cuenta
 import com.example.midas.R
 
 
