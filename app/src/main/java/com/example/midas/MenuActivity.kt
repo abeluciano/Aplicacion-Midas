@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.midas.AdapterAccount.AccountAdapter
+import com.example.midas.DatasClass.Cuenta
 import kotlin.properties.Delegates
 
 class MenuActivity : AppCompatActivity() {
