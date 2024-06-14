@@ -35,8 +35,6 @@ class HistoryActivity : AppCompatActivity() {
     fun initRecyclerView() {
         val manager = LinearLayoutManager(this)
         val list_transfer = dbHelper.getTransferenciasByCuenta(idCuenta)
-        /*val list_transfer = mutableListOf(Transferencia("PEpejpin", 59.00,
-            "1335494641" , "13/01/2024"))*/
         historyAdapter = HistoryAdapter(list_transfer)
 
         val decoration = DividerItemDecoration(this,manager.orientation)

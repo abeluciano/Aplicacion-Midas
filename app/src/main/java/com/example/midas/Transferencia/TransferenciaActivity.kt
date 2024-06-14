@@ -47,15 +47,22 @@ class TransferenciaActivity : AppCompatActivity() {
             finish()
         }
 
-        continuarButton.setOnClickListener(){
+        continuarButton.setOnClickListener() {
+
             val montoString = montoEditText.text.toString().trim()
-            val idCuentaDestino = cuentaDestino.text
+            val saldo = dbHelper.getSaldoByCuenta(idCuenta)
+            if (montoString.toDouble() > saldo!!) {
+                Toast.makeText(this, "El monto supera al saldo disponible", Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
+
+            val idCuentaDestino = cuentaDestino.text.toString()
             if (dbHelper.verifyAccount(idCuentaDestino.toString())) {
                 if (montoString.isNotEmpty() && idCuentaDestino.isNotEmpty()) {
                     val monto = montoString.toDoubleOrNull() ?: 0.0
                     val montoMinimo = if (tipoMoneda == "Soles") 5.0 else 2.0
                     val montomaximo = if (tipoMoneda == "Soles") 1000.0 else 300.0
-
                     if (monto in montoMinimo..montomaximo) {
                         val montoFormatted = String.format("%.2f", monto)
                         if (monto != montoFormatted.toDouble()) {

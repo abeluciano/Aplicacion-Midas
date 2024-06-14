@@ -286,4 +286,28 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.close()
     }
 
+    fun getSaldoByCuenta(idCuenta: String): Double? {
+        val db = this.readableDatabase
+        val query = "SELECT $COLUMN_SALDO FROM $TABLE_CUENTA WHERE $COLUMN_ID_CUENTA = ?"
+        val cursor = db.rawQuery(query, arrayOf(idCuenta))
+
+        return if (cursor.moveToFirst()) {
+            val saldo = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_SALDO))
+            cursor.close()
+            saldo
+        } else {
+            cursor.close()
+            null
+        }
+    }
+
+    fun updateSaldoByIdCuenta(idCuenta: String, nuevoSaldo: Double) {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(COLUMN_SALDO, nuevoSaldo)
+
+        db.update(TABLE_CUENTA, values, "$COLUMN_ID_CUENTA = ?", arrayOf(idCuenta))
+        db.close()
+    }
+
 }

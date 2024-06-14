@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.midas.BD.DatabaseHelper
 import com.example.midas.R
@@ -55,7 +56,16 @@ class ConfirmarTransferenciaActivity : AppCompatActivity() {
         simboloMonedaTextView.text = simbolo
         Monto.text = montoConvertido.toString()
 
+
+
         btnConfirm.setOnClickListener {
+
+            val saldo = dbHelper.getSaldoByCuenta(idCuenta)
+            val saldoDes = dbHelper.getSaldoByCuenta(idCuentaDestino)
+            val nuevoSaldoDes = saldoDes?.plus(montoConvertido)
+            val nuevoSaldo = saldo?.minus(monto.toDouble())
+            nuevoSaldo?.let { it1 -> dbHelper.updateSaldoByIdCuenta(idCuenta, it1) }
+            nuevoSaldoDes?.let { it1 -> dbHelper.updateSaldoByIdCuenta(idCuentaDestino, it1) }
             val idTransferencia = Random.nextInt(100000000, 200000000)
             val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
             val currentTime = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
@@ -75,7 +85,7 @@ class ConfirmarTransferenciaActivity : AppCompatActivity() {
             val intent = Intent(this, TransferenciaExitosaActivity::class.java)
             intent.putExtra("NAME", nombreUser)
             intent.putExtra("SIMBOLO", simbolo)
-            intent.putExtra("MONTO", montoConvertido)
+            intent.putExtra("MONTO", montoConvertido.toString())
             intent.putExtra("FECHA", currentDate)
             intent.putExtra("HORA", currentTime)
             startActivity(intent)
