@@ -1,8 +1,8 @@
 package com.example.midas
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Toast
+import com.example.midas.BD.DatabaseHelper
 import java.util.Random
 
 class Usuario(private val idUsuario: Int, private val context: Context) {

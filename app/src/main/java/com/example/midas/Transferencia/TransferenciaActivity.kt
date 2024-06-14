@@ -8,7 +8,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.midas.DatabaseHelper
+import com.example.midas.BD.DatabaseHelper
 import com.example.midas.MenuActivity
 import com.example.midas.R
 
@@ -27,7 +27,7 @@ class TransferenciaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_transferencia)
 
         dbHelper = DatabaseHelper(this)
-        var btnAtras = findViewById<ImageButton>(R.id.btnAtras)
+        val btnAtras = findViewById<ImageButton>(R.id.btnAtras)
         simboloMonedaTextView = findViewById(R.id.simboloMonedaTextView)
         idCuentaTextView = findViewById(R.id.idCuentaTextView)
         continuarButton = findViewById(R.id.btnContinuar)
@@ -62,9 +62,10 @@ class TransferenciaActivity : AppCompatActivity() {
                             montoEditText.setText(montoFormatted)
                         }
                     }
-                    val intent = Intent(this, algoaqui::class.java)
+                    val intent = Intent(this, ConfirmarTransferenciaActivity::class.java)
                     intent.putExtra("ID_CUENTADESTINO", idCuentaDestino)
                     intent.putExtra("MONTO", montoString)
+                    intent.putExtra("ID_CUENTA", idCuenta)
                     startActivity(intent)
                     finish()
                 } else {

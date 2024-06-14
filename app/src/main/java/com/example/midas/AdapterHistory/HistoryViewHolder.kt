@@ -12,13 +12,12 @@ class HistoryViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     val accountDesIdTextView = itemView.findViewById<TextView>(R.id.accountDesIdTextView)
     val accountDateTextView = itemView.findViewById<TextView>(R.id.accountDateTextView)
 
-    fun render(item: Transferencia, l: View.OnClickListener, onClickListener: (Transferencia) -> Unit) {
+    fun render(item: Transferencia) {
         accountDesNameTextView.text = item.nombreDestino
         transBalanceTextView.text = item.monto.toString()
         accountDesIdTextView.text = item.cuentaOrigen
         accountDateTextView.text = item.fecha
-        itemView.setOnClickListener {
-            onClickListener(item)
-        }
     }
+
+
 }

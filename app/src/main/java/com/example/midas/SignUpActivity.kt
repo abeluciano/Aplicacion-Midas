@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.midas.BD.DatabaseHelper
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var dbHelper: DatabaseHelper

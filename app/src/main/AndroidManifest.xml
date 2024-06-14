@@ -14,7 +14,19 @@
         android:roundIcon="@mipmap/midaslogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.MIDAS"
-        tools:targetApi="31">
+        tools:targetApi="32">
+        <activity
+            android:name=".Reportes.LlenarReporteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Reportes.RealizarReporteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Transferencia.TransferenciaExitosaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Transferencia.ConfirmarTransferenciaActivity"
+            android:exported="false" />
         <activity
             android:name=".RecargarSaldoActivity"
             android:exported="false" />
@@ -24,9 +36,11 @@
         <activity
             android:name=".Transferencia.TransferenciaActivity"
             android:exported="false" />
-
         <activity
             android:name=".AperturarCuentaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HistoryActivity"
             android:exported="false" />
         <activity
             android:name=".MenuActivity"

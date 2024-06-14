@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.midas.AdapterAccount.AccountAdapter
+import com.example.midas.BD.DatabaseHelper
 import com.example.midas.DatasClass.Cuenta
+import com.example.midas.Reportes.RealizarReporteActivity
 import com.example.midas.Transferencia.TransferenciaActivity
 import kotlin.properties.Delegates
 
@@ -35,6 +37,8 @@ class MenuActivity : AppCompatActivity() {
         val AbrirCuenta = findViewById<ImageButton>(R.id.btnAperturarCuenta)
         val Recarga = findViewById<ImageButton>(R.id.btnRecarga)
         val Transferencia = findViewById<ImageButton>(R.id.btnTranferencia)
+        val Reporte = findViewById<ImageButton>(R.id.btnReporte)
+        val Historial = findViewById<ImageButton>(R.id.btnHistorial)
 
         val sharedPreferences = getSharedPreferences("MyAppPreferences", MODE_PRIVATE)
         idUsuario = sharedPreferences.getInt("Id_Usuario", -1)
@@ -76,6 +80,15 @@ class MenuActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Debe crear al menos una cuenta para recargar saldo", Toast.LENGTH_SHORT).show()
             }
+        }
+        Reporte.setOnClickListener() {
+            val intent = Intent(this, RealizarReporteActivity::class.java)
+            startActivity(intent)
+        }
+        Historial.setOnClickListener() {
+            val intent = Intent(this, HistoryActivity::class.java)
+            intent.putExtra("ID_CUENTA", idCuenta)
+            startActivity(intent)
         }
     }
     fun initRecyclerView() {

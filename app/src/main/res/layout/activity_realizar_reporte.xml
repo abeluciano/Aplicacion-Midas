@@ -44,7 +44,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
-                    android:id="@+id/imageButton3"
+                    android:id="@+id/btnAtras"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
@@ -58,7 +58,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/btnRealizarReporte"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -67,7 +67,7 @@
                 app:srcCompat="@drawable/realizar_reporte_usuario" />
 
             <ImageButton
-                android:id="@+id/imageButton5"
+                android:id="@+id/btnVerReporte"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="80dp"

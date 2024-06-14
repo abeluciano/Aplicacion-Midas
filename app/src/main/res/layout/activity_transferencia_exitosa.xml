@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".TransferenciaActivity">
+    android:layout_height="match_parent">
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -56,7 +55,7 @@
                     android:textSize="48sp" />
 
                 <TextView
-                    android:id="@+id/textView19"
+                    android:id="@+id/txtMonto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -65,8 +64,8 @@
 
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/editTextText"
+            <TextView
+                android:id="@+id/txtName"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -79,7 +78,7 @@
                 android:textColor="#171616" />
 
             <TextView
-                android:id="@+id/TextFecha"
+                android:id="@+id/TextFechaHora"
                 android:layout_width="200dp"
                 android:layout_height="39dp"
                 android:layout_gravity="center"
@@ -89,7 +88,7 @@
                 android:textSize="20dp" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnContinuar"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
