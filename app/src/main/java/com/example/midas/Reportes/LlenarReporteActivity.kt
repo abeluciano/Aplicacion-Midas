@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.midas.BD.DatabaseHelper
 import com.example.midas.R
@@ -13,10 +14,12 @@ import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlin.properties.Delegates
 import kotlin.random.Random
 
 class LlenarReporteActivity : AppCompatActivity() {
     private lateinit var dbHelper: DatabaseHelper
+    private  var idUsuario by Delegates.notNull<Int>()
     private var idUser: String = ""
     private lateinit var spinner:Spinner
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,25 +45,31 @@ class LlenarReporteActivity : AppCompatActivity() {
         spinner.adapter = adapter
 
         btnReportar.setOnClickListener() {
-            val tipoSelecReport = spinner.selectedItem.toString()
-            val reporteTexto = txtField.text.toString()
-            val idReporte = Random.nextInt(100000000, 200000000)
-            val estado = "no revisado"
-            val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
-            val currentTime = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
+            try {
+                val tipoSelecReport = spinner.selectedItem.toString()
+                val reporteTexto = txtField.text.toString()
+                val idReporte = Random.nextInt(100000000, 200000000)
+                val estado = "no revisado"
+                val user = idUser
+                val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+                val currentTime = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
 
-            dbHelper.addReporte(
-                idReporte,
-                tipoSelecReport,
-                reporteTexto,
-                estado,
-                idUser,
-                currentDate,
-                currentTime
-            )
-            val intent = Intent(this, RealizarReporteActivity::class.java)
-            startActivity(intent)
-            finish()
+                dbHelper.addReporte(
+                    idReporte,
+                    tipoSelecReport,
+                    reporteTexto,
+                    estado,
+                    currentDate,
+                    currentTime,
+                    user
+                )
+                Toast.makeText(this, "Reporte Guardado", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, RealizarReporteActivity::class.java)
+                startActivity(intent)
+                finish()
+            }catch (e:Exception) {
+                Toast.makeText(this, "Error al guardar reporte", Toast.LENGTH_SHORT).show()
+            }
         }
 
         btnAtras.setOnClickListener() {

@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.midas.AdapterReporte.ReporteAdapter
 import com.example.midas.BD.DatabaseHelper
-import com.example.midas.MenuActivity
 import com.example.midas.R
 
 class VerReporteActivity : AppCompatActivity() {
+    private lateinit var user:String
     private var idUser: String = ""
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var reporteAdapter: ReporteAdapter
@@ -23,6 +23,7 @@ class VerReporteActivity : AppCompatActivity() {
         val btnAtras = findViewById<ImageButton>(R.id.btnAtras)
         dbHelper = DatabaseHelper(this)
         idUser = intent.getStringExtra("ID_USUARIO") ?: ""
+        user = idUser
 
         btnAtras.setOnClickListener() {
             val intent = Intent(this, RealizarReporteActivity::class.java)
@@ -35,7 +36,7 @@ class VerReporteActivity : AppCompatActivity() {
 
     fun initRecyclerView() {
         val manager = LinearLayoutManager(this)
-        val list_reporte = dbHelper.getReportesByUsuario(idUser)
+        val list_reporte = dbHelper.getReportesByUsuario(user)
         reporteAdapter = ReporteAdapter(list_reporte)
 
         val decoration = DividerItemDecoration(this,manager.orientation)

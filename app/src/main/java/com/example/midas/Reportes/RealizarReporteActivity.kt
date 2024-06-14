@@ -33,6 +33,7 @@ class RealizarReporteActivity : AppCompatActivity() {
 
         btnVerReporte.setOnClickListener() {
             val intent = Intent(this, VerReporteActivity::class.java)
+            intent.putExtra("ID_USUARIO", idUser)
             startActivity(intent)
         }
 

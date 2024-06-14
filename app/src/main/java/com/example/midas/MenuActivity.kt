@@ -82,9 +82,10 @@ class MenuActivity : AppCompatActivity() {
         }
         Reporte.setOnClickListener() {
             val intent = Intent(this, RealizarReporteActivity::class.java)
-            intent.putExtra("ID_USUARIO", idUsuario)
+            intent.putExtra("ID_USUARIO", idUsuario.toString())
             startActivity(intent)
         }
+
         Historial.setOnClickListener() {
             val intent = Intent(this, HistoryActivity::class.java)
             intent.putExtra("ID_CUENTA", idCuenta)
@@ -97,7 +98,6 @@ class MenuActivity : AppCompatActivity() {
         accountAdapter = AccountAdapter(this, list_accounts) { cuenta ->
             onItemSelected(cuenta)
         }
-
         val decoration = DividerItemDecoration(this,manager.orientation)
         val usersRecycler = this.findViewById<RecyclerView>(R.id.recyclerView)
         usersRecycler.layoutManager = manager

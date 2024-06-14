@@ -9,6 +9,7 @@ import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.midas.Login.Usuario
 
 class AperturarCuentaActivity : AppCompatActivity() {
     private lateinit var usuario: Usuario

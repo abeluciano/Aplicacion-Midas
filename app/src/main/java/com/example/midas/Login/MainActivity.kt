@@ -1,4 +1,4 @@
-package com.example.midas
+package com.example.midas.Login
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,9 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.midas.BD.DatabaseHelper
+import com.example.midas.MenuActivity
+import com.example.midas.R
+import com.example.midas.SignUpActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var dbHelper: DatabaseHelper
