@@ -18,6 +18,4 @@ class HistoryViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         accountDesIdTextView.text = item.cuentaOrigen
         accountDateTextView.text = item.fecha
     }
-
-
 }

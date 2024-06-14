@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.midas.DatasClass.Cuenta
+import com.example.midas.DatasClass.Reporte
 import com.example.midas.DatasClass.Transferencia
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -34,6 +35,15 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         private const val COLUMN_FECHA = "Fecha"
         private const val COLUMN_HORA = "Hora"
         private const val COLUMN_ID_CUENTA_FK = "Id_Cuenta"
+
+        private const val TABLE_REPORTE = "Reporte"
+        private const val COLUMN_ID_REPORTE = "Id_Reporte"
+        private const val COLUMN_TIPO_REPORTE = "Tipo_Reporte"
+        private const val COLUMN_DESCRIPCION = "Descripcion"
+        private const val COLUMN_ESTADO = "Estado"
+        private const val COLUMN_FECHAR = "Fecha"
+        private const val COLUMN_HORAR = "Hora"
+        private const val COLUMN_ID_USER_FK = "Id_User"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -63,12 +73,24 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 + COLUMN_ID_CUENTA_FK + " TEXT,"
                 + "FOREIGN KEY(" + COLUMN_ID_CUENTA_FK + ") REFERENCES " + TABLE_CUENTA + "(" + COLUMN_ID_CUENTA + "))")
         db.execSQL(createTransferenciaTable)
+
+        val createReporteTable = ("CREATE TABLE " + TABLE_REPORTE + "("
+                + COLUMN_ID_REPORTE + " INTEGER PRIMARY KEY,"
+                + COLUMN_TIPO_REPORTE + " TEXT,"
+                + COLUMN_DESCRIPCION + " TEXT,"
+                + COLUMN_ESTADO + " TEXT,"
+                + COLUMN_FECHAR + " DATE,"
+                + COLUMN_HORAR + " TIME,"
+                + COLUMN_ID_USER_FK + " TEXT,"
+                + "FOREIGN KEY(" + COLUMN_ID_USER_FK + ") REFERENCES " + TABLE_USUARIO + "(" + COLUMN_ID_USUARIO + "))")
+        db.execSQL(createReporteTable)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS $TABLE_USUARIO")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_CUENTA")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_TRANSFERENCIA")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_REPORTE")
         onCreate(db)
     }
 
@@ -309,5 +331,50 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.update(TABLE_CUENTA, values, "$COLUMN_ID_CUENTA = ?", arrayOf(idCuenta))
         db.close()
     }
+
+    fun addReporte(
+        idReporte: Int,
+        tipoReporte: String,
+        descripcion: String,
+        estado:String,
+        fecha: String,
+        hora: String,
+        idUsuarioFk: String
+    ) {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(COLUMN_ID_REPORTE, idReporte)
+        values.put(COLUMN_TIPO_REPORTE, tipoReporte)
+        values.put(COLUMN_DESCRIPCION, descripcion)
+        values.put(COLUMN_ESTADO, estado)
+        values.put(COLUMN_FECHAR, fecha)
+        values.put(COLUMN_HORAR, hora)
+        values.put(COLUMN_ID_USER_FK, idUsuarioFk)
+
+        db.insert(TABLE_REPORTE, null, values)
+        db.close()
+    }
+
+    fun getReportesByUsuario(idUsuario: String): MutableList<Reporte> {
+        val reportesList = mutableListOf<Reporte>()
+        val db = this.readableDatabase
+        val query = "SELECT $COLUMN_TIPO_REPORTE, $COLUMN_ESTADO, $COLUMN_FECHAR || ' ' || $COLUMN_HORAR AS FechayHora " +
+                "FROM $TABLE_REPORTE " +
+                "WHERE $COLUMN_ID_USER_FK = ?"
+        val cursor = db.rawQuery(query, arrayOf(idUsuario))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val tipoReporte = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIPO_REPORTE))
+                val estado = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ESTADO))
+                val fechayHora = cursor.getString(cursor.getColumnIndexOrThrow("FechayHora"))
+                val reporte = Reporte(tipoReporte, estado, fechayHora)
+                reportesList.add(reporte)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return reportesList
+    }
+
 
 }

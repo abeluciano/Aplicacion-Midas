@@ -1,6 +1,6 @@
 package com.example.midas
 
-import android.annotation.SuppressLint
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.midas.AdapterHistory.HistoryAdapter
 import com.example.midas.BD.DatabaseHelper
-import com.example.midas.DatasClass.Transferencia
+
 
 class HistoryActivity : AppCompatActivity() {
     private lateinit var dbHelper: DatabaseHelper
@@ -25,7 +25,7 @@ class HistoryActivity : AppCompatActivity() {
         dbHelper = DatabaseHelper(this)
         atras = findViewById(R.id.btnAtras)
         val txtUsuario = findViewById<TextView>(R.id.txtUsuario)
-        
+
         idCuenta = intent.getStringExtra("ID_CUENTA") ?: ""
         val nameUser = dbHelper.getNombreUsuarioByCuenta(idCuenta)
         atras.setOnClickListener() {

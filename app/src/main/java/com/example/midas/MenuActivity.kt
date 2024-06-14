@@ -82,6 +82,7 @@ class MenuActivity : AppCompatActivity() {
         }
         Reporte.setOnClickListener() {
             val intent = Intent(this, RealizarReporteActivity::class.java)
+            intent.putExtra("ID_USUARIO", idUsuario)
             startActivity(intent)
         }
         Historial.setOnClickListener() {

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    tools:context=".Reportes.VerReporteActivity">
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,11 +18,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imageView"
-                tools:ignore="DuplicateIds,MissingConstraints"
                 android:layout_width="match_parent"
                 android:layout_height="67dp"
                 app:srcCompat="@drawable/mavegacion" />
@@ -30,12 +31,12 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/txtHisOp"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@color/Principal_naranja"
                     android:gravity="center"
-                    android:text="Realizar Reportes"
+                    android:text="Ver Reporte"
                     android:textColor="@color/black"
                     android:textSize="25dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -49,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/textView7"
+                    app:layout_constraintEnd_toEndOf="@+id/txtHisOp"
                     app:layout_constraintHorizontal_bias="0.068"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -57,57 +58,12 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/textView10"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewReporte"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:gravity="center"
-                android:text="Seleccionar Tipo Problema"
-                android:textColor="@color/black"
-                android:textSize="20dp" />
-
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="10dp" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:text="Descripción:"
-                android:textSize="20dp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="350dp"
-                android:layout_height="300dp"
-                android:layout_gravity="center">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtField"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="top" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/btnReportar"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:layout_weight="1"
-                android:backgroundTint="@color/Color_botones"
-                android:text="Reportar"
-                android:textSize="20dp" />
-
+                android:layout_height="match_parent"
+                android:layout_margin="20dp" />
         </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

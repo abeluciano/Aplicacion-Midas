@@ -12,6 +12,8 @@ import com.example.midas.MenuActivity
 import com.example.midas.R
 
 class RealizarReporteActivity : AppCompatActivity() {
+    private var idUser: String = ""
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,14 +23,17 @@ class RealizarReporteActivity : AppCompatActivity() {
         val btnVerReporte = findViewById<ImageButton>(R.id.btnVerReporte)
         val btnAtras = findViewById<ImageButton>(R.id.btnAtras)
 
+        idUser = intent.getStringExtra("ID_USUARIO") ?: ""
+
         btnRealizarReporte.setOnClickListener() {
             val intent = Intent(this, LlenarReporteActivity::class.java)
+            intent.putExtra("ID_USUARIO", idUser)
             startActivity(intent)
         }
 
         btnVerReporte.setOnClickListener() {
-           /* val intent = Intent(this, RealizarReporteActivity::class.java)
-            startActivity(intent)*/
+            val intent = Intent(this, VerReporteActivity::class.java)
+            startActivity(intent)
         }
 
         btnAtras.setOnClickListener() {
