@@ -21,9 +21,10 @@ class AccountAdapter(
 
     override fun onBindViewHolder(holder: AccountViewHolder, position: Int) {
         val account = accountList[position]
-        holder.accountIdTextView.text = account.idCuenta.toString()
+        holder.accountIdTextView.text = account.idCuenta
         holder.accountTypeTextView.text = account.tipoMoneda
-        holder.accountBalanceTextView.text = account.saldo.toString()
+        val saldoN = String.format("%.2f", account.saldo)
+        holder.accountBalanceTextView.text = saldoN
 
         holder.itemView.setOnClickListener {
             onAccountSelected(account)

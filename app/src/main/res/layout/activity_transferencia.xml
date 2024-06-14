@@ -107,14 +107,15 @@
 
             </LinearLayout>
 
-            <EditText
+            <TextView
                 android:id="@+id/editTextText"
                 android:layout_width="311dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:ems="10"
                 android:inputType="text"
-                android:text="Limite de transferencia S/1000"
+                android:text="Limite de transferencia S/1000 o $300"
                 android:textColor="#E80000" />
 
             <TextView
@@ -132,6 +133,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_marginTop="25dp"
                 android:ems="10"
                 android:hint="Ingresar Cuenta"

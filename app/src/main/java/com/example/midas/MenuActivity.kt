@@ -52,8 +52,7 @@ class MenuActivity : AppCompatActivity() {
 
                 idCuentaTextView.text = "ID Cuenta: $idCuenta"
                 val saldoFormatted = String.format("%.2f", saldo)
-                saldoTextView.text = "Saldo: ${if (tipoMoneda == "Soles") "S/" else "$"} $saldo"
-                saldoTextView.setText(saldoFormatted)
+                saldoTextView.text = "Saldo: ${if (tipoMoneda == "Soles") "S/" else "$"} $saldoFormatted"
             } else {
                 idCuentaTextView.text = "No se encontró ninguna cuenta"
                 saldoTextView.text = "Saldo: N/A"
@@ -110,7 +109,6 @@ class MenuActivity : AppCompatActivity() {
         this.tipoMoneda = cuenta.tipoMoneda
         idCuentaTextView.text = "ID Cuenta: $idCuenta"
         val saldoFormatted = String.format("%.2f", saldo)
-        saldoTextView.text = "Saldo: ${if (tipoMoneda == "Soles") "S/" else "$"} $saldo"
-        saldoTextView.setText(saldoFormatted)
+        saldoTextView.text = "Saldo: ${if (tipoMoneda == "Soles") "S/" else "$"} $saldoFormatted"
     }
 }

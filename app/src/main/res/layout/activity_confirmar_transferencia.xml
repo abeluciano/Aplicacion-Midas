@@ -149,6 +149,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="300.0"
+                    android:gravity="center"
                     android:textSize="40dp" />
 
             </LinearLayout>

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,14 +24,17 @@ class HistoryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_history)
         dbHelper = DatabaseHelper(this)
         atras = findViewById(R.id.btnAtras)
-
+        val txtUsuario = findViewById<TextView>(R.id.txtUsuario)
+        
         idCuenta = intent.getStringExtra("ID_CUENTA") ?: ""
+        val nameUser = dbHelper.getNombreUsuarioByCuenta(idCuenta)
         atras.setOnClickListener() {
             val intent = Intent(this, MenuActivity::class.java)
             startActivity(intent)
             finish()
         }
         initRecyclerView()
+        txtUsuario.text = nameUser
     }
     fun initRecyclerView() {
         val manager = LinearLayoutManager(this)
