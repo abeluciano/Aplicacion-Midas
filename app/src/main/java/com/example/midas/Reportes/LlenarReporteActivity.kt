@@ -64,8 +64,6 @@ class LlenarReporteActivity : AppCompatActivity() {
                     user
                 )
                 Toast.makeText(this, "Reporte Guardado", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, RealizarReporteActivity::class.java)
-                startActivity(intent)
                 finish()
             }catch (e:Exception) {
                 Toast.makeText(this, "Error al guardar reporte", Toast.LENGTH_SHORT).show()
@@ -73,8 +71,6 @@ class LlenarReporteActivity : AppCompatActivity() {
         }
 
         btnAtras.setOnClickListener() {
-            val intent = Intent(this, RealizarReporteActivity::class.java)
-            startActivity(intent)
             finish()
         }
     }

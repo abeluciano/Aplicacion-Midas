@@ -93,8 +93,6 @@ class ConfirmarTransferenciaActivity : AppCompatActivity() {
         }
 
         btnAtras.setOnClickListener {
-            val intent = Intent(this, TransferenciaActivity::class.java)
-            startActivity(intent)
             finish()
         }
     }

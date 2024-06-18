@@ -223,28 +223,48 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val transferenciasList = mutableListOf<Transferencia>()
         val db = this.readableDatabase
         val query = """
-        SELECT t.Monto, t.Fecha, cOrigen.$COLUMN_ID_CUENTA AS Cuenta_Origen, uDestino.$COLUMN_NOMBRE AS Nombre_Destino
+        SELECT t.Monto, t.Fecha, 
+               cOrigen.$COLUMN_ID_CUENTA AS Cuenta_Origen, 
+               uOrigen.$COLUMN_NOMBRE AS Nombre_Origen,
+               cDestino.$COLUMN_ID_CUENTA AS Cuenta_Destino,
+               uDestino.$COLUMN_NOMBRE AS Nombre_Destino
         FROM $TABLE_TRANSFERENCIA t
-        JOIN $TABLE_CUENTA cOrigen ON t.$COLUMN_ID_CUENTA_FK = cOrigen.$COLUMN_ID_CUENTA
-        JOIN $TABLE_CUENTA cDestino ON t.$COLUMN_CUENTA_DESTINO = cDestino.$COLUMN_ID_CUENTA
-        JOIN $TABLE_USUARIO uDestino ON cDestino.$COLUMN_ID_USUARIO_FK = uDestino.$COLUMN_ID_USUARIO
-        WHERE t.$COLUMN_ID_CUENTA_FK = ?
+        LEFT JOIN $TABLE_CUENTA cOrigen ON t.$COLUMN_ID_CUENTA_FK = cOrigen.$COLUMN_ID_CUENTA
+        LEFT JOIN $TABLE_USUARIO uOrigen ON cOrigen.$COLUMN_ID_USUARIO_FK = uOrigen.$COLUMN_ID_USUARIO
+        LEFT JOIN $TABLE_CUENTA cDestino ON t.$COLUMN_CUENTA_DESTINO = cDestino.$COLUMN_ID_CUENTA
+        LEFT JOIN $TABLE_USUARIO uDestino ON cDestino.$COLUMN_ID_USUARIO_FK = uDestino.$COLUMN_ID_USUARIO
+        WHERE t.$COLUMN_ID_CUENTA_FK = ? OR t.$COLUMN_CUENTA_DESTINO = ?
     """
-        val cursor = db.rawQuery(query, arrayOf(idCuenta))
+        val cursor = db.rawQuery(query, arrayOf(idCuenta, idCuenta))
 
         if (cursor.moveToFirst()) {
             do {
                 val monto = cursor.getDouble(cursor.getColumnIndexOrThrow("Monto"))
                 val fecha = cursor.getString(cursor.getColumnIndexOrThrow("Fecha"))
                 val cuentaOrigen = cursor.getString(cursor.getColumnIndexOrThrow("Cuenta_Origen"))
+                val nombreOrigen = cursor.getString(cursor.getColumnIndexOrThrow("Nombre_Origen"))
+                val cuentaDestino = cursor.getString(cursor.getColumnIndexOrThrow("Cuenta_Destino"))
                 val nombreDestino = cursor.getString(cursor.getColumnIndexOrThrow("Nombre_Destino"))
-                val transferencia = Transferencia(nombreDestino, monto, cuentaOrigen, fecha)
+
+                // Determinar si la transferencia es de salida o de entrada
+                val tipoTransferencia = if (cuentaOrigen == idCuenta) "Salida" else "Entrada"
+
+                val transferencia = Transferencia(
+                    monto,
+                    fecha,
+                    cuentaOrigen,
+                    nombreOrigen,
+                    cuentaDestino,
+                    nombreDestino,
+                    tipoTransferencia
+                )
                 transferenciasList.add(transferencia)
             } while (cursor.moveToNext())
         }
         cursor.close()
         return transferenciasList
     }
+
 
     fun getNombreUsuarioByCuenta(idCuenta: String): String? {
         val db = this.readableDatabase
@@ -360,7 +380,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val db = this.readableDatabase
         val query = "SELECT $COLUMN_TIPO_REPORTE, $COLUMN_ESTADO, $COLUMN_FECHAR || ' ' || $COLUMN_HORAR AS FechayHora " +
                 "FROM $TABLE_REPORTE " +
-                "WHERE $COLUMN_ID_USER_FK = ?"
+                "WHERE $COLUMN_ID_USER_FK = ? " +
+                "ORDER BY $COLUMN_FECHAR DESC, $COLUMN_HORAR DESC"  // Ordenar por fecha y hora descendente
         val cursor = db.rawQuery(query, arrayOf(idUsuario))
 
         if (cursor.moveToFirst()) {
@@ -374,6 +395,31 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
         cursor.close()
         return reportesList
+    }
+
+    fun getAccountById(idCuenta: String): Cuenta? {
+        val db = readableDatabase
+        val query = "SELECT Id_Cuenta, Saldo, Tipo_Cuenta FROM Cuenta WHERE Id_Cuenta = ?"
+        val cursor = db.rawQuery(query, arrayOf(idCuenta))
+
+        return if (cursor.moveToFirst()) {
+            val idCuenta = cursor.getString(cursor.getColumnIndexOrThrow("Id_Cuenta"))
+            val saldo = cursor.getDouble(cursor.getColumnIndexOrThrow("Saldo"))
+            val tipoMoneda = cursor.getString(cursor.getColumnIndexOrThrow("Tipo_Cuenta"))
+            cursor.close()
+            Cuenta(idCuenta, saldo, tipoMoneda)
+        } else {
+            cursor.close()
+            null
+        }
+    }
+    fun recargarCuenta(idCuenta: String, monto: Double) {
+        val db = writableDatabase
+        val query = "UPDATE Cuenta SET Saldo = Saldo + ? WHERE Id_Cuenta = ?"
+        val statement = db.compileStatement(query)
+        statement.bindDouble(1, monto)
+        statement.bindString(2, idCuenta)
+        statement.executeUpdateDelete()
     }
 
 

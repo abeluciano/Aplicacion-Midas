@@ -4,4 +4,6 @@
     <string name="name_des">Name Des</string>
     <string name="monto">Monto</string>
     <string name="fecha">Fecha</string>
+    <string name="nombre_origen">Nombre Origen</string>
+    <string name="tipo_transferencia">Tipo Transferencia</string>
 </resources>

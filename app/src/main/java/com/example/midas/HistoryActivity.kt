@@ -29,8 +29,6 @@ class HistoryActivity : AppCompatActivity() {
         idCuenta = intent.getStringExtra("ID_CUENTA") ?: ""
         val nameUser = dbHelper.getNombreUsuarioByCuenta(idCuenta)
         atras.setOnClickListener() {
-            val intent = Intent(this, MenuActivity::class.java)
-            startActivity(intent)
             finish()
         }
         initRecyclerView()

@@ -47,8 +47,6 @@ class AperturarCuentaActivity : AppCompatActivity() {
                 if (::usuario.isInitialized) {
                     usuario.abrirCuenta(tipoMoneda, contraseña)
                 }
-                val intent = Intent(this, MenuActivity::class.java)
-                startActivity(intent)
                 finish()
             } catch (e: Exception) {
                 Toast.makeText(this, "No se pudo aperturar cuenta", Toast.LENGTH_SHORT).show()

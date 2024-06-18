@@ -18,6 +18,7 @@ class RecargarSaldoActivity : AppCompatActivity() {
     private lateinit var simboloMonedaTextView: TextView
     private lateinit var montoEditText: EditText
     private lateinit var continuarButton: Button
+    private lateinit var regresar:ImageButton
 
     private var idCuenta: String = ""
     private var tipoMoneda: String = ""
@@ -33,7 +34,7 @@ class RecargarSaldoActivity : AppCompatActivity() {
         simboloMonedaTextView = findViewById(R.id.simboloMonedaTextView)
         montoEditText = findViewById(R.id.montoEditText)
         continuarButton = findViewById(R.id.continuarButton)
-        var regresar = findViewById<ImageButton>(R.id.imgbtnAtrasRe)
+        regresar = findViewById(R.id.imgbtnAtrasRe)
 
         idCuenta = intent.getStringExtra("ID_CUENTA") ?: ""
         tipoMoneda = intent.getStringExtra("TIPO_MONEDA") ?: ""
@@ -56,10 +57,8 @@ class RecargarSaldoActivity : AppCompatActivity() {
                     if (monto != montoFormatted.toDouble()) {
                         montoEditText.setText(montoFormatted)
                     }
-                    recargarCuenta(idCuenta, monto)
+                    dbHelper.recargarCuenta(idCuenta, monto)
                     Toast.makeText(this, "Cuenta recargada con éxito", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, MenuActivity::class.java)
-                    startActivity(intent)
                     finish()
                 } else {
                     if (monto < montoMinimo) {
@@ -72,20 +71,8 @@ class RecargarSaldoActivity : AppCompatActivity() {
                 Toast.makeText(this, "Ingrese un monto", Toast.LENGTH_SHORT).show()
             }
         }
-
         regresar.setOnClickListener(){
-            val intent = Intent(this, MenuActivity::class.java)
-            startActivity(intent)
             finish()
         }
-    }
-
-    private fun recargarCuenta(idCuenta: String, monto: Double) {
-        val db = dbHelper.writableDatabase
-        val query = "UPDATE Cuenta SET Saldo = Saldo + ? WHERE Id_Cuenta = ?"
-        val statement = db.compileStatement(query)
-        statement.bindDouble(1, monto)
-        statement.bindString(2, idCuenta)
-        statement.executeUpdateDelete()
     }
 }

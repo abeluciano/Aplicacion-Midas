@@ -57,9 +57,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="Nombre (max 15 caracteres)"
+                android:hint="Nombre y Apellido (max 20 caracteres)"
                 android:inputType="text"
-                android:maxLength="15" />
+                android:maxLength="20" />
 
             <EditText
                 android:id="@+id/correoEditText"

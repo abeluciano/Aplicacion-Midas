@@ -5,4 +5,7 @@
     <color name="Principal_naranja">#FFA756</color>
     <color name="Color_botones">#6A1B1B</color>
     <color name="Gris_mostrar">#949191</color>
+    <color name="colorSalida">#FF0000</color>
+    <color name="colorEntrada">#00FF00</color>
+
 </resources>

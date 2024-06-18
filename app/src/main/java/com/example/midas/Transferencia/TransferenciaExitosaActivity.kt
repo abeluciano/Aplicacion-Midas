@@ -42,8 +42,6 @@ class TransferenciaExitosaActivity : AppCompatActivity() {
         TextFechaHora.text = "$currentDate" + "    " + "$currentTime"
 
         btnContinuar.setOnClickListener() {
-            val intent = Intent(this, MenuActivity::class.java)
-            startActivity(intent)
             finish()
         }
     }

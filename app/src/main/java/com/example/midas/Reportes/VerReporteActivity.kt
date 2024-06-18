@@ -26,8 +26,6 @@ class VerReporteActivity : AppCompatActivity() {
         user = idUser
 
         btnAtras.setOnClickListener() {
-            val intent = Intent(this, RealizarReporteActivity::class.java)
-            startActivity(intent)
             finish()
         }
 

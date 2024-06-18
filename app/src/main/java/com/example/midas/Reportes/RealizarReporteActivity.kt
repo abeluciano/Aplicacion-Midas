@@ -38,8 +38,6 @@ class RealizarReporteActivity : AppCompatActivity() {
         }
 
         btnAtras.setOnClickListener() {
-            val intent = Intent(this, MenuActivity::class.java)
-            startActivity(intent)
             finish()
         }
     }

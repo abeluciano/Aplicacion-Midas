@@ -13,6 +13,13 @@
         android:textSize="14sp" />
 
     <TextView
+        android:id="@+id/accountOrigNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/nombre_origen"
+        android:textSize="14sp" />
+
+    <TextView
         android:id="@+id/transBalanceTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,13 +30,27 @@
         android:id="@+id/accountDesIdTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cuenta Destino"
+        android:text="@string/cuenta_destino"
+        android:textSize="14sp" />
+    <TextView
+        android:id="@+id/accountDestIdTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cuenta_destino"
         android:textSize="14sp" />
 
     <TextView
         android:id="@+id/accountDateTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/fecha" />
+        android:text="@string/fecha"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tipoTransferenciaTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tipo_transferencia"
+        android:textSize="14sp" />
 
 </LinearLayout>

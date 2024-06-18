@@ -42,8 +42,6 @@ class TransferenciaActivity : AppCompatActivity() {
         simboloMonedaTextView.text = if (tipoMoneda == "Soles") "S/" else "$"
 
         btnAtras.setOnClickListener() {
-            val intent = Intent(this, MenuActivity::class.java)
-            startActivity(intent)
             finish()
         }
 
@@ -58,7 +56,7 @@ class TransferenciaActivity : AppCompatActivity() {
             }
 
             val idCuentaDestino = cuentaDestino.text.toString()
-            if (dbHelper.verifyAccount(idCuentaDestino.toString())) {
+            if (dbHelper.verifyAccount(idCuentaDestino)) {
                 if (montoString.isNotEmpty() && idCuentaDestino.isNotEmpty()) {
                     val monto = montoString.toDoubleOrNull() ?: 0.0
                     val montoMinimo = if (tipoMoneda == "Soles") 5.0 else 2.0
