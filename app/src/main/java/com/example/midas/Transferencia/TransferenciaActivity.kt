@@ -50,9 +50,12 @@ class TransferenciaActivity : AppCompatActivity() {
             val montoString = montoEditText.text.toString().trim()
             val saldo = dbHelper.getSaldoByCuenta(idCuenta)
             val idCuentaDestino = cuentaDestino.text.toString()
-            if (montoString.toDouble() > saldo!! ) {
+            if (montoString.toDouble() > saldo!!) {
                 Toast.makeText(this, "El monto supera al saldo disponible", Toast.LENGTH_SHORT)
                     .show()
+                return@setOnClickListener
+            }
+            if (montoString.toDouble() < 0.1) {
                 return@setOnClickListener
             }
             if (idCuentaDestino == idCuenta) {

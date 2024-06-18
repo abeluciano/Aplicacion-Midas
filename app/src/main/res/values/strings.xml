@@ -11,4 +11,6 @@
     <string name="ingrese_su_identificador">Ingrese su Identificador</string>
     <string name="gestionar_reportes">Gestionar Reportes</string>
     <string name="gestionar_usuarios">Gestionar Usuarios</string>
+    <string name="m_ximo_500_caracteres">máximo 500 caracteres</string>
+    <string name="ingresa_el_monto">Ingresa el monto</string>
 </resources>

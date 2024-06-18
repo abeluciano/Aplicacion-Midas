@@ -92,6 +92,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtField"
                     android:layout_width="match_parent"
+                    android:hint="@string/m_ximo_500_caracteres"
+                    android:maxLength="500"
                     android:layout_height="match_parent"
                     android:gravity="top" />
 
