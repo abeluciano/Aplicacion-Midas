@@ -10,4 +10,5 @@
     <string name="registrarse">Registrarse</string>
     <string name="ingrese_su_identificador">Ingrese su Identificador</string>
     <string name="gestionar_reportes">Gestionar Reportes</string>
+    <string name="gestionar_usuarios">Gestionar Usuarios</string>
 </resources>
