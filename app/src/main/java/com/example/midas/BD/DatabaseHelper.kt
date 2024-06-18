@@ -4,6 +4,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
+import com.example.midas.Administrador.DataClassAdmin.Reportes
 import com.example.midas.DatasClass.Cuenta
 import com.example.midas.DatasClass.Reporte
 import com.example.midas.DatasClass.Transferencia
@@ -13,6 +15,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     companion object {
         private const val DATABASE_NAME = "MidasBD.db"
         private const val DATABASE_VERSION = 1
+
+        private const val TABLE_ADMINISTRADOR = "Administrador"
+        private const val COLUMN_ID_ADMINISTRADOR = "Id_Administrador"
+        private const val COLUMN_NOMBRE_ADMIN = "nombre_Admin"
+        private const val COLUMN_CONTRASEÑA_ADMIN = "contraseña_Admin"
 
         private const val TABLE_USUARIO = "Usuario"
         private const val COLUMN_ID_USUARIO = "Id_Usuario"
@@ -47,6 +54,13 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     override fun onCreate(db: SQLiteDatabase) {
+
+        val createAdministradorTable = ("CREATE TABLE " + TABLE_ADMINISTRADOR+ "("
+                + COLUMN_ID_ADMINISTRADOR + " TEXT PRIMARY KEY,"
+                + COLUMN_NOMBRE_ADMIN + " TEXT,"
+                + COLUMN_CONTRASEÑA_ADMIN + " TEXT" + ")")
+        db.execSQL(createAdministradorTable)
+
         val createUsuarioTable = ("CREATE TABLE " + TABLE_USUARIO + "("
                 + COLUMN_ID_USUARIO + " TEXT PRIMARY KEY,"
                 + COLUMN_NOMBRE + " TEXT,"
@@ -87,11 +101,26 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_ADMINISTRADOR")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_USUARIO")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_CUENTA")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_TRANSFERENCIA")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_REPORTE")
         onCreate(db)
+    }
+
+    fun checkIfAdmin(userName: String): Boolean {
+        val db = readableDatabase
+        val query = "SELECT COUNT(*) FROM $TABLE_ADMINISTRADOR WHERE $COLUMN_ID_ADMINISTRADOR = ?"
+        val cursor = db.rawQuery(query, arrayOf(userName))
+
+        var isAdmin = false
+        if (cursor != null && cursor.moveToFirst()) {
+            val count = cursor.getInt(0)
+            isAdmin = count > 0
+        }
+        cursor.close()
+        return isAdmin
     }
 
     fun addUser(idUsuario: String, nombre: String, contraseña: String, correo: String) {
@@ -130,6 +159,25 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         values.put(COLUMN_ID_USUARIO_FK, idUsuario)
         db.insert(TABLE_CUENTA, null, values)
         db.close()
+    }
+
+    fun verifyAdmin(userName: String, password: String): Int {
+        val db = readableDatabase
+        val cursor = db.query(TABLE_ADMINISTRADOR, arrayOf(COLUMN_ID_ADMINISTRADOR),"$COLUMN_ID_ADMINISTRADOR=? AND $COLUMN_CONTRASEÑA_ADMIN=?",
+            arrayOf(userName, password),
+            null, null, null, null
+        )
+
+        if (cursor != null && cursor.moveToFirst()) {
+            val columnIndex = cursor.getColumnIndex(COLUMN_ID_ADMINISTRADOR)
+            if (columnIndex != -1) {
+                val adminid = cursor.getInt(columnIndex)
+                cursor.close()
+                return adminid
+            }
+        }
+        cursor?.close()
+        return -1
     }
 
     fun verifyUser(IdUSer: String, contraseña: String): Int {
@@ -246,7 +294,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 val cuentaDestino = cursor.getString(cursor.getColumnIndexOrThrow("Cuenta_Destino"))
                 val nombreDestino = cursor.getString(cursor.getColumnIndexOrThrow("Nombre_Destino"))
 
-                // Determinar si la transferencia es de salida o de entrada
+
                 val tipoTransferencia = if (cuentaOrigen == idCuenta) "Salida" else "Entrada"
 
                 val transferencia = Transferencia(
@@ -422,5 +470,65 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         statement.executeUpdateDelete()
     }
 
+    fun createDefaultAdministradores() {
+        val db = this.writableDatabase
 
+        try {
+            val admin1Values = ContentValues().apply {
+                put(COLUMN_ID_ADMINISTRADOR,"7777777")
+                put(COLUMN_NOMBRE_ADMIN, "Admin1")
+                put(COLUMN_CONTRASEÑA_ADMIN, "admin123")
+            }
+            db.insert(TABLE_ADMINISTRADOR, null, admin1Values)
+
+            val admin2Values = ContentValues().apply {
+                put(COLUMN_ID_ADMINISTRADOR,"6666666")
+                put(COLUMN_NOMBRE_ADMIN, "Admin2")
+                put(COLUMN_CONTRASEÑA_ADMIN, "admin123")
+            }
+            db.insert(TABLE_ADMINISTRADOR, null, admin2Values)
+
+            Log.d("ADMIN", "Se han creado dos administradores correctamente.")
+        } catch (e: Exception) {
+            Log.e("ADMIN", "Error al crear administradores: ${e.message}")
+        } finally {
+            db.close()
+        }
+    }
+
+    fun getAllReportes(): MutableList<Reportes> {
+        val reportesList = mutableListOf<Reportes>()
+        val db = readableDatabase
+        val query = "SELECT $COLUMN_TIPO_REPORTE, $COLUMN_ID_USER_FK, $COLUMN_FECHA, $COLUMN_HORA FROM $TABLE_REPORTE ORDER BY $COLUMN_FECHA DESC, $COLUMN_HORA DESC"
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val tipoReporte = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIPO_REPORTE))
+                val idUsuario = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ID_USER_FK))
+                val fecha = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FECHA))
+                val hora = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_HORA))
+                val nombreUsuario = getNombreUsuarioById(idUsuario)
+
+                val reporte = Reportes(tipoReporte, nombreUsuario, idUsuario, fecha, hora)
+                reportesList.add(reporte)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return reportesList
+    }
+
+
+    fun getNombreUsuarioById(idUsuario: String): String {
+        val db = readableDatabase
+        val query = "SELECT $COLUMN_NOMBRE FROM $TABLE_USUARIO WHERE $COLUMN_ID_USUARIO = ?"
+        val cursor = db.rawQuery(query, arrayOf(idUsuario))
+        var nombreUsuario = "Usuario no encontrado"
+        if (cursor.moveToFirst()) {
+            nombreUsuario = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOMBRE))
+        }
+
+        cursor.close()
+        return nombreUsuario
+    }
 }

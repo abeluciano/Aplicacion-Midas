@@ -20,8 +20,9 @@
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:ems="10"
-        android:hint="Ingrese su Identificador"
-        android:inputType="number" />
+        android:hint="@string/ingrese_su_identificador"
+        android:inputType="number"
+        android:maxLength="8"/>
 
     <EditText
         android:id="@+id/txtClave"
@@ -30,8 +31,9 @@
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:ems="10"
-        android:hint="Ingresar Clave"
-        android:inputType="textPassword" />
+        android:hint="@string/ingresar_clave"
+        android:inputType="textPassword"
+        android:maxLength="15"/>
 
     <Button
         android:id="@+id/btnIniciar"
@@ -51,7 +53,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
         android:backgroundTint="#591616"
-        android:text="Registrarse"
+        android:text="@string/registrarse"
         android:textColorLink="#BF1E1E"
         android:textSize="20dp" />
 

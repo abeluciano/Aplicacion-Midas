@@ -16,6 +16,15 @@
         android:theme="@style/Theme.MIDAS"
         tools:targetApi="32">
         <activity
+            android:name=".Administrador.GestionarUsuariosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Administrador.GestionarReportesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Administrador.MenuAdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".Reportes.VerReporteActivity"
             android:exported="false" />
         <activity

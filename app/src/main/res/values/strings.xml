@@ -6,4 +6,8 @@
     <string name="fecha">Fecha</string>
     <string name="nombre_origen">Nombre Origen</string>
     <string name="tipo_transferencia">Tipo Transferencia</string>
+    <string name="ingresar_clave">Ingresar Clave</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="ingrese_su_identificador">Ingrese su Identificador</string>
+    <string name="gestionar_reportes">Gestionar Reportes</string>
 </resources>

@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.midas.Administrador.MenuAdminActivity
 import com.example.midas.BD.DatabaseHelper
 import com.example.midas.MenuActivity
 import com.example.midas.R
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         dbHelper = DatabaseHelper(this)
+        dbHelper.createDefaultAdministradores()
 
         val nombre = findViewById<EditText>(R.id.txtUsuario)
         val codigo = findViewById<EditText>(R.id.txtClave)
@@ -31,7 +33,11 @@ class MainActivity : AppCompatActivity() {
 
             if (userName.isNotEmpty() && password.isNotEmpty()) {
                 val userId = dbHelper.verifyUser(userName, password)
-                if (userId != -1) {
+                val adminId = dbHelper.verifyAdmin(userName, password)
+
+                if (userId != -1 || adminId != -1) {
+                    val isAdmin = dbHelper.checkIfAdmin(if (userId != -1) userId.toString() else adminId.toString())
+
                     Toast.makeText(this, "Login exitoso", Toast.LENGTH_SHORT).show()
                     val sharedPreferences = getSharedPreferences("MyAppPreferences", MODE_PRIVATE)
                     val editor = sharedPreferences.edit()
@@ -39,7 +45,11 @@ class MainActivity : AppCompatActivity() {
                     editor.putString("nombre", userName)
                     editor.apply()
 
-                    val intent = Intent(this, MenuActivity::class.java)
+                    val intent = if (isAdmin) {
+                        Intent(this, MenuAdminActivity::class.java)
+                    } else {
+                        Intent(this, MenuActivity::class.java)
+                    }
                     startActivity(intent)
                     finish()
                 } else {
@@ -49,9 +59,11 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Por favor ingrese todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
+
         signUpButton.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
     }
 }
+

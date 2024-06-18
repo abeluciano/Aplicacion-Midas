@@ -47,12 +47,18 @@ class LlenarReporteActivity : AppCompatActivity() {
         btnReportar.setOnClickListener() {
             try {
                 val tipoSelecReport = spinner.selectedItem.toString()
-                val reporteTexto = txtField.text.toString()
+                val reporteTexto = txtField.text.toString().trim()
                 val idReporte = Random.nextInt(100000000, 200000000)
                 val estado = "no revisado"
                 val user = idUser
                 val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
                 val currentTime = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
+
+                if (reporteTexto.isNullOrBlank()) {
+                    Toast.makeText(this, "Llene la descripcion", Toast.LENGTH_SHORT)
+                        .show()
+                    return@setOnClickListener
+                }
 
                 dbHelper.addReporte(
                     idReporte,

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/typeReport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="tipoReporte"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/idUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="idUser"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/fechayhora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fecha y Hora"
+        android:textSize="14sp" />
+
+
+</LinearLayout>
