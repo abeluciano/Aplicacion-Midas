@@ -49,13 +49,19 @@ class TransferenciaActivity : AppCompatActivity() {
 
             val montoString = montoEditText.text.toString().trim()
             val saldo = dbHelper.getSaldoByCuenta(idCuenta)
-            if (montoString.toDouble() > saldo!!) {
+            val idCuentaDestino = cuentaDestino.text.toString()
+            if (montoString.toDouble() > saldo!! ) {
                 Toast.makeText(this, "El monto supera al saldo disponible", Toast.LENGTH_SHORT)
                     .show()
                 return@setOnClickListener
             }
+            if (idCuentaDestino == idCuenta) {
+                Toast.makeText(this, "No puedes transferir a la misma cuenta en la que estas", Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
 
-            val idCuentaDestino = cuentaDestino.text.toString()
+
             if (dbHelper.verifyAccount(idCuentaDestino)) {
                 if (montoString.isNotEmpty() && idCuentaDestino.isNotEmpty()) {
                     val monto = montoString.toDoubleOrNull() ?: 0.0

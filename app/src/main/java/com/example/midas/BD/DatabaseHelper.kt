@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import com.example.midas.Administrador.DataClassAdmin.Reportes
+import com.example.midas.Administrador.DataClassAdmin.Usuarios
 import com.example.midas.DatasClass.Cuenta
 import com.example.midas.DatasClass.Reporte
 import com.example.midas.DatasClass.Transferencia
@@ -495,6 +496,26 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             db.close()
         }
     }
+
+
+    fun getAllUsuarios(): MutableList<Usuarios> {
+        val usuariosList = mutableListOf<Usuarios>()
+        val db = readableDatabase
+        val query = "SELECT $COLUMN_ID_USUARIO, $COLUMN_NOMBRE FROM $TABLE_USUARIO"
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val idUser = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ID_USUARIO))
+                val nameUser = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOMBRE))
+                val usuario = Usuarios(nameUser, idUser)
+                usuariosList.add(usuario)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return usuariosList
+    }
+
 
     fun getAllReportes(): MutableList<Reportes> {
         val reportesList = mutableListOf<Reportes>()
