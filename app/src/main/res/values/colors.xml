@@ -8,4 +8,9 @@
     <color name="colorSalida">#FF0000</color>
     <color name="colorEntrada">#00FF00</color>
 
+    <color name="newoscuro_fondo">#161622</color>
+    <color name="gris_textos">#707070</color>
+    <color name="newoscuro_botones">#0066FF</color>
+    <color name="newoscuro_casilla">#232533</color>
+
 </resources>
