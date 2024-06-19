@@ -32,7 +32,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:text="Identificador"
-                tools:textColor="@color/white" />
+                android:textColor="@color/white" />
 
             <EditText
                 android:id="@+id/editTextText3"
@@ -55,7 +55,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:text="Contraseña"
-                tools:textColor="@color/white" />
+                android:textColor="@color/white" />
 
             <EditText
                 android:id="@+id/editTextpas"
