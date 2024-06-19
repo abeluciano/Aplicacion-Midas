@@ -12,5 +12,6 @@
     <color name="gris_textos">#707070</color>
     <color name="newoscuro_botones">#0066FF</color>
     <color name="newoscuro_casilla">#232533</color>
+    <color name="rojo_mensaje">#FD0A0A</color>
 
 </resources>
