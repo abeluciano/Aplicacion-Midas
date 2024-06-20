@@ -1,3 +1,17 @@
+
+/**
+ * Adaptador para una lista de transferencias en un RecyclerView.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * Esta clase HistoryAdapter es un adaptador personalizado para mostrar una lista de objetos
+ * Transferencia en un RecyclerView. Se encarga de crear y vincular las vistas para cada
+ * transferencia en la lista.
+ */
 package com.example.midas.AdapterHistory
 
 import android.content.Context
