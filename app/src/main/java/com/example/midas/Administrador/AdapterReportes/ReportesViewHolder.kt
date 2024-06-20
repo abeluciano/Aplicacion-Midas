@@ -1,3 +1,17 @@
+/**
+ * ViewHolder para un reporte en un RecyclerView.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * Esta clase ReportesViewHolder representa una vista de un solo elemento (Reportes) en un
+ * RecyclerView. Contiene referencias a las vistas dentro de cada elemento y un método
+ * para vincular los datos de un reporte específico a estas vistas.
+ */
+
 package com.example.midas.Administrador.AdapterReportes
 
 import android.view.View
