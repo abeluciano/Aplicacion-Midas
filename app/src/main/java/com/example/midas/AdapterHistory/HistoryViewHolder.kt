@@ -1,3 +1,18 @@
+
+/**
+ * ViewHolder para una transferencia en un RecyclerView.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * Esta clase HistoryViewHolder representa una vista de un solo elemento (Transferencia) en un
+ * RecyclerView. Contiene referencias a las vistas dentro de cada elemento y un método
+ * para vincular los datos de una transferencia específica a estas vistas. También maneja
+ * la visualización y el color del tipo de transferencia (Entrada o Salida).
+ */
 package com.example.midas.AdapterHistory
 
 import android.graphics.Color
