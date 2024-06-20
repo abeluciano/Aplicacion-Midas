@@ -1,5 +1,6 @@
 package com.example.midas
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
@@ -27,7 +28,9 @@ class MenuActivity : AppCompatActivity() {
     private var idCuenta: String = ""
     private var tipoMoneda: String = ""
     private var saldo: Double = 0.0
+    private lateinit var tipo:TextView
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
@@ -36,6 +39,7 @@ class MenuActivity : AppCompatActivity() {
 
         idCuentaTextView = findViewById(R.id.txtID)
         saldoTextView = findViewById(R.id.txtMostrarSaldo)
+        tipo = findViewById(R.id.Tipo)
         val AbrirCuenta = findViewById<ImageButton>(R.id.btnAperturarCuenta)
         val Recarga = findViewById<ImageButton>(R.id.btnRecarga)
         val Transferencia = findViewById<ImageButton>(R.id.btnTranferencia)
@@ -110,12 +114,14 @@ class MenuActivity : AppCompatActivity() {
             saldo = cuenta!!.saldo
             tipoMoneda = cuenta!!.tipoMoneda
 
-            idCuentaTextView.text = "ID Cuenta: $idCuenta"
+            tipo.text = "${if(tipoMoneda == "Soles") "Soles" else "Dolares"}"
+            idCuentaTextView.text = "$idCuenta"
             val saldoFormatted = String.format("%.2f", saldo)
-            saldoTextView.text = "Saldo: ${if (tipoMoneda == "Soles") "S/" else "$"} $saldoFormatted"
+            saldoTextView.text = "${if (tipoMoneda == "Soles") "S/" else "$"} $saldoFormatted"
         } else {
             idCuentaTextView.text = "No se encontró ninguna cuenta"
-            saldoTextView.text = "Saldo: N/A"
+            saldoTextView.text = "N/A"
+            tipo.text = "N/A"
         }
     }
 
@@ -143,9 +149,10 @@ class MenuActivity : AppCompatActivity() {
         editor.putString("Id_Cuenta_Seleccionada", idCuenta)
         editor.apply()
 
-        idCuentaTextView.text = "ID Cuenta: $idCuenta"
+        idCuentaTextView.text = "$idCuenta"
         val saldoFormatted = String.format("%.2f", saldo)
-        saldoTextView.text = "Saldo: ${if (tipoMoneda == "Soles") "S/" else "$"} $saldoFormatted"
+        saldoTextView.text = "${if (tipoMoneda == "Soles") "S/" else "$"} $saldoFormatted"
+        tipo.text = "${if(tipoMoneda == "Soles") "Soles" else "Dolares"}"
     }
 
     private fun logout() {

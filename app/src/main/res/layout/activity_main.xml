@@ -1,60 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFA756"
-    android:orientation="vertical">
+    android:background="@color/newoscuro_fondo">
 
-
-    <ImageView
-        android:id="@+id/imageView2"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="225dp"
-        app:srcCompat="@drawable/midaslogo" />
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/txtUsuario"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint="@string/ingrese_su_identificador"
-        android:inputType="number"
-        android:maxLength="8"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/txtClave"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint="@string/ingresar_clave"
-        android:inputType="textPassword"
-        android:maxLength="15"/>
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="411dp"
+                android:layout_height="380dp"
+                app:srcCompat="@drawable/nuevo_logo_midas_login" />
 
-    <Button
-        android:id="@+id/btnIniciar"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="#591616"
-        android:text="Ingresar"
-        android:textColorLink="#BF1E1E"
-        android:textSize="20dp" />
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Identificador"
+                android:textColor="@color/white" />
 
-    <Button
-        android:id="@+id/btnSignUp"
-        android:layout_width="154dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="#591616"
-        android:text="@string/registrarse"
-        android:textColorLink="#BF1E1E"
-        android:textSize="20dp" />
+            <EditText
+                android:id="@+id/txtUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="40dp"
+                android:drawableLeft="@drawable/item_tarjetitas"
+                android:ems="10"
+                android:hint="Ingresar DNI"
+                android:inputType="number"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gris_textos" />
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/textpas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Contraseña"
+                android:textColor="@color/white" />
+
+            <EditText
+                android:id="@+id/txtClave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="40dp"
+                android:drawableLeft="@drawable/item_candado"
+                android:ems="10"
+                android:hint="Ingresar contraseña"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gris_textos"
+                />
+
+            <Button
+                android:id="@+id/btnIniciar"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/newoscuro_botones"
+                android:text="Ingresar"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="¿Eres un nuevo usuario?"
+                android:textColor="@color/gris_textos" />
+
+            <TextView
+                android:id="@+id/btnSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Regístrese"
+                android:textColor="@color/newoscuro_botones"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

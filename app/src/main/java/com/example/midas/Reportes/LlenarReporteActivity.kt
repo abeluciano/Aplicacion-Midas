@@ -19,7 +19,6 @@ import kotlin.random.Random
 
 class LlenarReporteActivity : AppCompatActivity() {
     private lateinit var dbHelper: DatabaseHelper
-    private  var idUsuario by Delegates.notNull<Int>()
     private var idUser: String = ""
     private lateinit var spinner:Spinner
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,11 +49,12 @@ class LlenarReporteActivity : AppCompatActivity() {
                 val reporteTexto = txtField.text.toString().trim()
                 val idReporte = Random.nextInt(100000000, 200000000)
                 val estado = "no revisado"
+                val respuesta = "ninguna"
                 val user = idUser
                 val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
                 val currentTime = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
 
-                if (reporteTexto.isNullOrBlank()) {
+                if (reporteTexto.isBlank()) {
                     Toast.makeText(this, "Llene la descripcion", Toast.LENGTH_SHORT)
                         .show()
                     return@setOnClickListener
@@ -64,12 +64,14 @@ class LlenarReporteActivity : AppCompatActivity() {
                     idReporte,
                     tipoSelecReport,
                     reporteTexto,
+                    respuesta,
                     estado,
                     currentDate,
                     currentTime,
                     user
                 )
                 Toast.makeText(this, "Reporte Guardado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "${dbHelper.hashCode()}", Toast.LENGTH_SHORT).show()
                 finish()
             }catch (e:Exception) {
                 Toast.makeText(this, "Error al guardar reporte", Toast.LENGTH_SHORT).show()

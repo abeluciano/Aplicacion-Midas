@@ -6,6 +6,12 @@
     android:padding="15dp">
 
     <TextView
+        android:id="@+id/idReporte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="idreporte"
+        android:textSize="14sp" />
+    <TextView
         android:id="@+id/typeReport"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,17 +19,17 @@
         android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/nombre"
+        android:id="@+id/estado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nombre"
+        android:text="Estado"
         android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/idUser"
+        android:id="@+id/respuesta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="idUser"
+        android:text="Respuesta"
         android:textSize="14sp" />
 
     <TextView

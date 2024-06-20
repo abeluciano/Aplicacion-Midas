@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.midas.Administrador.MenuAdminActivity
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         val nombre = findViewById<EditText>(R.id.txtUsuario)
         val codigo = findViewById<EditText>(R.id.txtClave)
         val botonEnviar = findViewById<Button>(R.id.btnIniciar)
-        val signUpButton = findViewById<Button>(R.id.btnSignUp)
+        val signUpButton = findViewById<TextView>(R.id.btnSignUp)
 
         botonEnviar.setOnClickListener {
             val userName = nombre.text.toString()
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (userId != -1 || adminId != -1) {
                     val isAdmin = dbHelper.checkIfAdmin(if (userId != -1) userId.toString() else adminId.toString())
-
+                    Toast.makeText(this, "${dbHelper.hashCode()}", Toast.LENGTH_SHORT).show()
                     Toast.makeText(this, "Login exitoso", Toast.LENGTH_SHORT).show()
                     val sharedPreferences = getSharedPreferences("MyAppPreferences", MODE_PRIVATE)
                     val editor = sharedPreferences.edit()

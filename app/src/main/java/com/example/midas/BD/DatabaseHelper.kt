@@ -48,6 +48,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         private const val COLUMN_ID_REPORTE = "Id_Reporte"
         private const val COLUMN_TIPO_REPORTE = "Tipo_Reporte"
         private const val COLUMN_DESCRIPCION = "Descripcion"
+        private const val COLUMN_RESPUESTA = "Respuesta"
         private const val COLUMN_ESTADO = "Estado"
         private const val COLUMN_FECHAR = "Fecha"
         private const val COLUMN_HORAR = "Hora"
@@ -55,6 +56,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     override fun onCreate(db: SQLiteDatabase) {
+
+        Log.d("DB", "onCreate")
 
         val createAdministradorTable = ("CREATE TABLE " + TABLE_ADMINISTRADOR+ "("
                 + COLUMN_ID_ADMINISTRADOR + " TEXT PRIMARY KEY,"
@@ -93,6 +96,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 + COLUMN_ID_REPORTE + " INTEGER PRIMARY KEY,"
                 + COLUMN_TIPO_REPORTE + " TEXT,"
                 + COLUMN_DESCRIPCION + " TEXT,"
+                + COLUMN_RESPUESTA + " TEXT,"
                 + COLUMN_ESTADO + " TEXT,"
                 + COLUMN_FECHAR + " DATE,"
                 + COLUMN_HORAR + " TIME,"
@@ -405,6 +409,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         idReporte: Int,
         tipoReporte: String,
         descripcion: String,
+        repuesta: String,
         estado:String,
         fecha: String,
         hora: String,
@@ -415,6 +420,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         values.put(COLUMN_ID_REPORTE, idReporte)
         values.put(COLUMN_TIPO_REPORTE, tipoReporte)
         values.put(COLUMN_DESCRIPCION, descripcion)
+        values.put(COLUMN_RESPUESTA, repuesta)
         values.put(COLUMN_ESTADO, estado)
         values.put(COLUMN_FECHAR, fecha)
         values.put(COLUMN_HORAR, hora)
@@ -520,24 +526,28 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     fun getAllReportes(): MutableList<Reportes> {
         val reportesList = mutableListOf<Reportes>()
         val db = readableDatabase
-        val query = "SELECT $COLUMN_TIPO_REPORTE, $COLUMN_ID_USER_FK, $COLUMN_FECHA, $COLUMN_HORA FROM $TABLE_REPORTE ORDER BY $COLUMN_FECHA DESC, $COLUMN_HORA DESC"
+        val query = """SELECT $COLUMN_ID_REPORTE, $COLUMN_TIPO_REPORTE, $COLUMN_RESPUESTA,
+                                $COLUMN_ESTADO, $COLUMN_FECHAR, $COLUMN_HORAR
+                        FROM $TABLE_REPORTE ORDER BY $COLUMN_FECHAR DESC, $COLUMN_HORAR DESC"""
         val cursor = db.rawQuery(query, null)
 
         if (cursor.moveToFirst()) {
             do {
+                val idReporte = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID_REPORTE))
                 val tipoReporte = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIPO_REPORTE))
-                val idUsuario = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ID_USER_FK))
-                val fecha = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FECHA))
-                val hora = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_HORA))
-                val nombreUsuario = getNombreUsuarioById(idUsuario)
+                val respuesta = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_RESPUESTA))
+                val estado = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ESTADO))
+                val fecha = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FECHAR))
+                val hora = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_HORAR))
 
-                val reporte = Reportes(tipoReporte, nombreUsuario, idUsuario, fecha, hora)
+                val reporte = Reportes(idReporte.toString(), tipoReporte, respuesta, estado, fecha, hora)
                 reportesList.add(reporte)
             } while (cursor.moveToNext())
         }
         cursor.close()
         return reportesList
     }
+
 
 
     fun getNombreUsuarioById(idUsuario: String): String {

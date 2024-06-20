@@ -1,103 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Principal_naranja"
-    android:orientation="vertical"
-    android:padding="16dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/newoscuro_fondo">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fondo1" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:padding="10dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:orientation="vertical" >
 
-            <LinearLayout
+            <ImageButton
+                android:id="@+id/imgbtnAtrasR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                app:srcCompat="@drawable/item_boton_retroceder" />
+
+            <TextView
+                android:id="@+id/textView19"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="50dp"
+                android:text="Registrarse"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:textStyle="bold" />
 
-                <ImageButton
-                    android:id="@+id/imgbtnAtrasR"
-                    android:layout_width="42dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/Principal_naranja"
-                    app:srcCompat="@drawable/baseline_arrow_back_ios_24" />
-
-                <TextView
-                    android:id="@+id/txtRegistro"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/Principal_naranja"
-                    android:gravity="center"
-                    android:text="REGISTRO"
-                    android:textSize="30dp" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/textViewdni"
+                tools:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="DNI"
+                android:textColor="@color/white" />
 
             <EditText
                 android:id="@+id/idUsuarioEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="DNI (8 caracteres)"
-                android:inputType="number"
-                android:maxLength="8" />
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/item_tarjetitas"
+                android:ems="10"
+                android:hint="Ingresar DNI"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gris_textos"
+                android:maxLength="8"/>
+
+            <TextView
+                android:id="@+id/textViewnombre"
+                tools:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Apellidos y Nombre"
+                android:textColor="@color/white" />
 
             <EditText
                 android:id="@+id/nombreEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Nombre y Apellido (max 20 caracteres)"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/item_tarjetitas"
+                android:ems="10"
+                android:hint="Ingresar apellidos y nombre"
                 android:inputType="text"
-                android:maxLength="20" />
+                android:textColor="@color/white"
+                android:textColorHint="@color/gris_textos"
+                android:maxLength="20"/>
+
+            <TextView
+                android:id="@+id/textViewcorreo"
+                tools:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Correo electronico"
+                android:textColor="@color/white" />
 
             <EditText
                 android:id="@+id/correoEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Correo (max 20 caracteres)"
-                android:inputType="textEmailAddress"
-                android:maxLength="20" />
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/item_tarjetitas"
+                android:ems="10"
+                android:hint="Ingresar correo electronico"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gris_textos"
+                android:maxLength="40"/>
+
+            <TextView
+                android:id="@+id/textViewcontraseña"
+                tools:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Contraseña"
+                android:textColor="@color/white" />
 
             <EditText
                 android:id="@+id/contraseñaEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Contraseña (min 8 y max 15 caracteres)"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/item_candado"
+                android:ems="10"
+                android:hint="Ingresar contraseña"
                 android:inputType="textPassword"
-                android:maxLength="15" />
+                android:textColor="@color/white"
+                android:textColorHint="@color/gris_textos"
+                android:maxLength="15"
+                />
+
+            <TextView
+                android:id="@+id/textViewconfirmar"
+                tools:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Confirmar contraseña"
+                android:textColor="@color/white" />
 
             <EditText
                 android:id="@+id/etxtConfirmarContraseña"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Confirmar contraseña"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/item_candado"
+                android:ems="10"
+                android:hint="Vuelve a ingresar contraseña"
                 android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gris_textos"
                 android:maxLength="15"/>
 
             <Button
                 android:id="@+id/signUpButton"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:backgroundTint="#6A1B1B"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/newoscuro_botones"
                 android:text="Registrarse"
                 android:textSize="20dp" />
         </LinearLayout>
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
