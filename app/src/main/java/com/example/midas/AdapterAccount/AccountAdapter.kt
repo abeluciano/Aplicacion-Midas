@@ -1,3 +1,17 @@
+/**
+ * Adaptador para una lista de cuentas en un RecyclerView.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * Esta clase AccountAdapter es un adaptador personalizado para mostrar una lista de objetos
+ * Cuenta en un RecyclerView. Se encarga de crear y vincular las vistas para cada cuenta en
+ * la lista, y maneja los eventos de clic en cada elemento de la lista para seleccionar una cuenta.
+ */
+
 package com.example.midas.AdapterAccount
 
 import android.content.Context
