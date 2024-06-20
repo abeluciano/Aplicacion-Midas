@@ -1,3 +1,18 @@
+
+/**
+ * ViewHolder para una cuenta en un RecyclerView.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * Esta clase AccountViewHolder representa una vista de un solo elemento (Cuenta) en un
+ * RecyclerView. Contiene referencias a las vistas dentro de cada elemento y un método
+ * para vincular los datos de una cuenta específica a estas vistas. También maneja los
+ * eventos de clic en cada elemento.
+ */
 package com.example.midas.AdapterAccount
 
 import android.view.View
