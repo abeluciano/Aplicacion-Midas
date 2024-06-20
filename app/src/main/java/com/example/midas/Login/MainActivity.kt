@@ -1,7 +1,9 @@
 package com.example.midas.Login
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -12,6 +14,7 @@ import com.example.midas.BD.DatabaseHelper
 import com.example.midas.MenuActivity
 import com.example.midas.R
 import com.example.midas.SignUpActivity
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     private lateinit var dbHelper: DatabaseHelper
@@ -57,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "Por favor ingrese todos los campos", Toast.LENGTH_SHORT).show()
+                showInvalidEmailNotification()
             }
         }
 
@@ -65,6 +68,22 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun showInvalidEmailNotification() {
+        val snackbar = Snackbar.make(findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG)
+
+        // Inflar la vista personalizada
+        val customSnackView: View = layoutInflater.inflate(R.layout.custom_snackbar, null)
+        val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+
+        // Eliminar el texto predeterminado del Snackbar
+        snackbarLayout.removeAllViews()
+
+        // Añadir la vista personalizada al Snackbar
+        snackbarLayout.addView(customSnackView)
+        snackbar.show()
     }
 }
 

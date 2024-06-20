@@ -1,6 +1,7 @@
 package com.example.midas.Administrador
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.Toast
@@ -49,6 +50,13 @@ class GestionarReportesActivity : AppCompatActivity() {
     }
 
     private fun onItemSelected(reporte: Reportes) {
+
         Toast.makeText(this, "En proceso", Toast.LENGTH_SHORT).show()
+    }
+
+    fun initDialog() {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_cuenta)
+        dialog.show()
     }
 }
