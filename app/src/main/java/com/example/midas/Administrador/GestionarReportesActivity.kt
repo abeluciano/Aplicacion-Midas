@@ -1,3 +1,19 @@
+/**
+ * Actividad para gestionar reportes en la aplicación.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * La clase GestionarReportesActivity es una actividad de Android que permite gestionar
+ * reportes en la aplicación. Se conecta a una base de datos mediante DatabaseHelper,
+ * inicializa un RecyclerView con un adaptador ReportesAdapter para mostrar los reportes
+ * y maneja eventos de clic en los elementos de la lista de reportes. También tiene una
+ * función para mostrar un diálogo.
+ */
+
 package com.example.midas.Administrador
 
 import android.annotation.SuppressLint
