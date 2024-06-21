@@ -1,3 +1,20 @@
+/**
+ * Actividad principal que muestra el menú de opciones para el usuario en la aplicación Midas.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * Esta actividad permite al usuario realizar diversas acciones como abrir una nueva cuenta,
+ * realizar transferencias, recargar saldo, generar reportes, ver el historial de transacciones
+ * y cerrar sesión. También muestra información actualizada de la cuenta seleccionada y lista
+ * todas las cuentas asociadas al usuario utilizando un RecyclerView y un adaptador personalizado
+ * (AccountAdapter). Al seleccionar una cuenta de la lista, se actualiza la información de la
+ * cuenta mostrada en la parte superior.
+ */
+
 package com.example.midas
 
 import android.annotation.SuppressLint
