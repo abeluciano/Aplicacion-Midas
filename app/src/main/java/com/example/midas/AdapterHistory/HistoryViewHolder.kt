@@ -26,10 +26,7 @@ import com.example.midas.R
 class HistoryViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val accountDesNameTextView = itemView.findViewById<TextView>(R.id.accountDesNameTextView)
     private val transBalanceTextView = itemView.findViewById<TextView>(R.id.transBalanceTextView)
-    private val accountDesIdTextView = itemView.findViewById<TextView>(R.id.accountDesIdTextView)
-    private val accountDateTextView = itemView.findViewById<TextView>(R.id.accountDateTextView)
     private val tipoTransferenciaTextView = itemView.findViewById<TextView>(R.id.tipoTransferenciaTextView)
-    private val accountOrigNameTextView = itemView.findViewById<TextView>(R.id.accountOrigNameTextView)
     private val accountDestIdTextView = itemView.findViewById<TextView>(R.id.accountDestIdTextView)
 
     fun render(item: Transferencia) {

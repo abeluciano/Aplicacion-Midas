@@ -39,15 +39,17 @@ class HistoryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_history)
         dbHelper = DatabaseHelper(this)
         atras = findViewById(R.id.btnAtras)
-        val txtUsuario = findViewById<TextView>(R.id.txtUsuario)
+        //val txtUsuario = findViewById<TextView>(R.id.txtUsuario)
+        val txtCuenta = findViewById<TextView>(R.id.idCuentaTextView)
 
         idCuenta = intent.getStringExtra("ID_CUENTA") ?: ""
         val nameUser = dbHelper.getNombreUsuarioByCuenta(idCuenta)
         atras.setOnClickListener() {
             finish()
         }
+        txtCuenta.text = idCuenta
+        //txtUsuario.text = nameUser
         initRecyclerView()
-        txtUsuario.text = nameUser
     }
     fun initRecyclerView() {
         val manager = LinearLayoutManager(this)
