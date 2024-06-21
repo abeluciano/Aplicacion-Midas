@@ -466,18 +466,20 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     fun getReportesByUsuario(idUsuario: String): MutableList<Reporte> {
         val reportesList = mutableListOf<Reporte>()
         val db = this.readableDatabase
-        val query = "SELECT $COLUMN_TIPO_REPORTE, $COLUMN_ESTADO, $COLUMN_FECHAR || ' ' || $COLUMN_HORAR AS FechayHora " +
+        val query = "SELECT $COLUMN_ID_REPORTE, $COLUMN_TIPO_REPORTE, $COLUMN_RESPUESTA, $COLUMN_ESTADO, $COLUMN_FECHAR || ' ' || $COLUMN_HORAR AS FechayHora " +
                 "FROM $TABLE_REPORTE " +
                 "WHERE $COLUMN_ID_USER_FK = ? " +
-                "ORDER BY $COLUMN_FECHAR DESC, $COLUMN_HORAR DESC"  // Ordenar por fecha y hora descendente
+                "ORDER BY $COLUMN_FECHAR DESC, $COLUMN_HORAR DESC"
         val cursor = db.rawQuery(query, arrayOf(idUsuario))
 
         if (cursor.moveToFirst()) {
             do {
+                val idReporte = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID_REPORTE))
                 val tipoReporte = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIPO_REPORTE))
+                val respuesta = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_RESPUESTA))
                 val estado = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ESTADO))
                 val fechayHora = cursor.getString(cursor.getColumnIndexOrThrow("FechayHora"))
-                val reporte = Reporte(tipoReporte, estado, fechayHora)
+                val reporte = Reporte(idReporte.toString(), tipoReporte, respuesta, estado, fechayHora)
                 reportesList.add(reporte)
             } while (cursor.moveToNext())
         }
@@ -597,11 +599,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
     fun getCurrencyTypeById(idCuenta: String): String? {
         val db = readableDatabase
-        val query = "SELECT Tipo_Moneda FROM Cuenta WHERE Id_Cuenta = ?"
+        val query = "SELECT Tipo_Cuenta FROM Cuenta WHERE Id_Cuenta = ?"
         val cursor = db.rawQuery(query, arrayOf(idCuenta))
 
         return if (cursor.moveToFirst()) {
-            val tipoMoneda = cursor.getString(cursor.getColumnIndexOrThrow("Tipo_Moneda"))
+            val tipoMoneda = cursor.getString(cursor.getColumnIndexOrThrow("Tipo_Cuenta"))
             cursor.close()
             tipoMoneda
         } else {

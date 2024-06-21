@@ -49,9 +49,9 @@ class ConfirmarTransferenciaActivity : AppCompatActivity() {
             else -> monto.toDouble()
         }
 
-        txtNameDes.text = nombreUser
-        txtCDes.text = idCuentaDestino
-        txtTipoMDes.text = tipoDestino
+        txtNameDes.text = " $nombreUser"
+        txtCDes.text = " $idCuentaDestino"
+        txtTipoMDes.text = " $tipoDestino"
         val simbolo = if (tipoDestino == "Soles") "S/" else "$"
         simboloMonedaTextView.text = simbolo
         Monto.text = montoConvertido.toString()

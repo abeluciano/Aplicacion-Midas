@@ -14,6 +14,7 @@
 
 package com.example.midas.AdapterReporte
 
+import android.graphics.Color
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -22,13 +23,24 @@ import com.example.midas.DatasClass.Transferencia
 import com.example.midas.R
 
 class ReporteViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    val idReporte = itemView.findViewById<TextView>(R.id.idReporte)
     val typeReport = itemView.findViewById<TextView>(R.id.typeReport)
     val estado = itemView.findViewById<TextView>(R.id.estado)
+    val respuesta = itemView.findViewById<TextView>(R.id.respuesta)
     val FechayHora = itemView.findViewById<TextView>(R.id.FechayHora)
 
     fun render(item: Reporte) {
         typeReport.text = item.tipoReporte
-        estado.text = item.estado
+        idReporte.text = item.idReporte
+        respuesta.text = item.respuesta
+        if (item.estado == "Solucionado") {
+            estado.text = item.estado
+            estado.setTextColor(Color.GREEN)
+        } else {
+            estado.text = item.estado
+            estado.setTextColor(Color.RED)
+        }
+
         FechayHora.text = item.FechayHora
     }
 }

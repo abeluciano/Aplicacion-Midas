@@ -25,19 +25,19 @@ import com.example.midas.BD.DatabaseHelper
 import com.example.midas.DatasClass.Transferencia
 import com.example.midas.R
 
-class HistoryViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-    private lateinit var dbHelper: DatabaseHelper
+class HistoryViewHolder(itemView: View, private val dbHelper: DatabaseHelper): RecyclerView.ViewHolder(itemView) {
     private val accountDesNameTextView = itemView.findViewById<TextView>(R.id.accountDesNameTextView)
     private val transBalanceTextView = itemView.findViewById<TextView>(R.id.transBalanceTextView)
     private val accountDestIdTextView = itemView.findViewById<TextView>(R.id.accountDestIdTextView)
+    private val tipoTransferenciaTextView = itemView.findViewById<TextView>(R.id.tipoTransferenciaTextView)
 
     @SuppressLint("SetTextI18n")
     fun render(item: Transferencia) {
 
         if (item.tipoTransferencia == "Salida"){
-            accountDesNameTextView.text = item.nombreDestino ?: "N/A"
+            accountDesNameTextView.text = " ${item.nombreDestino ?: "N/A"}"
         } else {
-            accountDesNameTextView.text = item.nombreOrigen ?: "N/A"
+            accountDesNameTextView.text = " ${item.nombreOrigen ?: "N/A"}"
         }
 
         if (item.tipoTransferencia == "Salida") {
@@ -53,5 +53,7 @@ class HistoryViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             accountDestIdTextView.text = "+ ${item.monto}"
             accountDestIdTextView.setTextColor(Color.GREEN)
         }
+
+        tipoTransferenciaTextView.text = "Fecha: ${item.fecha}"
     }
 }

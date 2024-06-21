@@ -1,7 +1,9 @@
 package com.example.midas.Transferencia
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.midas.BD.DatabaseHelper
 import com.example.midas.MenuActivity
 import com.example.midas.R
+import com.google.android.material.snackbar.Snackbar
 
 class TransferenciaActivity : AppCompatActivity() {
 
@@ -51,16 +54,14 @@ class TransferenciaActivity : AppCompatActivity() {
             val saldo = dbHelper.getSaldoByCuenta(idCuenta)
             val idCuentaDestino = cuentaDestino.text.toString()
             if (montoString.toDouble() > saldo!!) {
-                Toast.makeText(this, "El monto supera al saldo disponible", Toast.LENGTH_SHORT)
-                    .show()
+                showInvalidEmailNotification("El monto supera al saldo disponible")
                 return@setOnClickListener
             }
             if (montoString.toDouble() < 0.1) {
                 return@setOnClickListener
             }
             if (idCuentaDestino == idCuenta) {
-                Toast.makeText(this, "No puedes transferir a la misma cuenta en la que estas", Toast.LENGTH_SHORT)
-                    .show()
+                showInvalidEmailNotification("No puedes transferir a la misma cuenta en la que estas")
                 return@setOnClickListener
             }
 
@@ -83,11 +84,24 @@ class TransferenciaActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-                    Toast.makeText(this, "Llene todos los campos", Toast.LENGTH_SHORT).show()
+                    showInvalidEmailNotification("Llene todos los campos")
                 }
             } else {
-                Toast.makeText(this, "La cuenta de destino no está registrada", Toast.LENGTH_SHORT).show()
+                showInvalidEmailNotification("La cuenta de destino no está registrada")
             }
+
         }
     }
+    @SuppressLint("RestrictedApi")
+    private fun showInvalidEmailNotification(msg: String) {
+        val snackbar = Snackbar.make(findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG)
+        val customSnackView: View = layoutInflater.inflate(R.layout.custom_snackbar, null)
+        val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+        val snackbar_text = customSnackView.findViewById<TextView>(R.id.snackbar_text)
+        snackbar_text.text = msg
+        snackbarLayout.removeAllViews()
+        snackbarLayout.addView(customSnackView)
+        snackbar.show()
+    }
+
 }

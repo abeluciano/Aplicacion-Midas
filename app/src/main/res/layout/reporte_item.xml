@@ -7,34 +7,60 @@
     android:padding="15dp">
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/idReporte"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tipo Reporte:"
-        android:textColor="@color/gris_textos" />
+        android:gravity="right"
+        android:text="idreporte"
+        android:textColor="@color/gris_textos"
+        android:textSize="18dp" />
 
-    <TextView
-        android:id="@+id/typeReport"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="tipoReporte"
-        android:textColor="@color/white"
-        android:textSize="20dp" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/textView22"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Estado:"
-        android:textColor="@color/gris_textos" />
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Tipo reporte:"
+            android:textColor="@color/gris_textos"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/typeReport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="tipoReporte"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/estado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Estado"
+        android:layout_marginTop="10dp"
+        android:text="Estado(cambiar color)"
         android:textColor="@color/white"
-        android:textSize="20dp" />
+        android:textSize="24dp" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Respuesta:"
+        android:textColor="@color/gris_textos" />
+
+    <TextView
+        android:id="@+id/respuesta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Respuesta escrita"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/FechayHora"
@@ -42,7 +68,7 @@
         android:layout_height="wrap_content"
         android:gravity="right"
         android:text="Fecha y Hora"
-        android:textColor="@color/white"
+        android:textColor="@color/gris_textos"
         android:textSize="14sp" />
 
 
