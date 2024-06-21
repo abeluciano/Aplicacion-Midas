@@ -2,28 +2,47 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/item_fondo_reporte"
     android:orientation="vertical"
     android:padding="15dp">
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tipo Reporte:"
+        android:textColor="@color/gris_textos" />
 
     <TextView
         android:id="@+id/typeReport"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="tipoReporte"
-        android:textSize="14sp" />
+        android:textColor="@color/white"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Estado:"
+        android:textColor="@color/gris_textos" />
 
     <TextView
         android:id="@+id/estado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Estado"
-        android:textSize="14sp" />
+        android:textColor="@color/white"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/FechayHora"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="right"
         android:text="Fecha y Hora"
+        android:textColor="@color/white"
         android:textSize="14sp" />
 
 
