@@ -14,5 +14,7 @@
     <color name="newoscuro_casilla">#232533</color>
     <color name="rojo_mensaje">#FD0A0A</color>
     <color name="fondo_admin">#27273A</color>
+    <color name="color_descongelar">#0066FF</color>
+    <color name="color_congelar">#EA001B</color>
 
 </resources>
