@@ -1,3 +1,18 @@
+/**
+ * Actividad principal que gestiona el inicio de sesión en la aplicación Midas.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * MainActivity es la actividad principal de inicio de sesión de la aplicación Midas.
+ * Permite a los usuarios ingresar su nombre de usuario y contraseña, verifica las credenciales
+ * utilizando la base de datos local y redirige a la actividad correspondiente según si el usuario es
+ * administrador o no. También ofrece la opción de registrarse para nuevos usuarios.
+ */
+
 package com.example.midas.Login
 
 import android.annotation.SuppressLint
