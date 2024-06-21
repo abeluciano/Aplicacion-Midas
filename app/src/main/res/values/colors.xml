@@ -13,5 +13,6 @@
     <color name="newoscuro_botones">#0066FF</color>
     <color name="newoscuro_casilla">#232533</color>
     <color name="rojo_mensaje">#FD0A0A</color>
+    <color name="fondo_admin">#27273A</color>
 
 </resources>
