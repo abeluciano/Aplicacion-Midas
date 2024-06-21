@@ -1,3 +1,20 @@
+/**
+ * Actividad para registrar un nuevo usuario en la aplicación Midas.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * Esta actividad permite al usuario completar el registro proporcionando un ID de usuario,
+ * nombre completo, correo electrónico y contraseña. Se realizan validaciones en los campos
+ * ingresados antes de proceder con el registro en la base de datos. Las validaciones incluyen
+ * longitud del ID de usuario, formato y seguridad de la contraseña, validez del correo electrónico
+ * y concordancia de la contraseña confirmada. Si el registro es exitoso, se muestra un mensaje
+ * de confirmación y se redirige al usuario a la pantalla de inicio de sesión.
+ */
+
 package com.example.midas
 
 import android.content.Intent
