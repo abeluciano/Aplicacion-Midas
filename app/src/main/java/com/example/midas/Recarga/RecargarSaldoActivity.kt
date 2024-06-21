@@ -14,7 +14,7 @@
  * si el usuario decide cancelar la operación.
  */
 
-package com.example.midas
+package com.example.midas.Recarga
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -25,7 +25,9 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.midas.AperturarCuentaActivity
 import com.example.midas.BD.DatabaseHelper
+import com.example.midas.R
 
 class RecargarSaldoActivity : AppCompatActivity() {
 
@@ -42,7 +44,7 @@ class RecargarSaldoActivity : AppCompatActivity() {
     @SuppressLint("DefaultLocale")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recargar_saldo )
+        setContentView(R.layout.activity_recargar_saldo)
 
         dbHelper = DatabaseHelper(this)
 
@@ -74,7 +76,8 @@ class RecargarSaldoActivity : AppCompatActivity() {
                         montoEditText.setText(montoFormatted)
                     }
                     dbHelper.recargarCuenta(idCuenta, monto)
-                    Toast.makeText(this, "Cuenta recargada con éxito", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, PagoEfectivoActivity::class.java)
+                    startActivity(intent)
                     finish()
                 } else {
                     if (monto < montoMinimo) {

@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity() {
                     val sharedPreferences = getSharedPreferences("MyAppPreferences", MODE_PRIVATE)
                     val editor = sharedPreferences.edit()
                     editor.putInt("Id_Usuario", userId)
+                    editor.putInt("Id_Admin", adminId)
                     editor.putString("nombre", userName)
                     editor.apply()
 

@@ -16,6 +16,15 @@
         android:theme="@style/Theme.MIDAS"
         tools:targetApi="32">
         <activity
+            android:name=".Administrador.UsuarioSeleccionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Recarga.PagoEfectivoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Transferencia.MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".Administrador.GestionarUsuariosActivity"
             android:exported="false" />
         <activity
@@ -40,7 +49,7 @@
             android:name=".Transferencia.ConfirmarTransferenciaActivity"
             android:exported="false" />
         <activity
-            android:name=".RecargarSaldoActivity"
+            android:name=".Recarga.RecargarSaldoActivity"
             android:exported="false" />
         <activity
             android:name=".SignUpActivity"

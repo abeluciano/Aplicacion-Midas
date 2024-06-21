@@ -15,6 +15,7 @@
 
 package com.example.midas.Administrador
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.Toast
@@ -63,6 +64,9 @@ class GestionarUsuariosActivity : AppCompatActivity() {
     }
 
     private fun onItemSelected(usuarios: Usuarios) {
-        Toast.makeText(this, "En proceso", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, UsuarioSeleccionActivity::class.java)
+        intent.putExtra("ID_USARIO", usuarios.idUser)
+        intent.putExtra("NOMBRE_USUARIO", usuarios.nameUser)
+        startActivity(intent)
     }
 }

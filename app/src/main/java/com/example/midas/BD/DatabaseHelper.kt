@@ -18,6 +18,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import com.example.midas.Administrador.DataClassAdmin.Cuentas
 import com.example.midas.Administrador.DataClassAdmin.Reportes
 import com.example.midas.Administrador.DataClassAdmin.Usuarios
 import com.example.midas.DatasClass.Cuenta
@@ -279,6 +280,25 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 val saldo = cursor.getDouble(cursor.getColumnIndexOrThrow("Saldo"))
                 val tipoMoneda = cursor.getString(cursor.getColumnIndexOrThrow("Tipo_Cuenta"))
                 cuentasList.add(Cuenta(idCuenta, saldo, tipoMoneda))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return cuentasList
+    }
+
+    fun getCuentasByUsuario2(idUsuario: String): MutableList<Cuentas> {
+        val cuentasList = mutableListOf<Cuentas>()
+        val db = this.readableDatabase
+        val query = "SELECT Id_Cuenta, Saldo, Estado_Cuenta, Tipo_Cuenta FROM $TABLE_CUENTA WHERE $COLUMN_ID_USUARIO_FK = ?"
+        val cursor = db.rawQuery(query, arrayOf(idUsuario))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val idCuenta = cursor.getString(cursor.getColumnIndexOrThrow("Id_Cuenta"))
+                val saldo = cursor.getDouble(cursor.getColumnIndexOrThrow("Saldo"))
+                val estadoCuenta = cursor.getString(cursor.getColumnIndexOrThrow("Estado_Cuenta"))
+                val tipoMoneda = cursor.getString(cursor.getColumnIndexOrThrow("Tipo_Cuenta"))
+                cuentasList.add(Cuentas(idCuenta, saldo,estadoCuenta, tipoMoneda))
             } while (cursor.moveToNext())
         }
         cursor.close()
@@ -575,4 +595,34 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         cursor.close()
         return nombreUsuario
     }
+    fun getCurrencyTypeById(idCuenta: String): String? {
+        val db = readableDatabase
+        val query = "SELECT Tipo_Moneda FROM Cuenta WHERE Id_Cuenta = ?"
+        val cursor = db.rawQuery(query, arrayOf(idCuenta))
+
+        return if (cursor.moveToFirst()) {
+            val tipoMoneda = cursor.getString(cursor.getColumnIndexOrThrow("Tipo_Moneda"))
+            cursor.close()
+            tipoMoneda
+        } else {
+            cursor.close()
+            null
+        }
+    }
+
+    fun getAdminNameById(adminId: String): String? {
+        val db = this.readableDatabase
+        var name: String? = null
+
+        val query = "SELECT $COLUMN_NOMBRE_ADMIN FROM $TABLE_ADMINISTRADOR WHERE $COLUMN_ID_ADMINISTRADOR = ?"
+        val cursor = db.rawQuery(query, arrayOf(adminId))
+
+        if (cursor.moveToFirst()) {
+            name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOMBRE_ADMIN))
+        }
+        cursor.close()
+        return name
+    }
+
+
 }

@@ -15,35 +15,43 @@
  */
 package com.example.midas.AdapterHistory
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.midas.BD.DatabaseHelper
 import com.example.midas.DatasClass.Transferencia
 import com.example.midas.R
 
 class HistoryViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    private lateinit var dbHelper: DatabaseHelper
     private val accountDesNameTextView = itemView.findViewById<TextView>(R.id.accountDesNameTextView)
     private val transBalanceTextView = itemView.findViewById<TextView>(R.id.transBalanceTextView)
-    private val tipoTransferenciaTextView = itemView.findViewById<TextView>(R.id.tipoTransferenciaTextView)
     private val accountDestIdTextView = itemView.findViewById<TextView>(R.id.accountDestIdTextView)
 
+    @SuppressLint("SetTextI18n")
     fun render(item: Transferencia) {
 
-        accountDesNameTextView.text = "Nombre Destino: ${item.nombreDestino ?: "N/A"}"
-        transBalanceTextView.text = "Monto: ${item.monto}"
-        accountDesIdTextView.text = "Cuenta Origen: ${item.cuentaOrigen}"
-        accountDateTextView.text = "Fecha: ${item.fecha}"
-        accountOrigNameTextView.text = "Nombre Origen: ${item.nombreOrigen ?: "N/A"}"
-        accountDestIdTextView.text = "Cuenta Destino: ${item.cuentaDestino ?: "N/A"}"
+        if (item.tipoTransferencia == "Salida"){
+            accountDesNameTextView.text = item.nombreDestino ?: "N/A"
+        } else {
+            accountDesNameTextView.text = item.nombreOrigen ?: "N/A"
+        }
 
         if (item.tipoTransferencia == "Salida") {
-            tipoTransferenciaTextView.text = "Salida"
-            tipoTransferenciaTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.colorSalida))
+            transBalanceTextView.text = dbHelper.getCurrencyTypeById(item.cuentaOrigen)
         } else {
-            tipoTransferenciaTextView.text = "Entrada"
-            tipoTransferenciaTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.colorEntrada))
+            transBalanceTextView.text = item.cuentaDestino?.let { dbHelper.getCurrencyTypeById(it) }
+        }
+
+        if (item.tipoTransferencia == "Salida") {
+            accountDestIdTextView.text = "- ${item.monto}"
+            accountDestIdTextView.setTextColor(Color.RED)
+        }else {
+            accountDestIdTextView.text = "+ ${item.monto}"
+            accountDestIdTextView.setTextColor(Color.GREEN)
         }
     }
 }

@@ -115,7 +115,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
                 android:backgroundTint="@color/newoscuro_botones"
-                android:text="*Simular Pago*"
+                android:text="Simular Pago"
                 android:textSize="20dp" />
 
         </LinearLayout>

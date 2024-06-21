@@ -27,7 +27,7 @@
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Usuarios"
+                    android:text="Cuentas Usuario"
                     android:textColor="@color/white"
                     android:textSize="25dp"
                     android:textStyle="bold"
@@ -37,7 +37,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
-                    android:id="@+id/imageButton"
+                    android:id="@+id/btnRetroceder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
@@ -51,9 +51,38 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView28"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre de Usuario:"
+                    android:textColor="@color/gris_textos"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:id="@+id/nameUSer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Josshua Flores"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ReyclerCuentas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="20dp" />
 
         </LinearLayout>
     </ScrollView>
