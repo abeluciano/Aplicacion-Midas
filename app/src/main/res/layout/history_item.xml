@@ -37,7 +37,7 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/monto"
                 android:textColor="@color/newoscuro_botones"
-                android:textSize="30dp"
+                android:textSize="28dp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -62,7 +62,7 @@
             android:fontFamily="@font/poppins"
             android:text="@string/cuenta_destino"
             android:textColor="@color/white"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textStyle="bold" />
 
 
