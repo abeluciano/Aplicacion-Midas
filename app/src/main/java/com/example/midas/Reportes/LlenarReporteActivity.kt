@@ -1,4 +1,17 @@
 package com.example.midas.Reportes
+/**
+ * Actividad para llenar un reporte dentro de la aplicación Midas.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * Esta actividad permite a los usuarios llenar y enviar un reporte sobre un problema específico
+ * que están experimentando. Los usuarios seleccionan el tipo de reporte y proporcionan una descripción
+ * detallada del problema. El reporte se guarda en la base de datos con su estado inicial como "no revisado".
+ */
 
 import android.content.Intent
 import android.os.Bundle
