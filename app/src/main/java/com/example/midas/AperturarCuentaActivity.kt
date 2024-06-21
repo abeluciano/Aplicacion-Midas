@@ -1,3 +1,18 @@
+/**
+ * Actividad para permitir a un usuario aperturar una nueva cuenta en la aplicación Midas.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * Esta actividad permite al usuario seleccionar el tipo de moneda (Soles o Dólares) y
+ * proporcionar la contraseña para abrir una nueva cuenta. Al presionar el botón "Abrir Cuenta",
+ * se verifica la contraseña y se procede con la apertura de la cuenta si es válida.
+ * También incluye un botón para navegar hacia atrás al menú principal.
+ */
+
 package com.example.midas
 
 import android.content.Intent
