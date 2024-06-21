@@ -1,3 +1,17 @@
+/**
+ * Actividad del menú de administración.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * La clase MenuAdminActivity es una actividad de Android que sirve como el menú principal
+ * para los administradores. Permite la navegación hacia otras actividades como la gestión
+ * de usuarios y reportes, y proporciona una opción para cerrar sesión.
+ */
+
 package com.example.midas.Administrador
 
 import android.content.Intent
