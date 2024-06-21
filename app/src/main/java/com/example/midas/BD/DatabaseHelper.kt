@@ -1,3 +1,16 @@
+/**
+ * Clase que gestiona la base de datos de la aplicación Midas.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * La clase DatabaseHelper es una implementación de SQLiteOpenHelper que maneja la creación,
+ * actualización y operaciones básicas de la base de datos para la aplicación Midas.
+ * Proporciona métodos para la gestión de usuarios, cuentas, transferencias y reportes.
+ */
 package com.example.midas.BD
 
 import android.content.ContentValues
