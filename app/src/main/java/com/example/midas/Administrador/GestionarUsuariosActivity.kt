@@ -1,3 +1,18 @@
+/**
+ * Actividad para gestionar usuarios en la aplicación.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * La clase GestionarUsuariosActivity es una actividad de Android que permite gestionar
+ * usuarios en la aplicación. Se conecta a una base de datos mediante DatabaseHelper,
+ * inicializa un RecyclerView con un adaptador UsuariosAdapter para mostrar los usuarios
+ * y maneja eventos de clic en los elementos de la lista de usuarios.
+ */
+
 package com.example.midas.Administrador
 
 import android.os.Bundle
