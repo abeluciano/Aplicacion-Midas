@@ -1,3 +1,17 @@
+/**
+ * ViewHolder para un usuario en un RecyclerView.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * Esta clase UsuariosViewHolder representa una vista de un solo elemento (Usuarios) en un
+ * RecyclerView. Contiene referencias a las vistas dentro de cada elemento y un método
+ * para vincular los datos de un usuario específico a estas vistas.
+ */
+
 package com.example.midas.Administrador.AdministradorAdapterUsers
 
 import android.view.View
