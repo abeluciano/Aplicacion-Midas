@@ -1,3 +1,17 @@
+/**
+ * Actividad para visualizar reportes realizados por un usuario en la aplicación Midas.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * Esta actividad muestra todos los reportes realizados por un usuario específico.
+ * Utiliza un RecyclerView para mostrar la lista de reportes y permite al usuario
+ * navegar hacia atrás para salir de la actividad.
+ */
+
 package com.example.midas.Reportes
 
 import android.content.Intent
