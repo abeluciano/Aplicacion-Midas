@@ -56,8 +56,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (userId != -1 || adminId != -1) {
                     val isAdmin = dbHelper.checkIfAdmin(if (userId != -1) userId.toString() else adminId.toString())
-                    Toast.makeText(this, "${dbHelper.hashCode()}", Toast.LENGTH_SHORT).show()
-                    Toast.makeText(this, "Login exitoso", Toast.LENGTH_SHORT).show()
+                    showInvalidEmailNotification2("Login exitoso")
                     val sharedPreferences = getSharedPreferences("MyAppPreferences", MODE_PRIVATE)
                     val editor = sharedPreferences.edit()
                     editor.putInt("Id_Usuario", userId)
@@ -73,10 +72,10 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-                    Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+                    showInvalidEmailNotification("Usuario o contraseña incorrectos")
                 }
             } else {
-                showInvalidEmailNotification()
+                showInvalidEmailNotification("Por favor ingrese todos los campos")
             }
         }
 
@@ -87,17 +86,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     @SuppressLint("RestrictedApi")
-    private fun showInvalidEmailNotification() {
+    private fun showInvalidEmailNotification(msg: String) {
         val snackbar = Snackbar.make(findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG)
-
-        // Inflar la vista personalizada
         val customSnackView: View = layoutInflater.inflate(R.layout.custom_snackbar, null)
         val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
-
-        // Eliminar el texto predeterminado del Snackbar
+        val snackbar_text = customSnackView.findViewById<TextView>(R.id.snackbar_text)
+        snackbar_text.text = msg
         snackbarLayout.removeAllViews()
+        snackbarLayout.addView(customSnackView)
+        snackbar.show()
+    }
 
-        // Añadir la vista personalizada al Snackbar
+    @SuppressLint("RestrictedApi")
+    private fun showInvalidEmailNotification2(msg: String) {
+        val snackbar = Snackbar.make(findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG)
+        val customSnackView: View = layoutInflater.inflate(R.layout.custom_snackbar2, null)
+        val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+        val snackbar_text = customSnackView.findViewById<TextView>(R.id.snackbar_text)
+        snackbar_text.text = msg
+        snackbarLayout.removeAllViews()
         snackbarLayout.addView(customSnackView)
         snackbar.show()
     }

@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:text="Tipo reporte:"
             android:textColor="@color/gris_textos"
-            android:textSize="15dp" />
+            android:textSize="17dp" />
 
         <TextView
             android:id="@+id/typeReport"

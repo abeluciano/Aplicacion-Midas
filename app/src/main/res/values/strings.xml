@@ -16,4 +16,5 @@
     <string name="error_icon">error_icon</string>
     <string name="por_favor_ingrese_todos_los_campos">Por favor ingrese todos los campos</string>
     <string name="hi_user">Hi User!</string>
+    <string name="check_icon">check icon</string>
 </resources>

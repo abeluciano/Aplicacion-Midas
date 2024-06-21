@@ -32,7 +32,7 @@ import com.example.midas.BD.DatabaseHelper
 import com.example.midas.DatasClass.Cuenta
 import com.example.midas.Login.MainActivity
 import com.example.midas.Recarga.RecargarSaldoActivity
-import com.example.midas.Reportes.RealizarReporteActivity
+import com.example.midas.Reportes.LlenarReporteActivity
 import com.example.midas.Transferencia.TransferenciaActivity
 import kotlin.properties.Delegates
 
@@ -95,7 +95,7 @@ class MenuActivity : AppCompatActivity() {
             }
         }
         Reporte.setOnClickListener {
-            val intent = Intent(this, RealizarReporteActivity::class.java)
+            val intent = Intent(this, LlenarReporteActivity::class.java)
             intent.putExtra("ID_USUARIO", idUsuario.toString())
             startActivity(intent)
         }

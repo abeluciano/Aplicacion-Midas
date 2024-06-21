@@ -15,16 +15,20 @@
 
 package com.example.midas
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.midas.Login.Usuario
+import com.google.android.material.snackbar.Snackbar
 
 class AperturarCuentaActivity : AppCompatActivity() {
     private lateinit var usuario: Usuario
@@ -64,7 +68,7 @@ class AperturarCuentaActivity : AppCompatActivity() {
                 }
                 finish()
             } catch (e: Exception) {
-                Toast.makeText(this, "No se pudo aperturar cuenta", Toast.LENGTH_SHORT).show()
+                showInvalidEmailNotification("No se pudo aperturar cuenta")
             }
         }
         atras.setOnClickListener(){
@@ -73,4 +77,16 @@ class AperturarCuentaActivity : AppCompatActivity() {
             finish()
         }
     }
+    @SuppressLint("RestrictedApi")
+    private fun showInvalidEmailNotification(msg: String) {
+        val snackbar = Snackbar.make(findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG)
+        val customSnackView: View = layoutInflater.inflate(R.layout.custom_snackbar, null)
+        val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+        val snackbar_text = customSnackView.findViewById<TextView>(R.id.snackbar_text)
+        snackbar_text.text = msg
+        snackbarLayout.removeAllViews()
+        snackbarLayout.addView(customSnackView)
+        snackbar.show()
+    }
+
 }

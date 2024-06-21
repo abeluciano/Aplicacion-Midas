@@ -14,6 +14,7 @@
 
 package com.example.midas.Administrador.AdapterReportes
 
+import android.graphics.Color
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -28,10 +29,16 @@ class ReportesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val fechayhora = itemView.findViewById<TextView>(R.id.fechayhora)
 
     fun render(item: Reportes) {
-        idReporte.text = "Id:Reporte: ${item.idReporte}"
-        typeReport.text = "Tipo Reporte: ${item.tipo}"
-        respuesta.text = "ID Usuario Origen: ${item.respuesta}"
-        estado.text = "Nombre Usuario: ${item.estado}"
+        idReporte.text = "${item.idReporte}"
+        typeReport.text = " ${item.tipo}"
+        respuesta.text = "${item.respuesta}"
+        if(item.estado == "Solucionado") {
+            estado.text = item.estado
+            estado.setTextColor(Color.GREEN)
+        } else {
+            estado.text = item.estado
+            estado.setTextColor(Color.RED)
+        }
         fechayhora.text = "Fecha: ${item.fecha}    Hora: ${item.hora}"
     }
 }

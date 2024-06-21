@@ -17,15 +17,19 @@
 
 package com.example.midas
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.midas.BD.DatabaseHelper
 import com.example.midas.Login.MainActivity
+import com.google.android.material.snackbar.Snackbar
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var dbHelper: DatabaseHelper
@@ -56,7 +60,7 @@ class SignUpActivity : AppCompatActivity() {
             }
 
             dbHelper.addUser(idUsuario, normalizarNombre(nombre), contraseña, correo)
-            Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
+            showInvalidEmailNotification2("Registro exitoso")
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
@@ -71,37 +75,37 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun validarCampos(idUsuario: String, nombre: String, correo: String, contraseña: String, reconfirmar: String): Boolean {
         if (idUsuario.length != 8 || idUsuario.isEmpty()) {
-            Toast.makeText(this, "El ID de usuario debe tener 8 caracteres", Toast.LENGTH_SHORT).show()
+            showInvalidEmailNotification("El ID de usuario debe tener 8 caracteres")
             return false
         }
 
         if (!esNombreValido(nombre)) {
-            Toast.makeText(this, "Por favor ingrese nombre y apellido válidos", Toast.LENGTH_SHORT).show()
+            showInvalidEmailNotification("Por favor ingrese nombre y apellido válidos")
             return false
         }
 
         if (!esCorreoValido(correo)) {
-            Toast.makeText(this, "El correo no tiene un dominio valido", Toast.LENGTH_SHORT).show()
+            showInvalidEmailNotification("El correo no tiene un dominio valido")
             return false
         }
 
         if (!esContraseñaValida(contraseña)) {
-            Toast.makeText(this, "La contraseña no es segura", Toast.LENGTH_SHORT).show()
+            showInvalidEmailNotification("La contraseña no es segura")
             return false
         }
 
         if (contraseña != reconfirmar) {
-            Toast.makeText(this, "La contraseña no coincide", Toast.LENGTH_SHORT).show()
+            showInvalidEmailNotification("La contraseña no coincide")
             return false
         }
 
         if (contraseña.length < 8) {
-            Toast.makeText(this, "La contraseña es muy corta", Toast.LENGTH_SHORT).show()
+            showInvalidEmailNotification("La contraseña es muy corta")
             return false
         }
 
         if (dbHelper.isUserExists(idUsuario)) {
-            Toast.makeText(this, "El ID de usuario ya existe", Toast.LENGTH_SHORT).show()
+            showInvalidEmailNotification("El ID de usuario ya existe")
             return false
         }
 
@@ -135,5 +139,29 @@ class SignUpActivity : AppCompatActivity() {
     private fun esCorreoValido(correo: String): Boolean {
         val regex = "^[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$"
         return correo.matches(regex.toRegex())
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun showInvalidEmailNotification(msg: String) {
+        val snackbar = Snackbar.make(findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG)
+        val customSnackView: View = layoutInflater.inflate(R.layout.custom_snackbar, null)
+        val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+        val snackbar_text = customSnackView.findViewById<TextView>(R.id.snackbar_text)
+        snackbar_text.text = msg
+        snackbarLayout.removeAllViews()
+        snackbarLayout.addView(customSnackView)
+        snackbar.show()
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun showInvalidEmailNotification2(msg: String) {
+        val snackbar = Snackbar.make(findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG)
+        val customSnackView: View = layoutInflater.inflate(R.layout.custom_snackbar2, null)
+        val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+        val snackbar_text = customSnackView.findViewById<TextView>(R.id.snackbar_text)
+        snackbar_text.text = msg
+        snackbarLayout.removeAllViews()
+        snackbarLayout.addView(customSnackView)
+        snackbar.show()
     }
 }

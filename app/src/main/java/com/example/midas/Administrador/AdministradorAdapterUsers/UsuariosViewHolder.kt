@@ -26,7 +26,7 @@ class UsuariosViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
     fun render(item: Usuarios) {
 
-        nombreU.text = "Nombre Usuario: ${item.nameUser}"
-        idU.text = "ID Usuario: ${item.idUser}"
+        nombreU.text = " ${item.nameUser}"
+        idU.text = "${item.idUser}"
     }
 }

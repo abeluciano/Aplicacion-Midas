@@ -19,6 +19,7 @@ package com.example.midas.Recarga
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -28,6 +29,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.midas.AperturarCuentaActivity
 import com.example.midas.BD.DatabaseHelper
 import com.example.midas.R
+import com.google.android.material.snackbar.Snackbar
 
 class RecargarSaldoActivity : AppCompatActivity() {
 
@@ -81,9 +83,9 @@ class RecargarSaldoActivity : AppCompatActivity() {
                     finish()
                 } else {
                     if (monto < montoMinimo) {
-                        Toast.makeText(this, "El monto ingresado es menor al mínimo permitido", Toast.LENGTH_SHORT).show()
+                        showInvalidEmailNotification("El monto ingresado es menor al mínimo permitido")
                     } else {
-                        Toast.makeText(this, "El monto ingresado ha superado el límite de recarga", Toast.LENGTH_SHORT).show()
+                        showInvalidEmailNotification("El monto ingresado ha superado el límite de recarga")
                     }
                 }
             } else {
@@ -94,4 +96,16 @@ class RecargarSaldoActivity : AppCompatActivity() {
             finish()
         }
     }
+    @SuppressLint("RestrictedApi")
+    private fun showInvalidEmailNotification(msg: String) {
+        val snackbar = Snackbar.make(findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG)
+        val customSnackView: View = layoutInflater.inflate(R.layout.custom_snackbar, null)
+        val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+        val snackbar_text = customSnackView.findViewById<TextView>(R.id.snackbar_text)
+        snackbar_text.text = msg
+        snackbarLayout.removeAllViews()
+        snackbarLayout.addView(customSnackView)
+        snackbar.show()
+    }
+
 }

@@ -625,4 +625,14 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
 
+    fun actualizarReporte(id: String, nuevoEstado: String, nuevaRespuesta: String): Boolean {
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(COLUMN_ESTADO, nuevoEstado)
+        contentValues.put(COLUMN_RESPUESTA, nuevaRespuesta)
+
+        val resultado = db.update(TABLE_REPORTE, contentValues, "$COLUMN_ID_REPORTE = ?", arrayOf(id))
+        db.close()
+        return resultado > 0
+    }
 }
