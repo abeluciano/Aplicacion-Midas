@@ -1,3 +1,19 @@
+/**
+ * Actividad para recargar saldo en una cuenta específica de la aplicación Midas.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * Esta actividad permite al usuario ingresar un monto para recargar saldo en una cuenta
+ * seleccionada. Se valida que el monto ingresado esté dentro de los límites establecidos
+ * según el tipo de moneda (Soles o Dólares). Una vez validado, se realiza la recarga de
+ * saldo y se muestra un mensaje de confirmación. También ofrece la opción de regresar atrás
+ * si el usuario decide cancelar la operación.
+ */
+
 package com.example.midas
 
 import android.annotation.SuppressLint
