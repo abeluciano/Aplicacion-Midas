@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="16dp"
-    android:background="@drawable/snackbar_background">
+    android:background="#FFFFFFFF">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -23,8 +23,8 @@
             android:id="@+id/snackbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hi User!"
-            android:textColor="#FFF"
+            android:text="@string/hi_user"
+            android:textColor="#FF0000"
             android:textStyle="bold"
             android:textSize="16sp" />
 
@@ -32,8 +32,8 @@
             android:id="@+id/snackbar_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Correo no valido"
-            android:textColor="#FFF"
+            android:text="@string/por_favor_ingrese_todos_los_campos"
+            android:textColor="#FF0000"
             android:textSize="14sp" />
     </LinearLayout>
 </LinearLayout>

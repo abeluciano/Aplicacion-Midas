@@ -14,4 +14,6 @@
     <string name="m_ximo_500_caracteres">máximo 500 caracteres</string>
     <string name="ingresa_el_monto">Ingresa el monto</string>
     <string name="error_icon">error_icon</string>
+    <string name="por_favor_ingrese_todos_los_campos">Por favor ingrese todos los campos</string>
+    <string name="hi_user">Hi User!</string>
 </resources>
