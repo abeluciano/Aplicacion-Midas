@@ -1,3 +1,18 @@
+/**
+ * Actividad para mostrar el historial de transferencias de una cuenta en la aplicación Midas.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * Esta actividad muestra el historial de transferencias asociadas a una cuenta específica.
+ * Utiliza un RecyclerView para desplegar las transferencias en una lista, con un adaptador
+ * personalizado (HistoryAdapter). También muestra el nombre del usuario dueño de la cuenta
+ * y permite regresar al menú principal al presionar el botón "Atrás".
+ */
+
 package com.example.midas
 
 
