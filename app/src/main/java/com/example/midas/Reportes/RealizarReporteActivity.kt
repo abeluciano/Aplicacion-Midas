@@ -1,3 +1,17 @@
+/**
+ * Actividad para realizar acciones relacionadas con reportes en la aplicación Midas.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * Esta actividad permite al usuario realizar diversas acciones relacionadas con reportes,
+ * como llenar un nuevo reporte, ver reportes previamente realizados y navegar hacia atrás.
+ * Se integra con otras actividades para gestionar reportes dentro del sistema.
+ */
+
 package com.example.midas.Reportes
 
 import android.annotation.SuppressLint
