@@ -1,3 +1,17 @@
+/**
+ * Clase Usuario que representa un usuario en la aplicación Midas.
+ *
+ * Autores:
+ * Abel Luciano Aragón Alvaro
+ * Josshua David Flores Chumbimuni
+ * Rodrigo Ojeda Arce
+ *
+ * Resumen:
+ * La clase Usuario gestiona las operaciones relacionadas con un usuario específico,
+ * como verificar la contraseña, abrir una nueva cuenta bancaria y proporcionar
+ * retroalimentación mediante mensajes Toast según el resultado de las operaciones.
+ */
+
 package com.example.midas.Login
 
 import android.content.Context
