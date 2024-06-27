@@ -74,19 +74,21 @@ class GestionarReportesActivity : AppCompatActivity() {
         val id = reporte.idReporte
         val tipo = reporte.tipo
         val hora = reporte.hora
+        val descripcion = reporte.descripcion
         val estado = reporte.estado
         val respuesta = reporte.respuesta
         val fecha = reporte.fecha
         if (hora != null && respuesta != null && fecha != null) {
-            initDialog(id, tipo, hora, estado, respuesta, fecha)
+            initDialog(id, tipo, hora, descripcion, estado, respuesta, fecha)
         }
     }
 
-    fun initDialog(id:String, tipo:String, hora:String, estado:String, respuesta:String, fecha:String) {
+    fun initDialog(id:String, tipo:String, hora:String,descripcion:String, estado:String, respuesta:String, fecha:String) {
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.dialog_cuenta)
 
         val textViewCod = dialog.findViewById<TextView>(R.id.textViewCod)
+        val Descripcion = dialog.findViewById<TextView>(R.id.Descripcion)
         val textViewProblema = dialog.findViewById<TextView>(R.id.textViewProblema)
         val textViewFecha = dialog.findViewById<TextView>(R.id.textViewFecha)
         val textViewDescripcion = dialog.findViewById<EditText>(R.id.textViewDescripcion)
@@ -97,7 +99,7 @@ class GestionarReportesActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, R.layout.spinner, estdo)
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
         spinnerEstado.adapter = adapter
-
+        Descripcion.text = descripcion
         textViewProblema.text= tipo
         textViewCod.text= "Cod: $id"
         textViewFecha.text= "Fecha: $fecha, Hora: $hora"
