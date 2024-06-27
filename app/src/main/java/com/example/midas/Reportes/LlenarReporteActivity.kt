@@ -57,8 +57,8 @@ class LlenarReporteActivity : AppCompatActivity() {
                 "Problema en la aplicación",
                 "Otro")
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, tipoReporte)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val adapter = ArrayAdapter(this, R.layout.spinner_item, tipoReporte)
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
         spinner.adapter = adapter
 
         VerReporte.setOnClickListener() {

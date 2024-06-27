@@ -1,5 +1,6 @@
 package com.example.midas.Administrador
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.midas.AdapterHistory.HistoryAdapter
 import com.example.midas.Administrador.AdapterCuentas.CuentasAdapter
+import com.example.midas.Administrador.DataClassAdmin.Cuentas
+import com.example.midas.Administrador.DataClassAdmin.Usuarios
 import com.example.midas.BD.DatabaseHelper
 import com.example.midas.R
 
@@ -41,12 +44,17 @@ class UsuarioSeleccionActivity : AppCompatActivity() {
     fun initRecyclerView() {
         val manager = LinearLayoutManager(this)
         val list_transfer = dbHelper.getCuentasByUsuario2(idUsuar)
-        cuentasAdapter = CuentasAdapter(list_transfer)
+        cuentasAdapter = CuentasAdapter(list_transfer, dbHelper) { cuentas ->
+            onItemSelected(cuentas)
+        }
 
         val decoration = DividerItemDecoration(this,manager.orientation)
         val usersRecycler = this.findViewById<RecyclerView>(R.id.ReyclerCuentas)
         usersRecycler.layoutManager = manager
         usersRecycler.adapter = cuentasAdapter
         usersRecycler.addItemDecoration(decoration)
+    }
+
+    private fun onItemSelected(cuentas: Cuentas) {
     }
 }

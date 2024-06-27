@@ -76,6 +76,8 @@ class TransferenciaActivity : AppCompatActivity() {
                         if (monto != montoFormatted.toDouble()) {
                             montoEditText.setText(montoFormatted)
                         }
+                    }else {
+                        return@setOnClickListener
                     }
                     val intent = Intent(this, ConfirmarTransferenciaActivity::class.java)
                     intent.putExtra("ID_CUENTADESTINO", idCuentaDestino)

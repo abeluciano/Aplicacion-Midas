@@ -47,6 +47,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         private const val COLUMN_TIPO_CUENTA = "Tipo_Cuenta"
         private const val COLUMN_SALDO = "Saldo"
         private const val COLUMN_ESTADO_CUENTA = "Estado_Cuenta"
+        private const val COLUMN_RAZON = "Razon"
         private const val COLUMN_ID_USUARIO_FK = "Id_Usuario"
 
         private const val TABLE_TRANSFERENCIA = "Transferencia"
@@ -91,6 +92,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 + COLUMN_TIPO_CUENTA + " TEXT,"
                 + COLUMN_SALDO + " DECIMAL,"
                 + COLUMN_ESTADO_CUENTA + " TEXT,"
+                + COLUMN_RAZON + " TEXT,"
                 + COLUMN_ID_USUARIO_FK + " TEXT,"
                 + "FOREIGN KEY(" + COLUMN_ID_USUARIO_FK + ") REFERENCES " + TABLE_USUARIO + "(" + COLUMN_ID_USUARIO + "))")
         db.execSQL(createCuentaTable)
@@ -175,6 +177,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         values.put(COLUMN_TIPO_CUENTA, tipoCuenta)
         values.put(COLUMN_SALDO, 0.0)
         values.put(COLUMN_ESTADO_CUENTA, "Activa")
+        values.put(COLUMN_RAZON, "")
         values.put(COLUMN_ID_USUARIO_FK, idUsuario)
         db.insert(TABLE_CUENTA, null, values)
         db.close()
@@ -241,7 +244,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             val saldo = cursor.getDouble(cursor.getColumnIndexOrThrow("Saldo"))
             val tipoMoneda = cursor.getString(cursor.getColumnIndexOrThrow("Tipo_Cuenta"))
             cursor.close()
-            Cuenta(idCuenta, saldo, tipoMoneda)
+            Cuenta(idCuenta, saldo, tipoMoneda, "Activa", "")
         } else {
             cursor.close()
             null
@@ -271,7 +274,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     fun getCuentasByUsuario(idUsuario: String): List<Cuenta> {
         val cuentasList = mutableListOf<Cuenta>()
         val db = this.readableDatabase
-        val query = "SELECT Id_Cuenta, Saldo, Tipo_Cuenta FROM $TABLE_CUENTA WHERE $COLUMN_ID_USUARIO_FK = ?"
+        val query = "SELECT Id_Cuenta, Saldo, Tipo_Cuenta, Estado_Cuenta, Razon FROM $TABLE_CUENTA WHERE $COLUMN_ID_USUARIO_FK = ?"
         val cursor = db.rawQuery(query, arrayOf(idUsuario))
 
         if (cursor.moveToFirst()) {
@@ -279,7 +282,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 val idCuenta = cursor.getString(cursor.getColumnIndexOrThrow("Id_Cuenta"))
                 val saldo = cursor.getDouble(cursor.getColumnIndexOrThrow("Saldo"))
                 val tipoMoneda = cursor.getString(cursor.getColumnIndexOrThrow("Tipo_Cuenta"))
-                cuentasList.add(Cuenta(idCuenta, saldo, tipoMoneda))
+                val estadoCuenta = cursor.getString(cursor.getColumnIndexOrThrow("Estado_Cuenta"))
+                val razon = cursor.getString(cursor.getColumnIndexOrThrow("Razon"))
+                cuentasList.add(Cuenta(idCuenta, saldo, tipoMoneda, estadoCuenta, razon))
             } while (cursor.moveToNext())
         }
         cursor.close()
@@ -497,7 +502,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             val saldo = cursor.getDouble(cursor.getColumnIndexOrThrow("Saldo"))
             val tipoMoneda = cursor.getString(cursor.getColumnIndexOrThrow("Tipo_Cuenta"))
             cursor.close()
-            Cuenta(idCuenta, saldo, tipoMoneda)
+            Cuenta(idCuenta, saldo, tipoMoneda, "Activa", "")
         } else {
             cursor.close()
             null
@@ -583,20 +588,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return reportesList
     }
 
-
-
-    fun getNombreUsuarioById(idUsuario: String): String {
-        val db = readableDatabase
-        val query = "SELECT $COLUMN_NOMBRE FROM $TABLE_USUARIO WHERE $COLUMN_ID_USUARIO = ?"
-        val cursor = db.rawQuery(query, arrayOf(idUsuario))
-        var nombreUsuario = "Usuario no encontrado"
-        if (cursor.moveToFirst()) {
-            nombreUsuario = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOMBRE))
-        }
-
-        cursor.close()
-        return nombreUsuario
-    }
     fun getCurrencyTypeById(idCuenta: String): String? {
         val db = readableDatabase
         val query = "SELECT Tipo_Cuenta FROM Cuenta WHERE Id_Cuenta = ?"
@@ -637,4 +628,40 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.close()
         return resultado > 0
     }
+
+    fun cambiarEstadoCuenta(idCuenta: String, nuevoEstado: String): Boolean {
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(COLUMN_ESTADO_CUENTA, nuevoEstado)
+
+        val resultado = db.update(TABLE_CUENTA, contentValues, "$COLUMN_ID_CUENTA = ?", arrayOf(idCuenta))
+        db.close()
+        return resultado > 0
+    }
+
+    fun updateRazonCuenta(idCuenta: String, updateRazon: String): Boolean {
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(COLUMN_RAZON, updateRazon)
+
+        val resultado = db.update(TABLE_CUENTA, contentValues, "$COLUMN_ID_CUENTA = ?", arrayOf(idCuenta))
+        db.close()
+        return resultado > 0
+    }
+
+    fun getEstadoCuentaById(idCuenta: String): String? {
+        val db = this.readableDatabase
+        val query = "SELECT $COLUMN_ESTADO_CUENTA FROM $TABLE_CUENTA WHERE $COLUMN_ID_CUENTA = ?"
+        val cursor = db.rawQuery(query, arrayOf(idCuenta))
+
+        return if (cursor.moveToFirst()) {
+            val estadoCuenta = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ESTADO_CUENTA))
+            cursor.close()
+            estadoCuenta
+        } else {
+            cursor.close()
+            null
+        }
+    }
+
 }

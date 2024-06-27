@@ -54,8 +54,8 @@ class AperturarCuentaActivity : AppCompatActivity() {
         }
 
         val monedas = arrayOf("Soles", "Dolares")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, monedas)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val adapter = ArrayAdapter(this, R.layout.spinner_item, monedas)
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
         tipoMonedaSpinner.adapter = adapter
 
         abrirCuentaButton.setOnClickListener {

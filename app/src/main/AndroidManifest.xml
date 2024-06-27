@@ -22,9 +22,6 @@
             android:name=".Recarga.PagoEfectivoActivity"
             android:exported="false" />
         <activity
-            android:name=".Transferencia.MainActivity"
-            android:exported="false" />
-        <activity
             android:name=".Administrador.GestionarUsuariosActivity"
             android:exported="false" />
         <activity
@@ -38,9 +35,6 @@
             android:exported="false" />
         <activity
             android:name=".Reportes.LlenarReporteActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Reportes.RealizarReporteActivity"
             android:exported="false" />
         <activity
             android:name=".Transferencia.TransferenciaExitosaActivity"

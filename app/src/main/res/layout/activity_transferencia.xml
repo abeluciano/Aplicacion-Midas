@@ -95,7 +95,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textView35"
+                        android:id="@+id/adolares"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
@@ -104,7 +104,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textView36"
+                        android:id="@+id/asoles"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
@@ -137,7 +137,7 @@
                 android:drawableLeft="@drawable/item_moneda"
                 android:ems="10"
                 android:hint="Ingresar numero de cuenta"
-                android:inputType="text"
+                android:inputType="number"
                 android:textColor="@color/white"
                 android:textColorHint="@color/gris_textos" />
 
@@ -184,6 +184,7 @@
                     android:textColor="@color/white"
                     android:textColorHint="@color/gris_textos"
                     android:textSize="30dp"
+                    android:maxLength="7"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.61"

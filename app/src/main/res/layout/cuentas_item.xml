@@ -19,7 +19,7 @@
             android:textColor="@color/gris_textos" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/idCuenta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="123456789"
@@ -35,7 +35,7 @@
             android:textColor="@color/gris_textos" />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/tipo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Soles"
@@ -62,17 +62,17 @@
                 android:textColor="@color/gris_textos" />
 
             <TextView
-                android:id="@+id/textView26"
+                android:id="@+id/saldo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="S/. 100"
                 android:textColor="@color/white"
-                android:textSize="25dp" />
+                android:textSize="20dp" />
 
         </LinearLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnEstado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/color_congelar"

@@ -18,8 +18,10 @@
 package com.example.midas
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -75,13 +77,26 @@ class MenuActivity : AppCompatActivity() {
         }
 
         Transferencia.setOnClickListener {
-            if (dbHelper.getNumeroCuentasUsuario(idUsuario.toString()) > 0) {
+            if (dbHelper.getNumeroCuentasUsuario(idUsuario.toString()) > 0 && dbHelper.getEstadoCuentaById(idCuenta.toString()) == "Activa") {
                 val intent = Intent(this, TransferenciaActivity::class.java)
                 intent.putExtra("ID_CUENTA", idCuenta)
                 intent.putExtra("TIPO_MONEDA", tipoMoneda)
                 startActivity(intent)
             } else {
-                Toast.makeText(this, "Debe crear al menos una cuenta para transferir", Toast.LENGTH_SHORT).show()
+                if (dbHelper.getEstadoCuentaById(idCuenta.toString()) != "Activa") {
+                    Toast.makeText(
+                        this,
+                        "No puede realizar Transferencias con esta cuenta",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else if(dbHelper.getNumeroCuentasUsuario(idUsuario.toString()) == 0){
+                    Toast.makeText(
+                        this,
+                        "Debe crear al menos una cuenta para transferir",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                return@setOnClickListener
             }
         }
         Recarga.setOnClickListener {
@@ -92,6 +107,7 @@ class MenuActivity : AppCompatActivity() {
                 startActivity(intent)
             } else {
                 Toast.makeText(this, "Debe crear al menos una cuenta para recargar saldo", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
         }
         Reporte.setOnClickListener {
@@ -158,19 +174,52 @@ class MenuActivity : AppCompatActivity() {
     }
 
     private fun onItemSelected(cuenta: Cuenta) {
-        this.idCuenta = cuenta.idCuenta
-        this.saldo = cuenta.saldo
-        this.tipoMoneda = cuenta.tipoMoneda
+        if (cuenta.estado == "Congelada") {
+            initDialog(cuenta)
+        } else {
+            this.idCuenta = cuenta.idCuenta
+            this.saldo = cuenta.saldo
+            this.tipoMoneda = cuenta.tipoMoneda
 
-        val sharedPreferences = getSharedPreferences("MyAppPreferences", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("Id_Cuenta_Seleccionada", idCuenta)
-        editor.apply()
+            val sharedPreferences = getSharedPreferences("MyAppPreferences", MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putString("Id_Cuenta_Seleccionada", idCuenta)
+            editor.apply()
 
-        idCuentaTextView.text = "$idCuenta"
-        val saldoFormatted = String.format("%.2f", saldo)
-        saldoTextView.text = "${if (tipoMoneda == "Soles") "S/" else "$"} $saldoFormatted"
-        tipo.text = "${if(tipoMoneda == "Soles") "Soles" else "Dolares"}"
+            idCuentaTextView.text = "$idCuenta"
+            val saldoFormatted = String.format("%.2f", saldo)
+            saldoTextView.text = "${if (tipoMoneda == "Soles") "S/" else "$"} $saldoFormatted"
+            tipo.text = "${if (tipoMoneda == "Soles") "Soles" else "Dolares"}"
+        }
+    }
+
+    private fun initDialog(cuenta: Cuenta) {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_advertenciacambio)
+        val editTextRazon = dialog.findViewById<TextView>(R.id.editTextRazon)
+        val btnAceptar = dialog.findViewById<Button>(R.id.btnok)
+        val btnCancelar = dialog.findViewById<Button>(R.id.btnNo)
+        editTextRazon.text = cuenta.razon
+
+        btnAceptar.setOnClickListener {
+            this.idCuenta = cuenta.idCuenta
+            this.saldo = cuenta.saldo
+            this.tipoMoneda = cuenta.tipoMoneda
+
+            val sharedPreferences = getSharedPreferences("MyAppPreferences", MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putString("Id_Cuenta_Seleccionada", idCuenta)
+            editor.apply()
+
+            idCuentaTextView.text = "$idCuenta"
+            val saldoFormatted = String.format("%.2f", saldo)
+            saldoTextView.text = "${if (tipoMoneda == "Soles") "S/" else "$"} $saldoFormatted"
+            tipo.text = "${if (tipoMoneda == "Soles") "Soles" else "Dolares"}"
+            dialog.dismiss()
+        }
+        btnCancelar.setOnClickListener{ dialog.dismiss() }
+
+        dialog.show()
     }
 
     private fun logout() {
