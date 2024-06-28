@@ -21,6 +21,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         val codigo = findViewById<EditText>(R.id.txtClave)
         val botonEnviar = findViewById<Button>(R.id.btnIniciar)
         val signUpButton = findViewById<TextView>(R.id.btnSignUp)
+        val ocultar = findViewById<ImageButton>(R.id.ocultar)
 
         botonEnviar.setOnClickListener {
             val userName = nombre.text.toString()
@@ -76,6 +78,14 @@ class MainActivity : AppCompatActivity() {
                 }
             } else {
                 showInvalidEmailNotification("Por favor ingrese todos los campos")
+            }
+        }
+
+        ocultar.setOnClickListener {
+            if (codigo.inputType == android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                codigo.inputType = android.text.InputType.TYPE_CLASS_TEXT
+            }else{
+                codigo.inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
             }
         }
 
