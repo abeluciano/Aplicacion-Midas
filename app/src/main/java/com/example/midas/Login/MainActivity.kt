@@ -23,7 +23,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.midas.Administrador.MenuAdminActivity
 import com.example.midas.BD.DatabaseHelper
@@ -46,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         val codigo = findViewById<EditText>(R.id.txtClave)
         val botonEnviar = findViewById<Button>(R.id.btnIniciar)
         val signUpButton = findViewById<TextView>(R.id.btnSignUp)
-        val ocultar = findViewById<ImageButton>(R.id.ocultar)
+        val ocultar = findViewById<ImageButton>(R.id.ocultar1)
 
         botonEnviar.setOnClickListener {
             val userName = nombre.text.toString()
