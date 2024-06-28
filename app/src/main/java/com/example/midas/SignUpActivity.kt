@@ -69,18 +69,18 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         ocultar1.setOnClickListener {
-            if (contraseñaEditText.inputType == android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+            if (contraseñaEditText.inputType == android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD) {
                 contraseñaEditText.inputType = android.text.InputType.TYPE_CLASS_TEXT
             }else{
-                contraseñaEditText.inputType = android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
+                contraseñaEditText.inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
             }
         }
 
         ocultar2.setOnClickListener {
-            if (confirmarContraseña.inputType == android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+            if (confirmarContraseña.inputType == android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD) {
                 confirmarContraseña.inputType = android.text.InputType.TYPE_CLASS_TEXT
             }else{
-                confirmarContraseña.inputType = android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
+                confirmarContraseña.inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
             }
         }
 
