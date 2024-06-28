@@ -97,6 +97,7 @@
                 android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="20dp"
                 android:backgroundTint="@color/newoscuro_botones"
                 android:text="Ingresar"
                 android:textSize="20sp" />
