@@ -126,20 +126,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageButton
-                    android:id="@+id/ocultar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@null"
-                    app:layout_constraintBottom_toBottomOf="@+id/txtClave"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.478"
-                    app:srcCompat="@drawable/item_ver_password" />
-
                 <EditText
                     android:id="@+id/contraseñaEditText"
                     android:layout_width="match_parent"
@@ -155,6 +141,20 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/ocultar1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@null"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtClave"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.478"
+                    app:srcCompat="@drawable/item_ver_password" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -182,7 +182,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.478"
-                    app:srcCompat="@drawable/item_ver_password" />
+                    app:srcCompat="@drawable/item_ver_password"
+                    tools:ignore="UnknownIdInLayout" />
 
                 <EditText
                     android:id="@+id/etxtConfirmarContraseña"
@@ -194,7 +195,8 @@
                     android:inputType="textPassword"
                     android:maxLength="25"
                     android:textColor="@color/white"
-                    android:textColorHint="@color/gris_textos" />
+                    android:textColorHint="@color/gris_textos"
+                    tools:ignore="MissingConstraints" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button

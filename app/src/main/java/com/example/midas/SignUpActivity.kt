@@ -47,6 +47,9 @@ class SignUpActivity : AppCompatActivity() {
         val confirmarContraseña = findViewById<EditText>(R.id.etxtConfirmarContraseña)
         val signUpButton = findViewById<Button>(R.id.signUpButton)
         val imgbtnAtras = findViewById<ImageButton>(R.id.imgbtnAtrasR)
+        val ocultar1 = findViewById<ImageButton>(R.id.ocultar1)
+        val ocultar2 = findViewById<ImageButton>(R.id.ocultar2)
+
 
         signUpButton.setOnClickListener {
             val idUsuario = idUsuarioEditText.text.toString()
@@ -54,7 +57,6 @@ class SignUpActivity : AppCompatActivity() {
             val correo = correoEditText.text.toString()
             val contraseña = contraseñaEditText.text.toString()
             val reconfirmar = confirmarContraseña.text.toString()
-
             if (!validarCampos(idUsuario, nombre, correo, contraseña, reconfirmar)) {
                 return@setOnClickListener
             }
@@ -64,6 +66,22 @@ class SignUpActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
+        }
+
+        ocultar1.setOnClickListener {
+            if (contraseñaEditText.inputType == android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                contraseñaEditText.inputType = android.text.InputType.TYPE_CLASS_TEXT
+            }else{
+                contraseñaEditText.inputType = android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
+            }
+        }
+
+        ocultar2.setOnClickListener {
+            if (confirmarContraseña.inputType == android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                confirmarContraseña.inputType = android.text.InputType.TYPE_CLASS_TEXT
+            }else{
+                confirmarContraseña.inputType = android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
+            }
         }
 
         imgbtnAtras.setOnClickListener {
