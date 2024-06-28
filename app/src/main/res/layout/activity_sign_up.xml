@@ -89,7 +89,7 @@
                 android:inputType="text"
                 android:textColor="@color/white"
                 android:textColorHint="@color/gris_textos"
-                android:maxLength="20"/>
+                android:maxLength="50"/>
 
             <TextView
                 android:id="@+id/textViewcorreo"
@@ -133,7 +133,7 @@
                 android:inputType="textPassword"
                 android:textColor="@color/white"
                 android:textColorHint="@color/gris_textos"
-                android:maxLength="15"
+                android:maxLength="25"
                 />
 
             <TextView
@@ -156,7 +156,7 @@
                 android:inputType="textPassword"
                 android:textColor="@color/white"
                 android:textColorHint="@color/gris_textos"
-                android:maxLength="15"/>
+                android:maxLength="25"/>
 
             <Button
                 android:id="@+id/signUpButton"
