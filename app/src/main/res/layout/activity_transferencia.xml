@@ -108,7 +108,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:text="$ 1.00"
+                        android:text="$ 0.26"
                         android:textColor="@color/newoscuro_botones"
                         android:textStyle="bold" />
                 </LinearLayout>

@@ -55,7 +55,11 @@ class TransferenciaActivity : AppCompatActivity() {
             val saldo = dbHelper.getSaldoByCuenta(idCuenta)
             val idCuentaDestino = cuentaDestino.text.toString()
             if (montoString.toDouble() > saldo!!) {
-                showInvalidEmailNotification("El monto supera al saldo disponible")
+                showInvalidEmailNotification("Fondos insuficientes")
+                return@setOnClickListener
+            }
+            if (montoString.toDouble() > 1000.0) {
+                showInvalidEmailNotification("Limite de transferencia excedido")
                 return@setOnClickListener
             }
             if (montoString.toDouble() < 0.1) {
@@ -91,7 +95,7 @@ class TransferenciaActivity : AppCompatActivity() {
                     showInvalidEmailNotification("Llene todos los campos")
                 }
             } else {
-                showInvalidEmailNotification("La cuenta de destino no está registrada")
+                showInvalidEmailNotification("Destinatario no valido")
             }
 
         }
