@@ -17,11 +17,13 @@ package com.example.midas.AdapterReporte
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.midas.Administrador.DataClassAdmin.Reportes
 import com.example.midas.DatasClass.Reporte
 
 import com.example.midas.R
 
-class ReporteAdapter( private val reporteList: MutableList<Reporte>
+class ReporteAdapter( private val reporteList: MutableList<Reporte>,
+                      private val onAccountSelected: (Reporte) -> Unit
 ) : RecyclerView.Adapter<ReporteViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReporteViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.reporte_item, parent, false)
@@ -31,6 +33,9 @@ class ReporteAdapter( private val reporteList: MutableList<Reporte>
     override fun onBindViewHolder(holder: ReporteViewHolder, position: Int) {
         val reporte = reporteList[position]
         holder.render(reporte)
+        holder.itemView.setOnClickListener {
+            onAccountSelected(reporte)
+        }
     }
 
     override fun getItemCount(): Int {

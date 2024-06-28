@@ -13,4 +13,4 @@
 
 package com.example.midas.DatasClass
 
-data class Reporte(var idReporte:String, var tipoReporte: String,var respuesta:String, val estado: String, val FechayHora: String)
+data class Reporte(var idReporte:String, var tipoReporte: String,var descripcion: String, var respuesta:String, val estado: String, val FechayHora: String)

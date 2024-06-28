@@ -14,15 +14,23 @@
 
 package com.example.midas.Reportes
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Spinner
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.midas.AdapterReporte.ReporteAdapter
 import com.example.midas.BD.DatabaseHelper
+import com.example.midas.DatasClass.Reporte
 import com.example.midas.R
 
 class VerReporteActivity : AppCompatActivity() {
@@ -49,12 +57,53 @@ class VerReporteActivity : AppCompatActivity() {
     fun initRecyclerView() {
         val manager = LinearLayoutManager(this)
         val list_reporte = dbHelper.getReportesByUsuario(user)
-        reporteAdapter = ReporteAdapter(list_reporte)
+        reporteAdapter = ReporteAdapter(list_reporte){ reporte ->
+            onItemSelected(reporte)
+        }
 
         val decoration = DividerItemDecoration(this,manager.orientation)
         val usersRecycler = this.findViewById<RecyclerView>(R.id.recyclerViewReporte)
         usersRecycler.layoutManager = manager
         usersRecycler.adapter = reporteAdapter
         usersRecycler.addItemDecoration(decoration)
+    }
+
+    fun onItemSelected(reporte: Reporte) {
+        val id = reporte.idReporte
+        val tipo = reporte.tipoReporte
+        val hora = reporte.FechayHora
+        val descripcion = reporte.descripcion
+        val estado = reporte.estado
+        val respuesta = reporte.respuesta
+
+        if (hora != null && respuesta != null && hora != null) {
+            initDialog(id, tipo, hora, descripcion, estado, respuesta)
+        }
+    }
+
+    private fun initDialog(id: String, tipo: String, hora: String, descripcion: String, estado: String, respuesta: String) {
+
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_reporte)
+
+        val textViewCod = dialog.findViewById<TextView>(R.id.textViewCod)
+        val Descripcion = dialog.findViewById<TextView>(R.id.Descripcion)
+        val textViewProblema = dialog.findViewById<TextView>(R.id.textViewProblema)
+        val textViewFecha = dialog.findViewById<TextView>(R.id.textViewFecha)
+        val txtRespuesta = dialog.findViewById<TextView>(R.id.txtRespuesta)
+        val buttonAceptar = dialog.findViewById<Button>(R.id.buttonAceptar)
+
+
+        Descripcion.text = descripcion
+        textViewProblema.text= tipo
+        textViewCod.text= "Cod: $id"
+        textViewFecha.text= hora
+        txtRespuesta.text= respuesta
+
+        buttonAceptar.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 }

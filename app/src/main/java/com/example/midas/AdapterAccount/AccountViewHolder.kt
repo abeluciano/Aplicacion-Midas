@@ -15,8 +15,13 @@
  */
 package com.example.midas.AdapterAccount
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
 import com.example.midas.DatasClass.Cuenta
 import com.example.midas.R
@@ -26,6 +31,7 @@ class AccountViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     val accountIdTextView = itemView.findViewById<TextView>(R.id.accountIdTextView)
     val accountTypeTextView = itemView.findViewById<TextView>(R.id.accountTypeTextView)
     val accountBalanceTextView = itemView.findViewById<TextView>(R.id.accountBalanceTextView)
+    val btnCpoar = itemView.findViewById<ImageButton>(R.id.btnCpoar)
 
     fun render(item: Cuenta, l: View.OnClickListener, onClickListener: (Cuenta) -> Unit) {
         accountIdTextView.text = item.idCuenta
@@ -33,6 +39,12 @@ class AccountViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         accountBalanceTextView.text = item.saldo.toString()
         itemView.setOnClickListener {
             onClickListener(item)
+        }
+        btnCpoar.setOnClickListener(){
+            val clipboard = getSystemService(itemView.context, ClipboardManager::class.java) as ClipboardManager
+            val clip = ClipData.newPlainText("ID", item.idCuenta)
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(itemView.context, "ID copiado al portapapeles", Toast.LENGTH_SHORT).show()
         }
     }
 }

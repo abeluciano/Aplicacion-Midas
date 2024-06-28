@@ -42,35 +42,36 @@
 
     </LinearLayout>
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descripción del problema:"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+    <TextView
         android:id="@+id/Descripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Descripción del problema"
+        android:text=""
         android:textColor="@color/Gris_mostrar"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="8dp">
 
-        <Spinner
-            android:id="@+id/spinnerEstado"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:layout_marginRight="8dp" />
-    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Respuesta:"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <!-- Descripción del reporte -->
-    <EditText
-        android:id="@+id/textViewDescripcion"
+    <TextView
+        android:id="@+id/txtRespuesta"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:inputType="text"
         android:text=""
-        android:textColor="#ffffff"
-        android:textSize="14sp"
-        android:maxLength="200"/>
+        android:textColor="@color/Gris_mostrar"
+        android:textSize="14sp" />
 
     <!-- Fecha del reporte -->
     <TextView

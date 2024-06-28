@@ -471,7 +471,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     fun getReportesByUsuario(idUsuario: String): MutableList<Reporte> {
         val reportesList = mutableListOf<Reporte>()
         val db = this.readableDatabase
-        val query = "SELECT $COLUMN_ID_REPORTE, $COLUMN_TIPO_REPORTE, $COLUMN_RESPUESTA, $COLUMN_ESTADO, $COLUMN_FECHAR || ' ' || $COLUMN_HORAR AS FechayHora " +
+        val query = "SELECT $COLUMN_ID_REPORTE, $COLUMN_TIPO_REPORTE, $COLUMN_DESCRIPCION, $COLUMN_RESPUESTA, $COLUMN_ESTADO, $COLUMN_FECHAR || ' ' || $COLUMN_HORAR AS FechayHora " +
                 "FROM $TABLE_REPORTE " +
                 "WHERE $COLUMN_ID_USER_FK = ? " +
                 "ORDER BY $COLUMN_FECHAR DESC, $COLUMN_HORAR DESC"
@@ -481,10 +481,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             do {
                 val idReporte = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID_REPORTE))
                 val tipoReporte = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIPO_REPORTE))
+                val descripcion = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DESCRIPCION))
                 val respuesta = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_RESPUESTA))
                 val estado = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ESTADO))
                 val fechayHora = cursor.getString(cursor.getColumnIndexOrThrow("FechayHora"))
-                val reporte = Reporte(idReporte.toString(), tipoReporte, respuesta, estado, fechayHora)
+
+                val reporte = Reporte(idReporte.toString(), tipoReporte, descripcion, respuesta, estado, fechayHora)
                 reportesList.add(reporte)
             } while (cursor.moveToNext())
         }

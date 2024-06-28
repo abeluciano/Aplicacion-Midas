@@ -1,6 +1,7 @@
 package com.example.midas.Transferencia
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -85,6 +86,7 @@ class TransferenciaActivity : AppCompatActivity() {
                     intent.putExtra("ID_CUENTA", idCuenta)
                     startActivity(intent)
                     finish()
+
                 } else {
                     showInvalidEmailNotification("Llene todos los campos")
                 }
@@ -105,5 +107,6 @@ class TransferenciaActivity : AppCompatActivity() {
         snackbarLayout.addView(customSnackView)
         snackbar.show()
     }
+
 
 }

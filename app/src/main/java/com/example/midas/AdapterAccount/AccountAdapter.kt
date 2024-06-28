@@ -14,9 +14,13 @@
 
 package com.example.midas.AdapterAccount
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.midas.DatasClass.Cuenta
 import com.example.midas.R
@@ -42,6 +46,14 @@ class AccountAdapter(
 
         holder.itemView.setOnClickListener {
             onAccountSelected(account)
+        }
+        holder.btnCpoar.setOnClickListener(){
+            val clipboard = ContextCompat.getSystemService( context,
+                ClipboardManager::class.java
+            ) as ClipboardManager
+            val clip = ClipData.newPlainText("ID", account.idCuenta)
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(context, "ID copiado al portapapeles", Toast.LENGTH_SHORT).show()
         }
     }
 

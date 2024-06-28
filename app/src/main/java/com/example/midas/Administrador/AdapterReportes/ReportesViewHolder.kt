@@ -14,9 +14,14 @@
 
 package com.example.midas.Administrador.AdapterReportes
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.graphics.Color
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.midas.Administrador.DataClassAdmin.Reportes
 import com.example.midas.R
@@ -27,6 +32,7 @@ class ReportesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val estado = itemView.findViewById<TextView>(R.id.estado)
     private val respuesta = itemView.findViewById<TextView>(R.id.respuesta)
     private val fechayhora = itemView.findViewById<TextView>(R.id.fechayhora)
+    private val btnCopiar = itemView.findViewById<ImageButton>(R.id.btnCopiar)
 
     fun render(item: Reportes) {
         idReporte.text = "${item.idReporte}"
@@ -40,5 +46,15 @@ class ReportesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             estado.setTextColor(Color.RED)
         }
         fechayhora.text = "Fecha: ${item.fecha}    Hora: ${item.hora}"
+
+        btnCopiar.setOnClickListener(){
+            val clipboard = ContextCompat.getSystemService(
+                itemView.context,
+                ClipboardManager::class.java
+            ) as ClipboardManager
+            val clip = ClipData.newPlainText("ID", item.idReporte)
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(itemView.context, "ID copiado al portapapeles", Toast.LENGTH_SHORT).show()
+        }
     }
 }
