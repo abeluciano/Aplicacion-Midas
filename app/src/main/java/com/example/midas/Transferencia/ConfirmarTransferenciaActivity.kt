@@ -89,6 +89,7 @@ class ConfirmarTransferenciaActivity : AppCompatActivity() {
             intent.putExtra("MONTO", montoConvertido.toString())
             intent.putExtra("FECHA", currentDate)
             intent.putExtra("HORA", currentTime)
+            intent.putExtra("ID_CUENTA_DESTINO", idCuentaDestino)
             startActivity(intent)
             finish()
 
