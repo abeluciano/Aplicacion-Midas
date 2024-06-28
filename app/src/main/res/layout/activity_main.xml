@@ -58,21 +58,39 @@
                 android:text="Contraseña"
                 android:textColor="@color/white" />
 
-            <EditText
-                android:id="@+id/txtClave"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="40dp"
-                android:drawableLeft="@drawable/item_candado"
-                android:ems="10"
-                android:hint="Ingresar contraseña"
-                android:inputType="textPassword"
-                android:maxLength="20"
-                android:textColor="@color/white"
-                android:textColorHint="@color/gris_textos"
-                />
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/txtClave"
+                    android:layout_width="370dp"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/item_candado"
+                    android:ems="10"
+                    android:hint="Ingresar contraseña"
+                    android:inputType="textPassword"
+                    android:maxLength="20"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/gris_textos"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/imageButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtClave"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.93"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.478"
+                    app:srcCompat="@drawable/item_ver_password" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
                 android:id="@+id/btnIniciar"
