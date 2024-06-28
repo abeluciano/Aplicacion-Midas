@@ -46,6 +46,7 @@
                 android:hint="Ingresar DNI"
                 android:inputType="number"
                 android:textColor="@color/white"
+                android:maxLength="8"
                 android:textColorHint="@color/gris_textos" />
 
             <TextView
@@ -68,6 +69,7 @@
                 android:ems="10"
                 android:hint="Ingresar contraseña"
                 android:inputType="textPassword"
+                android:maxLength="20"
                 android:textColor="@color/white"
                 android:textColorHint="@color/gris_textos"
                 />
