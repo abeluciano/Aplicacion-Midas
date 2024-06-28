@@ -75,7 +75,7 @@ class TransferenciaActivity : AppCompatActivity() {
                 if (montoString.isNotEmpty() && idCuentaDestino.isNotEmpty()) {
                     val monto = montoString.toDoubleOrNull() ?: 0.0
                     val montoMinimo = if (tipoMoneda == "Soles") 5.0 else 2.0
-                    val montomaximo = if (tipoMoneda == "Soles") 1000.0 else 300.0
+                    val montomaximo = if (tipoMoneda == "Soles") 1000.0 else 500.0
                     if (monto in montoMinimo..montomaximo) {
                         val montoFormatted = String.format("%.2f", monto)
                         if (monto != montoFormatted.toDouble()) {
