@@ -56,19 +56,19 @@
             android:id="@+id/btnok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#0000FF"
-            android:text="Aceptar"
             android:layout_marginLeft="70dp"
-            android:textColor="#ffffff" />
+            android:backgroundTint="@color/colorEntrada"
+            android:text="Aceptar"
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/btnNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#0000FF"
-            android:text="Cancelar"
             android:layout_marginLeft="20dp"
-            android:textColor="#ffffff" />
+            android:backgroundTint="@color/rojo_mensaje"
+            android:text="Cancelar"
+            android:textColor="@color/black" />
     </LinearLayout>
 
 </LinearLayout>

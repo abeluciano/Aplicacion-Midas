@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:text="Inicio"
                 android:textColor="@color/white"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -127,7 +127,7 @@
             android:layout_margin="20dp"
             android:text="Cuenta Actual:"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -160,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:text="ID de la cuenta"
                     android:textColor="@color/gris_textos"
-                    android:textSize="10dp" />
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/txtID"
@@ -168,7 +168,7 @@
                     android:layout_height="wrap_content"
                     android:text="123456789"
                     android:textColor="@color/white"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/textView23"
@@ -176,7 +176,7 @@
                     android:layout_height="wrap_content"
                     android:text="Tipo de cuenta"
                     android:textColor="@color/gris_textos"
-                    android:textSize="10dp" />
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/Tipo"
@@ -191,7 +191,7 @@
                     android:layout_height="wrap_content"
                     android:text="Saldo"
                     android:textColor="@color/gris_textos"
-                    android:textSize="10dp" />
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/txtMostrarSaldo"
@@ -199,7 +199,7 @@
                     android:layout_height="wrap_content"
                     android:text="S/ 600.00"
                     android:textColor="@color/white"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -215,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:text="Cuentas:"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

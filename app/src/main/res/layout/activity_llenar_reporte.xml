@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:text="Reportes"
                     android:textColor="@color/white"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -60,12 +60,12 @@
 
                 <TextView
                     android:id="@+id/textView"
-                    android:layout_width="500dp"
+                    android:layout_width="400dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Relalizar Reporte:"
                     android:textColor="@color/white"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/VerReporte"
@@ -75,8 +75,8 @@
                     android:gravity="right"
                     android:text="Mis reportes"
                     android:textColor="@color/newoscuro_botones"
-                    android:textSize="18dp"
-                    android:textStyle="bold"/>
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -88,7 +88,7 @@
                 android:layout_weight="1"
                 android:text="Seleccionar tipo problema:"
                 android:textColor="@color/gris_textos"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
 
             <Spinner
@@ -109,7 +109,7 @@
                 android:layout_marginRight="20dp"
                 android:text="Descripción:"
                 android:textColor="@color/gris_textos"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="350dp"
@@ -135,7 +135,7 @@
                 android:layout_marginTop="40dp"
                 android:backgroundTint="@color/newoscuro_botones"
                 android:text="Enviar"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
     </ScrollView>

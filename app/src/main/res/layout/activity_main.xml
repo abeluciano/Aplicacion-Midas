@@ -21,7 +21,7 @@
 
             <ImageView
                 android:id="@+id/imageView4"
-                android:layout_width="411dp"
+                android:layout_width="match_parent"
                 android:layout_height="380dp"
                 app:srcCompat="@drawable/nuevo_logo_midas_login" />
 
@@ -79,7 +79,7 @@
                 android:layout_gravity="center"
                 android:backgroundTint="@color/newoscuro_botones"
                 android:text="Ingresar"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView15"
@@ -97,7 +97,7 @@
                 android:gravity="center"
                 android:text="Regístrese"
                 android:textColor="@color/newoscuro_botones"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
     </ScrollView>

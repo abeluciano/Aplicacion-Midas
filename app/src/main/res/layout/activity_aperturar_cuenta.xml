@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:text="Aperturar Cuenta"
                     android:textColor="@color/white"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +69,7 @@
                 android:gravity="center"
                 android:text="Seleccionar el tipo de cuenta"
                 android:textColor="@color/gris_textos"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <Spinner
                 android:id="@+id/tipoMonedaSpinner"
@@ -118,7 +118,7 @@
                 android:layout_marginTop="40dp"
                 android:backgroundTint="@color/newoscuro_botones"
                 android:text="Aperturar"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
     </ScrollView>

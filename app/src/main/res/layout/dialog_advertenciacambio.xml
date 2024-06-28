@@ -51,18 +51,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
-            android:backgroundTint="#0000FF"
+            android:backgroundTint="@color/colorEntrada"
             android:text="Aceptar"
-            android:textColor="#ffffff" />
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/btnNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:backgroundTint="#0000FF"
+            android:backgroundTint="@color/rojo_mensaje"
             android:text="Cancelar"
-            android:textColor="#ffffff" />
+            android:textColor="@color/black" />
     </LinearLayout>
 
 </LinearLayout>

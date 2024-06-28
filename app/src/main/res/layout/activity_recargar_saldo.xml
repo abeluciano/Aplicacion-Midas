@@ -29,7 +29,7 @@
                     android:layout_height="wrap_content"
                     android:text="Recargar Cuenta"
                     android:textColor="@color/white"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:text="Cuenta actual:"
                     android:textColor="@color/gris_textos"
-                    android:textSize="17dp" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/idCuentaTextView"
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:text="123456789"
                     android:textColor="@color/white"
-                    android:textSize="25dp" />
+                    android:textSize="25sp" />
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:text="S/."
                     android:textColor="@color/white"
-                    android:textSize="30dp"
+                    android:textSize="30sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.205"
@@ -113,12 +113,12 @@
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:maxLength="7"
                     android:hint="Ingresar "
                     android:inputType="numberDecimal"
+                    android:maxLength="7"
                     android:textColor="@color/white"
                     android:textColorHint="@color/gris_textos"
-                    android:textSize="30dp"
+                    android:textSize="30sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.61"
@@ -145,7 +145,7 @@
                 android:layout_marginTop="40dp"
                 android:backgroundTint="@color/newoscuro_botones"
                 android:text="Confirmar"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
     </ScrollView>

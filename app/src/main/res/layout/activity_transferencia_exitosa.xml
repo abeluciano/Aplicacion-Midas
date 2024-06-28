@@ -144,7 +144,7 @@
                 android:layout_marginTop="70dp"
                 android:backgroundTint="@color/newoscuro_botones"
                 android:text="Inicio"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
     </ScrollView>
