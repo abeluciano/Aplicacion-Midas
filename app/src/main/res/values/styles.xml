@@ -1,0 +1,16 @@
+
+<resources>
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here -->
+        <!-- Other theme attributes -->
+    </style>
+
+    <!-- Style for SearchView text color -->
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:imeOptions">actionSearch</item>
+        <item name="android:inputType">text</item>
+        <item name="color"> @color/white</item>
+        <item name="android:textColor">@android:color/white</item> <!-- Text color set to white -->
+    </style>
+</resources>
