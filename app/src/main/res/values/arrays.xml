@@ -1,0 +1,9 @@
+<resources>
+    <string-array name="estados_array">
+        <item>Todos</item>
+        <item>Revisado</item>
+        <item>Solucionado</item>
+        <item>No revisado</item>
+
+    </string-array>
+</resources>

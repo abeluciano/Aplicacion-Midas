@@ -16,58 +16,90 @@
 
 package com.example.midas.Administrador
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.Spinner
-import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.midas.AdapterHistory.HistoryAdapter
 import com.example.midas.Administrador.AdapterReportes.ReportesAdapter
 import com.example.midas.Administrador.DataClassAdmin.Reportes
 import com.example.midas.BD.DatabaseHelper
-import com.example.midas.DatasClass.Cuenta
 import com.example.midas.R
 
 class GestionarReportesActivity : AppCompatActivity() {
+
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var reportesAdapter: ReportesAdapter
+    private lateinit var searchView: SearchView
+    private lateinit var spinnerEstado: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gestionar_reportes)
+
         dbHelper = DatabaseHelper(this)
         val imgbtnAtrasRep = findViewById<ImageButton>(R.id.btnAtrasRep)
 
-        imgbtnAtrasRep.setOnClickListener(){
+        imgbtnAtrasRep.setOnClickListener {
             finish()
         }
 
+        searchView = findViewById(R.id.searchView)
+        spinnerEstado = findViewById(R.id.spinnerEstado)
+
+
         initRecyclerView()
+        setupSearchView()
+        setupSpinner()
     }
-    fun initRecyclerView() {
+
+    private fun initRecyclerView() {
         val manager = LinearLayoutManager(this)
-        val list_transfer = dbHelper.getAllReportes()
-        reportesAdapter = ReportesAdapter(list_transfer) { reporte ->
+        val listTransfer = dbHelper.getAllReportes().toMutableList()
+        reportesAdapter = ReportesAdapter(listTransfer) { reporte ->
             onItemSelected(reporte)
         }
 
-        val decoration = DividerItemDecoration(this,manager.orientation)
-        val usersRecycler = this.findViewById<RecyclerView>(R.id.ReyclerReportes)
+        val decoration = DividerItemDecoration(this, manager.orientation)
+        val usersRecycler = findViewById<RecyclerView>(R.id.ReyclerReportes)
         usersRecycler.layoutManager = manager
         usersRecycler.adapter = reportesAdapter
         usersRecycler.addItemDecoration(decoration)
+    }
+
+    private fun setupSearchView() {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                reportesAdapter.filter.filter(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                reportesAdapter.filter.filter(newText)
+                return false
+            }
+        })
+    }
+
+    private fun setupSpinner() {
+        val estados = arrayOf("Todos", "Revisado", "Solucionado", "No revisado")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, estados)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerEstado.adapter = adapter
+
+        spinnerEstado.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val estado = parent.getItemAtPosition(position).toString()
+                reportesAdapter.filterByState(estado)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Do nothing
+            }
+        }
     }
 
     private fun onItemSelected(reporte: Reportes) {
@@ -83,7 +115,7 @@ class GestionarReportesActivity : AppCompatActivity() {
         }
     }
 
-    fun initDialog(id:String, tipo:String, hora:String,descripcion:String, estado:String, respuesta:String, fecha:String) {
+    private fun initDialog(id: String, tipo: String, hora: String, descripcion: String, estado: String, respuesta: String, fecha: String) {
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.dialog_cuenta)
 
@@ -95,14 +127,14 @@ class GestionarReportesActivity : AppCompatActivity() {
         val spinnerEstado = dialog.findViewById<Spinner>(R.id.spinnerEstado)
         val buttonAceptar = dialog.findViewById<Button>(R.id.buttonAceptar)
 
-        val estdo = arrayOf("Solucionado", "Pendiente")
+        val estdo = arrayOf("Revisado", "Solucionado", "No revisado")
         val adapter = ArrayAdapter(this, R.layout.spinner, estdo)
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
         spinnerEstado.adapter = adapter
         Descripcion.text = descripcion
-        textViewProblema.text= tipo
-        textViewCod.text= "Cod: $id"
-        textViewFecha.text= "Fecha: $fecha, Hora: $hora"
+        textViewProblema.text = tipo
+        textViewCod.text = "Cod: $id"
+        textViewFecha.text = "Fecha: $fecha, Hora: $hora"
 
         buttonAceptar.setOnClickListener {
             val respuestaActulizada = textViewDescripcion.text.toString()
