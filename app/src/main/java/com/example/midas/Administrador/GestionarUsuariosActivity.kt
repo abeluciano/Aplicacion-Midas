@@ -18,17 +18,12 @@ package com.example.midas.Administrador
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
+import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.midas.Administrador.AdapterReportes.ReportesAdapter
 import com.example.midas.Administrador.AdministradorAdapterUsers.UsuariosAdapter
-import com.example.midas.Administrador.DataClassAdmin.Reportes
 import com.example.midas.Administrador.DataClassAdmin.Usuarios
 import com.example.midas.BD.DatabaseHelper
 import com.example.midas.R
@@ -36,6 +31,7 @@ import com.example.midas.R
 class GestionarUsuariosActivity : AppCompatActivity() {
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var usuariosAdapter: UsuariosAdapter
+    private lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,24 +39,41 @@ class GestionarUsuariosActivity : AppCompatActivity() {
         dbHelper = DatabaseHelper(this)
         val btnAtrasUsers = findViewById<ImageButton>(R.id.btnAtrasUsers)
 
-        btnAtrasUsers.setOnClickListener(){
+        btnAtrasUsers.setOnClickListener {
             finish()
         }
 
+        searchView = findViewById(R.id.searchView)
         initRecyclerView()
+        setupSearchView()
     }
-    fun initRecyclerView() {
+
+    private fun initRecyclerView() {
         val manager = LinearLayoutManager(this)
-        val list_transfer = dbHelper.getAllUsuarios()
+        val list_transfer = dbHelper.getAllUsuarios().toMutableList()
         usuariosAdapter = UsuariosAdapter(list_transfer) { usuario ->
             onItemSelected(usuario)
         }
 
-        val decoration = DividerItemDecoration(this,manager.orientation)
-        val usersRecycler = this.findViewById<RecyclerView>(R.id.ReyclerUsuarios)
+        val decoration = DividerItemDecoration(this, manager.orientation)
+        val usersRecycler = findViewById<RecyclerView>(R.id.ReyclerUsuarios)
         usersRecycler.layoutManager = manager
         usersRecycler.adapter = usuariosAdapter
         usersRecycler.addItemDecoration(decoration)
+    }
+
+    private fun setupSearchView() {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                usuariosAdapter.filter.filter(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                usuariosAdapter.filter.filter(newText)
+                return false
+            }
+        })
     }
 
     private fun onItemSelected(usuarios: Usuarios) {
