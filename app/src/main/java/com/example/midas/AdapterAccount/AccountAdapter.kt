@@ -17,6 +17,7 @@ package com.example.midas.AdapterAccount
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -39,6 +40,12 @@ class AccountAdapter(
 
     override fun onBindViewHolder(holder: AccountViewHolder, position: Int) {
         val account = accountList[position]
+
+        if (account.estado == "Congelada"){
+            holder.accountIdTextView.setTextColor(Color.RED)
+            holder.accountBalanceTextView.setTextColor(Color.RED)
+        }
+
         holder.accountIdTextView.text = account.idCuenta
         holder.accountTypeTextView.text = account.tipoMoneda
         val saldoN = String.format("%.2f", account.saldo)

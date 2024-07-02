@@ -21,6 +21,7 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -36,6 +37,7 @@ import com.example.midas.Login.MainActivity
 import com.example.midas.Recarga.RecargarSaldoActivity
 import com.example.midas.Reportes.LlenarReporteActivity
 import com.example.midas.Transferencia.TransferenciaActivity
+import com.google.android.material.snackbar.Snackbar
 import kotlin.properties.Delegates
 
 class MenuActivity : AppCompatActivity() {
@@ -73,6 +75,8 @@ class MenuActivity : AppCompatActivity() {
 
         AbrirCuenta.setOnClickListener {
             val intent = Intent(this, AperturarCuentaActivity::class.java)
+            intent.putExtra("ID_CUENTA", idCuenta)
+            intent.putExtra("ID_USUARIO", idUsuario)
             startActivity(intent)
         }
 
@@ -81,20 +85,13 @@ class MenuActivity : AppCompatActivity() {
                 val intent = Intent(this, TransferenciaActivity::class.java)
                 intent.putExtra("ID_CUENTA", idCuenta)
                 intent.putExtra("TIPO_MONEDA", tipoMoneda)
+                intent.putExtra("ID_USUARIO", idUsuario.toString())
                 startActivity(intent)
             } else {
                 if (dbHelper.getEstadoCuentaById(idCuenta.toString()) != "Activa") {
-                    Toast.makeText(
-                        this,
-                        "No puede realizar Transferencias con esta cuenta",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showInvalidEmailNotification("No puede realizar Transferencias con esta cuenta")
                 } else if(dbHelper.getNumeroCuentasUsuario(idUsuario.toString()) == 0){
-                    Toast.makeText(
-                        this,
-                        "Debe crear al menos una cuenta para transferir",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showInvalidEmailNotification("Debe crear al menos una cuenta para transferir")
                 }
                 return@setOnClickListener
             }
@@ -106,7 +103,7 @@ class MenuActivity : AppCompatActivity() {
                 intent.putExtra("TIPO_MONEDA", tipoMoneda)
                 startActivity(intent)
             } else {
-                Toast.makeText(this, "Debe crear al menos una cuenta para recargar saldo", Toast.LENGTH_SHORT).show()
+                showInvalidEmailNotification("Debe crear al menos una cuenta para recargar saldo")
                 return@setOnClickListener
             }
         }
@@ -232,5 +229,18 @@ class MenuActivity : AppCompatActivity() {
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
+    }
+    @SuppressLint("RestrictedApi")
+    private fun showInvalidEmailNotification(msg: String) {
+        val snackbar = Snackbar.make(findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG)
+        val customSnackView: View = layoutInflater.inflate(R.layout.custom_snackbar, null)
+        val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+        val snackbar_title = customSnackView.findViewById<TextView>(R.id.snackbar_title)
+        val snackbar_text = customSnackView.findViewById<TextView>(R.id.snackbar_text)
+        snackbar_text.text = msg
+        snackbar_title.text = dbHelper.getNombreUsuarioByCuenta(idCuenta)
+        snackbarLayout.removeAllViews()
+        snackbarLayout.addView(customSnackView)
+        snackbar.show()
     }
 }

@@ -1,58 +1,47 @@
-
-/**
- * ViewHolder para una transferencia en un RecyclerView.
- *
- * Autores:
- * Abel Luciano Aragón Alvaro
- * Josshua David Flores Chumbimuni
- * Rodrigo Ojeda Arce
- *
- * Resumen:
- * Esta clase HistoryViewHolder representa una vista de un solo elemento (Transferencia) en un
- * RecyclerView. Contiene referencias a las vistas dentro de cada elemento y un método
- * para vincular los datos de una transferencia específica a estas vistas. También maneja
- * la visualización y el color del tipo de transferencia (Entrada o Salida).
- */
 package com.example.midas.AdapterHistory
 
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.View
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.midas.BD.DatabaseHelper
 import com.example.midas.DatasClass.Transferencia
 import com.example.midas.R
 
 class HistoryViewHolder(itemView: View, private val dbHelper: DatabaseHelper): RecyclerView.ViewHolder(itemView) {
-    private val accountDesNameTextView = itemView.findViewById<TextView>(R.id.accountDesNameTextView)
-    private val transBalanceTextView = itemView.findViewById<TextView>(R.id.transBalanceTextView)
-    private val accountDestIdTextView = itemView.findViewById<TextView>(R.id.accountDestIdTextView)
-    private val tipoTransferenciaTextView = itemView.findViewById<TextView>(R.id.tipoTransferenciaTextView)
+    private val accountDesNameTextView: TextView = itemView.findViewById(R.id.accountDesNameTextView)
+    private val transBalanceTextView: TextView = itemView.findViewById(R.id.transBalanceTextView)
+    private val accountDestIdTextView: TextView = itemView.findViewById(R.id.accountDestIdTextView)
+    private val tipoTransferenciaTextView: TextView = itemView.findViewById(R.id.tipoTransferenciaTextView)
 
     @SuppressLint("SetTextI18n")
     fun render(item: Transferencia) {
-
-        if (item.tipoTransferencia == "Salida"){
-            accountDesNameTextView.text = " ${item.nombreDestino ?: "N/A"}"
+        val nombreCuenta = if (item.tipoTransferencia == "Salida") {
+            item.nombreDestino ?: "N/A"
         } else {
-            accountDesNameTextView.text = " ${item.nombreOrigen ?: "N/A"}"
+            item.nombreOrigen ?: "N/A"
         }
+        accountDesNameTextView.text = " $nombreCuenta"
 
-        if (item.tipoTransferencia == "Salida") {
-            transBalanceTextView.text = dbHelper.getCurrencyTypeById(item.cuentaOrigen)
+        val moneda = if (item.tipoTransferencia == "Salida") {
+            dbHelper.getCurrencyTypeById(item.cuentaDestino)
         } else {
-            transBalanceTextView.text = item.cuentaDestino?.let { dbHelper.getCurrencyTypeById(it) }
+            dbHelper.getCurrencyTypeById(item.cuentaDestino)
         }
 
-        if (item.tipoTransferencia == "Salida") {
-            accountDestIdTextView.text = "- ${item.monto}"
-            accountDestIdTextView.setTextColor(Color.RED)
-        }else {
-            accountDestIdTextView.text = "+ ${item.monto}"
-            accountDestIdTextView.setTextColor(Color.GREEN)
+        transBalanceTextView.text = moneda
+
+        val monto = if (item.tipoTransferencia == "Salida") {
+            "- ${item.monto}"
+        } else {
+            "+ ${item.monto}"
         }
+
+        accountDestIdTextView.text = monto
+        accountDestIdTextView.setTextColor(
+            if (item.tipoTransferencia == "Salida") Color.RED else Color.GREEN
+        )
 
         tipoTransferenciaTextView.text = "Fecha: ${item.fecha}"
     }

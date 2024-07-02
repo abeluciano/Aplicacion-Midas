@@ -26,6 +26,7 @@ class TransferenciaActivity : AppCompatActivity() {
     private lateinit var cuentaDestino:EditText
     private var tipoMoneda: String = ""
     private var idCuenta: String = ""
+    private var idUser: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transferencia)
@@ -41,6 +42,7 @@ class TransferenciaActivity : AppCompatActivity() {
 
         idCuenta = intent.getStringExtra("ID_CUENTA") ?: ""
         tipoMoneda = intent.getStringExtra("TIPO_MONEDA") ?: ""
+        idUser = intent.getStringExtra("ID_USUARIO") ?: ""
 
         idCuentaTextView.text = "$idCuenta"
         simboloMonedaTextView.text = if (tipoMoneda == "Soles") "S/" else "$"
@@ -54,6 +56,10 @@ class TransferenciaActivity : AppCompatActivity() {
             val montoString = montoEditText.text.toString().trim()
             val saldo = dbHelper.getSaldoByCuenta(idCuenta)
             val idCuentaDestino = cuentaDestino.text.toString()
+            if (idCuentaDestino.isEmpty() || montoString.isEmpty()) {
+                showInvalidEmailNotification("Llene todos los campos")
+                return@setOnClickListener
+            }
             if (montoString.toDouble() > saldo!!) {
                 showInvalidEmailNotification("Fondos insuficientes")
                 return@setOnClickListener
@@ -63,6 +69,7 @@ class TransferenciaActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             if (montoString.toDouble() < 0.1) {
+                showInvalidEmailNotification("Monto minimo 0.10")
                 return@setOnClickListener
             }
             if (idCuentaDestino == idCuenta) {
@@ -105,8 +112,10 @@ class TransferenciaActivity : AppCompatActivity() {
         val snackbar = Snackbar.make(findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG)
         val customSnackView: View = layoutInflater.inflate(R.layout.custom_snackbar, null)
         val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+        val snackbar_title = customSnackView.findViewById<TextView>(R.id.snackbar_title)
         val snackbar_text = customSnackView.findViewById<TextView>(R.id.snackbar_text)
         snackbar_text.text = msg
+        snackbar_title.text = dbHelper.getNombreUsuarioByCuenta(idCuenta)
         snackbarLayout.removeAllViews()
         snackbarLayout.addView(customSnackView)
         snackbar.show()

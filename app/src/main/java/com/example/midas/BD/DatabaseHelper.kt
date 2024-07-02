@@ -324,7 +324,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         LEFT JOIN $TABLE_USUARIO uOrigen ON cOrigen.$COLUMN_ID_USUARIO_FK = uOrigen.$COLUMN_ID_USUARIO
         LEFT JOIN $TABLE_CUENTA cDestino ON t.$COLUMN_CUENTA_DESTINO = cDestino.$COLUMN_ID_CUENTA
         LEFT JOIN $TABLE_USUARIO uDestino ON cDestino.$COLUMN_ID_USUARIO_FK = uDestino.$COLUMN_ID_USUARIO
-        WHERE t.$COLUMN_ID_CUENTA_FK = ? OR t.$COLUMN_CUENTA_DESTINO = ?
+        WHERE t.$COLUMN_ID_CUENTA_FK = ? OR t.$COLUMN_CUENTA_DESTINO = ? ORDER BY t.$COLUMN_FECHA DESC
     """
         val cursor = db.rawQuery(query, arrayOf(idCuenta, idCuenta))
 
