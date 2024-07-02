@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/newoscuro_fondo"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/newoscuro_fondo">
+    tools:context=".HistorialOperaciones.HistoryActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent">>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_marginBottom="25dp">
+            android:layout_marginBottom="16dp">
 
             <TextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Historial"
+                android:text="Historial de Recargas"
                 android:textColor="@color/white"
                 android:textSize="25sp"
                 android:textStyle="bold"
@@ -44,8 +49,10 @@
                 app:layout_constraintVertical_bias="0.461"
                 app:srcCompat="@drawable/item_boton_retroceder" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
-        <LinearLayout
+    <LinearLayout
+            android:layout_marginTop="80dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
@@ -61,18 +68,84 @@
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/idCuentaTextView"
+                android:id="@+id/idCuenta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="123456789"
                 android:textColor="@color/white"
                 android:textSize="25dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewHistory"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="567dp" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/fondo_admin"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/baseline_check_circle_24"
+                        android:gravity="center_vertical"
+                        android:text=" Midas"
+                        android:textColor="@color/white"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/historialtransferencias"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="Ver mis transferencias"
+                        android:textColor="@color/newoscuro_botones"
+                        android:textSize="17sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="65dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/fondo_admin"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/baseline_check_circle_24"
+                            android:gravity="center_vertical"
+                            android:text=" Midas"
+                            android:textColor="@color/white"
+                            android:textSize="17sp"/>
+
+                        <TextView
+                            android:id="@+id/HistorialRecargas"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text="Ver mis recargas"
+                            android:textColor="@color/newoscuro_botones"
+                            android:textSize="17sp" />
+
+                    </LinearLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

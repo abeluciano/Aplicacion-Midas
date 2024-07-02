@@ -16,6 +16,12 @@
         android:theme="@style/Theme.MIDAS"
         tools:targetApi="32">
         <activity
+            android:name=".HistorialOperaciones.HistoryRecargaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HistorialOperaciones.HistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".Administrador.UsuarioSeleccionActivity"
             android:exported="false" />
         <activity
@@ -55,7 +61,7 @@
             android:name=".AperturarCuentaActivity"
             android:exported="false" />
         <activity
-            android:name=".HistoryActivity"
+            android:name=".HistorialOperaciones.HistoryTransferenciaActivity"
             android:exported="false" />
         <activity
             android:name=".MenuActivity"

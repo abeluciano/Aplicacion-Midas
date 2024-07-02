@@ -11,11 +11,14 @@ import com.example.midas.DatasClass.Transferencia
 import com.example.midas.R
 
 class HistoryReViewHolder(itemView: View, private val dbHelper: DatabaseHelper): RecyclerView.ViewHolder(itemView) {
-    private val accountDesNameTextView: TextView = itemView.findViewById(R.id.accountDesNameTextView)
-    private val transBalanceTextView: TextView = itemView.findViewById(R.id.transBalanceTextView)
-    private val accountDestIdTextView: TextView = itemView.findViewById(R.id.accountDestIdTextView)
-    private val tipoTransferenciaTextView: TextView = itemView.findViewById(R.id.tipoTransferenciaTextView)
+    private val montoTextView: TextView = itemView.findViewById(R.id.montoTextView)
+    private val fechayhora: TextView = itemView.findViewById(R.id.fechayhora)
 
     fun render(item: Recarga) {
+        val simbol = dbHelper.getTipoCuentaByCuenta(item.idCuenta)
+        val simbolo = if(simbol == "Soles") "S/." else "$"
+        montoTextView.text = "+ $simbolo ${item.monto}"
+        montoTextView.setTextColor(Color.GREEN)
+        fechayhora.text = "Fecha: ${item.fecha}  Hora: ${item.hora}"
     }
 }

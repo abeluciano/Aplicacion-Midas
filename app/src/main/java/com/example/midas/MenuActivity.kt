@@ -25,7 +25,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +32,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.midas.AdapterAccount.AccountAdapter
 import com.example.midas.BD.DatabaseHelper
 import com.example.midas.DatasClass.Cuenta
+import com.example.midas.HistorialOperaciones.HistoryActivity
+import com.example.midas.HistorialOperaciones.HistoryTransferenciaActivity
 import com.example.midas.Login.MainActivity
 import com.example.midas.Recarga.RecargarSaldoActivity
 import com.example.midas.Reportes.LlenarReporteActivity

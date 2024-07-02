@@ -699,27 +699,29 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return result
     }
 
-    fun getAllRecargas(): MutableList<Recarga> {
-        val recargasList = mutableListOf<Recarga>()
-        val db = readableDatabase
-        val query = """SELECT $COLUMN_ID_RECARGA, $COLUMN_MONTO_RECARGA,$COLUMN_FECHA_RECARGA, $COLUMN_HORA_RECARGA
-                        FROM $TABLE_RECARGA ORDER BY $COLUMN_FECHA_RECARGA DESC, $COLUMN_HORA_RECARGA DESC"""
-        val cursor = db.rawQuery(query, null)
+    fun getRecargasByIdCuenta(idCuenta: String): MutableList<Recarga> {
+        val recargas = mutableListOf<Recarga>()
+        val db = this.readableDatabase
+        val query = "SELECT * FROM $TABLE_RECARGA WHERE $COLUMN_ID_CUENTA_RECARGA_FK = ?"
+        val cursor = db.rawQuery(query, arrayOf(idCuenta))
 
         if (cursor.moveToFirst()) {
             do {
                 val idRecarga = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID_RECARGA))
-                val montoRecarga = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MONTO_RECARGA))
-                val fechaRecarga = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FECHA_RECARGA))
-                val horaRecarga = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_HORA_RECARGA))
+                val monto = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MONTO_RECARGA))
+                val fecha = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FECHA_RECARGA))
+                val hora = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_HORA_RECARGA))
+                val idCuentaFk = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ID_CUENTA_RECARGA_FK))
 
-                val recarga = Recarga(idRecarga, montoRecarga, fechaRecarga, horaRecarga)
-                recargasList.add(recarga)
+                val recarga = Recarga(idRecarga, monto, fecha, hora, idCuentaFk)
+                recargas.add(recarga)
             } while (cursor.moveToNext())
         }
         cursor.close()
-        return recargasList
+        db.close()
+        return recargas
     }
+
 
 
 }

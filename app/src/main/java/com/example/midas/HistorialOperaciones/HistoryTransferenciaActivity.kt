@@ -13,10 +13,9 @@
  * y permite regresar al menú principal al presionar el botón "Atrás".
  */
 
-package com.example.midas
+package com.example.midas.HistorialOperaciones
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
@@ -26,9 +25,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.midas.AdapterHistory.HistoryAdapter
 import com.example.midas.BD.DatabaseHelper
+import com.example.midas.R
 
 
-class HistoryActivity : AppCompatActivity() {
+class HistoryTransferenciaActivity : AppCompatActivity() {
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var historyAdapter: HistoryAdapter
     private lateinit var atras: ImageButton
@@ -36,7 +36,7 @@ class HistoryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_history)
+        setContentView(R.layout.activity_history_transferencia)
         dbHelper = DatabaseHelper(this)
         atras = findViewById(R.id.btnAtras)
         //val txtUsuario = findViewById<TextView>(R.id.txtUsuario)

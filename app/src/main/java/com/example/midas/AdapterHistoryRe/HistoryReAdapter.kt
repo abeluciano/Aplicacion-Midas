@@ -14,7 +14,7 @@ class HistoryReAdapter(
     private val dbHelper: DatabaseHelper
 ) : RecyclerView.Adapter<HistoryReViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryReViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.history_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.historyre_item, parent, false)
         return HistoryReViewHolder(view, dbHelper)
     }
 
