@@ -37,9 +37,9 @@
                 <ImageButton
                     android:id="@+id/btnCpoar"
                     android:layout_width="70dp"
-                    android:background="@drawable/item_rectangulo_casilla"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@null"
                     app:srcCompat="@drawable/item_copiar" />
             </LinearLayout>
 
