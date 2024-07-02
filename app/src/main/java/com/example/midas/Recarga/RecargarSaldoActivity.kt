@@ -63,7 +63,7 @@ class RecargarSaldoActivity : AppCompatActivity() {
         idCuenta = intent.getStringExtra("ID_CUENTA") ?: ""
         tipoMoneda = intent.getStringExtra("TIPO_MONEDA") ?: ""
 
-        idCuentaTextView.text = "ID Cuenta: $idCuenta"
+        idCuentaTextView.text = "$idCuenta"
         simboloMonedaTextView.text = if (tipoMoneda == "Soles") "S/" else "$"
 
 
