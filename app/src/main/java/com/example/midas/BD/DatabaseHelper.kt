@@ -332,7 +332,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val transferenciasList = mutableListOf<Transferencia>()
         val db = this.readableDatabase
         val query = """
-        SELECT t.Monto, t.Fecha, 
+        SELECT t.Monto, t.Fecha, t.Hora,
                cOrigen.$COLUMN_ID_CUENTA AS Cuenta_Origen, 
                uOrigen.$COLUMN_NOMBRE AS Nombre_Origen,
                cDestino.$COLUMN_ID_CUENTA AS Cuenta_Destino,
@@ -350,6 +350,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             do {
                 val monto = cursor.getDouble(cursor.getColumnIndexOrThrow("Monto"))
                 val fecha = cursor.getString(cursor.getColumnIndexOrThrow("Fecha"))
+                val hora = cursor.getString(cursor.getColumnIndexOrThrow("Hora"))
                 val cuentaOrigen = cursor.getString(cursor.getColumnIndexOrThrow("Cuenta_Origen"))
                 val nombreOrigen = cursor.getString(cursor.getColumnIndexOrThrow("Nombre_Origen"))
                 val cuentaDestino = cursor.getString(cursor.getColumnIndexOrThrow("Cuenta_Destino"))
@@ -361,6 +362,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 val transferencia = Transferencia(
                     monto,
                     fecha,
+                    hora,
                     cuentaOrigen,
                     nombreOrigen,
                     cuentaDestino,

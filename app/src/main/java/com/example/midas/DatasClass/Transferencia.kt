@@ -19,6 +19,7 @@ import java.util.Date
 data class Transferencia(
     val monto: Double,
     val fecha: String,
+    val hora: String,
     val cuentaOrigen: String,
     val nombreOrigen: String,
     val cuentaDestino: String,

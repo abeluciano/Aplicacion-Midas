@@ -82,15 +82,14 @@
             android:textColor="@color/white"
             android:textSize="20dp" />
 
-
-        <TextView
-            android:id="@+id/tipoTransferenciaTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Fecha transferencia"
-            android:textColor="@color/gris_textos"
-            android:textSize="14sp" />
     </LinearLayout>
+    <TextView
+        android:id="@+id/tipoTransferenciaTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Fecha transferencia"
+        android:textColor="@color/gris_textos"
+        android:textSize="14sp" />
 
 </LinearLayout>

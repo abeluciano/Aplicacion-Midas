@@ -43,6 +43,6 @@ class HistoryViewHolder(itemView: View, private val dbHelper: DatabaseHelper): R
             if (item.tipoTransferencia == "Salida") Color.RED else Color.GREEN
         )
 
-        tipoTransferenciaTextView.text = "Fecha: ${item.fecha}"
+        tipoTransferenciaTextView.text = "Fecha: ${item.fecha} Hora: ${item.hora}"
     }
 }
