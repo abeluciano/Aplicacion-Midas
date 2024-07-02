@@ -30,6 +30,10 @@ import com.example.midas.AperturarCuentaActivity
 import com.example.midas.BD.DatabaseHelper
 import com.example.midas.R
 import com.google.android.material.snackbar.Snackbar
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import kotlin.random.Random
 
 class RecargarSaldoActivity : AppCompatActivity() {
 
@@ -78,6 +82,12 @@ class RecargarSaldoActivity : AppCompatActivity() {
                         montoEditText.setText(montoFormatted)
                     }
                     dbHelper.recargarCuenta(idCuenta, monto)
+
+                    val idRecarga = Random.nextInt(100000000, 200000000)
+                    val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+                    val currentTime = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
+                    dbHelper.addRecarga(idRecarga,monto.toString(),currentDate,currentTime,idCuenta.toInt())
+
                     val intent = Intent(this, PagoEfectivoActivity::class.java)
                     startActivity(intent)
                     finish()

@@ -79,7 +79,7 @@ class Usuario(private val idUsuario: Int, private val idCuenta: String, private 
     }
     @SuppressLint("RestrictedApi")
     private fun showInvalidEmailNotification2(msg: String) {
-        val snackbar = Snackbar.make((context as MenuActivity).findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG)
+        val snackbar = Snackbar.make((context as AperturarCuentaActivity).findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG)
         val customSnackView: View = context.layoutInflater.inflate(R.layout.custom_snackbar2, null)
         val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
         val snackbar_title = customSnackView.findViewById<TextView>(R.id.snackbar_title)

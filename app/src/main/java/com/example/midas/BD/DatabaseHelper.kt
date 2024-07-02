@@ -22,6 +22,7 @@ import com.example.midas.Administrador.DataClassAdmin.Cuentas
 import com.example.midas.Administrador.DataClassAdmin.Reportes
 import com.example.midas.Administrador.DataClassAdmin.Usuarios
 import com.example.midas.DatasClass.Cuenta
+import com.example.midas.DatasClass.Recarga
 import com.example.midas.DatasClass.Reporte
 import com.example.midas.DatasClass.Transferencia
 
@@ -49,6 +50,13 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         private const val COLUMN_ESTADO_CUENTA = "Estado_Cuenta"
         private const val COLUMN_RAZON = "Razon"
         private const val COLUMN_ID_USUARIO_FK = "Id_Usuario"
+
+        private const val TABLE_RECARGA = "Recarga"
+        private const val COLUMN_ID_RECARGA = "Id_Recarga"
+        private const val COLUMN_MONTO_RECARGA = "Monto"
+        private const val COLUMN_FECHA_RECARGA = "Fecha"
+        private const val COLUMN_HORA_RECARGA = "Hora"
+        private const val COLUMN_ID_CUENTA_RECARGA_FK = "Id_Cuenta"
 
         private const val TABLE_TRANSFERENCIA = "Transferencia"
         private const val COLUMN_ID_TRANSFERENCIA = "Id_Transferencia"
@@ -97,6 +105,15 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 + "FOREIGN KEY(" + COLUMN_ID_USUARIO_FK + ") REFERENCES " + TABLE_USUARIO + "(" + COLUMN_ID_USUARIO + "))")
         db.execSQL(createCuentaTable)
 
+        val createRecargaTable = ("CREATE TABLE " + TABLE_RECARGA + "("
+                + COLUMN_ID_RECARGA + " INTEGER PRIMARY KEY,"
+                + COLUMN_MONTO_RECARGA + " TEXT,"
+                + COLUMN_FECHA_RECARGA + " DATE,"
+                + COLUMN_HORA_RECARGA + " TIME,"
+                + COLUMN_ID_CUENTA_RECARGA_FK + " TEXT,"
+                + "FOREIGN KEY(" + COLUMN_ID_CUENTA_RECARGA_FK + ") REFERENCES " + TABLE_USUARIO + "(" + COLUMN_ID_CUENTA + "))")
+        db.execSQL(createRecargaTable)
+
         val createTransferenciaTable =("CREATE TABLE " + TABLE_TRANSFERENCIA + "("
                 + COLUMN_ID_TRANSFERENCIA + " INTEGER PRIMARY KEY,"
                 + COLUMN_MONTO + " DECIMAL,"
@@ -125,6 +142,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.execSQL("DROP TABLE IF EXISTS $TABLE_ADMINISTRADOR")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_USUARIO")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_CUENTA")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_RECARGA")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_TRANSFERENCIA")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_REPORTE")
         onCreate(db)
@@ -666,5 +684,42 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             null
         }
     }
+    fun addRecarga(idRecarga: Int, monto: String, fecha: String, hora: String, idCuenta: Int): Long {
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+
+        contentValues.put(COLUMN_ID_RECARGA, idRecarga)
+        contentValues.put(COLUMN_MONTO_RECARGA, monto)
+        contentValues.put(COLUMN_FECHA_RECARGA, fecha)
+        contentValues.put(COLUMN_HORA_RECARGA, hora)
+        contentValues.put(COLUMN_ID_CUENTA_RECARGA_FK, idCuenta)
+
+        val result = db.insert(TABLE_RECARGA, null, contentValues)
+        db.close()
+        return result
+    }
+
+    fun getAllRecargas(): MutableList<Recarga> {
+        val recargasList = mutableListOf<Recarga>()
+        val db = readableDatabase
+        val query = """SELECT $COLUMN_ID_RECARGA, $COLUMN_MONTO_RECARGA,$COLUMN_FECHA_RECARGA, $COLUMN_HORA_RECARGA
+                        FROM $TABLE_RECARGA ORDER BY $COLUMN_FECHA_RECARGA DESC, $COLUMN_HORA_RECARGA DESC"""
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val idRecarga = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID_RECARGA))
+                val montoRecarga = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MONTO_RECARGA))
+                val fechaRecarga = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FECHA_RECARGA))
+                val horaRecarga = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_HORA_RECARGA))
+
+                val recarga = Recarga(idRecarga, montoRecarga, fechaRecarga, horaRecarga)
+                recargasList.add(recarga)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return recargasList
+    }
+
 
 }
