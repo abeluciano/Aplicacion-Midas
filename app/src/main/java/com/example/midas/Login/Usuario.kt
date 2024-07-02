@@ -21,6 +21,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.midas.AperturarCuentaActivity
 import com.example.midas.BD.DatabaseHelper
+import com.example.midas.MenuActivity
 import com.example.midas.R
 import com.google.android.material.snackbar.Snackbar
 import java.util.Random
@@ -50,7 +51,7 @@ class Usuario(private val idUsuario: Int, private val idCuenta: String, private 
                 if (tipoMoneda == "Soles" || tipoMoneda == "Dolares") {
                     val nuevaCuentaId = generarIdCuentaAleatorio()
                     dbHelper.addCuenta(nuevaCuentaId, tipoMoneda, idUsuario.toString())
-                    Toast.makeText(context, "Se abrió una cuenta con el ID: $nuevaCuentaId", Toast.LENGTH_SHORT).show()
+                    showInvalidEmailNotification2("Se abrió una cuenta con el ID: $nuevaCuentaId")
                     callback.onCuentaCreada() // Llamar al callback para finalizar la actividad
                 } else {
                     showInvalidEmailNotification("Tipo de moneda inválido")
@@ -67,6 +68,19 @@ class Usuario(private val idUsuario: Int, private val idCuenta: String, private 
     private fun showInvalidEmailNotification(msg: String) {
         val snackbar = Snackbar.make((context as AperturarCuentaActivity).findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG)
         val customSnackView: View = context.layoutInflater.inflate(R.layout.custom_snackbar, null)
+        val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+        val snackbar_title = customSnackView.findViewById<TextView>(R.id.snackbar_title)
+        val snackbar_text = customSnackView.findViewById<TextView>(R.id.snackbar_text)
+        snackbar_title.text = dbHelper.getNombreUsuarioByCuenta(idCuenta)
+        snackbar_text.text = msg
+        snackbarLayout.removeAllViews()
+        snackbarLayout.addView(customSnackView)
+        snackbar.show()
+    }
+    @SuppressLint("RestrictedApi")
+    private fun showInvalidEmailNotification2(msg: String) {
+        val snackbar = Snackbar.make((context as MenuActivity).findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG)
+        val customSnackView: View = context.layoutInflater.inflate(R.layout.custom_snackbar2, null)
         val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
         val snackbar_title = customSnackView.findViewById<TextView>(R.id.snackbar_title)
         val snackbar_text = customSnackView.findViewById<TextView>(R.id.snackbar_text)
