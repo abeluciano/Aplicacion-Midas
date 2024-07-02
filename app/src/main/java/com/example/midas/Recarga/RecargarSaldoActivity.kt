@@ -99,7 +99,7 @@ class RecargarSaldoActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                Toast.makeText(this, "Ingrese un monto", Toast.LENGTH_SHORT).show()
+                showInvalidEmailNotification("Ingrese un monto")
             }
         }
         regresar.setOnClickListener(){
@@ -111,7 +111,9 @@ class RecargarSaldoActivity : AppCompatActivity() {
         val snackbar = Snackbar.make(findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG)
         val customSnackView: View = layoutInflater.inflate(R.layout.custom_snackbar, null)
         val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+        val snackbar_title = customSnackView.findViewById<TextView>(R.id.snackbar_title)
         val snackbar_text = customSnackView.findViewById<TextView>(R.id.snackbar_text)
+        snackbar_title.text = dbHelper.getNombreUsuarioByCuenta(idCuenta)
         snackbar_text.text = msg
         snackbarLayout.removeAllViews()
         snackbarLayout.addView(customSnackView)
